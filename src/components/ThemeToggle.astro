@@ -1,0 +1,18 @@
+---
+// src/components/ThemeToggle.astro
+---
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle color theme"
+  class="rounded-md border border-border p-2 text-text-muted transition-colors duration-200 hover:text-text hover:border-text-muted"
+>
+  <!-- sun (shown in dark) / moon (shown in light) via CSS -->
+  <svg class="size-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+  <svg class="size-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+</button>
+<script>
+  import { initToggle } from "../scripts/theme";
+  const btn = document.getElementById("theme-toggle");
+  if (btn) initToggle(btn);
+</script>

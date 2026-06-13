@@ -1,0 +1,29 @@
+---
+// src/components/Header.astro
+import ThemeToggle from "./ThemeToggle.astro";
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/writing", label: "Writing" },
+  { href: "/about", label: "About" },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+<header class="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-6">
+  <a href="/" class="font-medium text-text">Soumyo</a>
+  <nav class="flex items-center gap-6">
+    {links.map((l) => (
+      <a
+        href={l.href}
+        aria-current={isActive(l.href) ? "page" : undefined}
+        class:list={[
+          "text-sm transition-colors duration-200 hover:text-text",
+          isActive(l.href) ? "text-text" : "text-text-muted",
+        ]}
+      >{l.label}</a>
+    ))}
+    <ThemeToggle />
+  </nav>
+</header>
