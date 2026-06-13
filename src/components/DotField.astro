@@ -1,0 +1,15 @@
+---
+// src/components/DotField.astro
+// Decorative hero motion. aria-hidden + pointer-events-none so it never
+// interferes with content or assistive tech. Sits behind hero content.
+---
+<canvas
+  id="dot-field"
+  aria-hidden="true"
+  class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+></canvas>
+<script>
+  import { initDotField } from "../scripts/dotField";
+  const canvas = document.getElementById("dot-field");
+  if (canvas instanceof HTMLCanvasElement) initDotField(canvas);
+</script>
