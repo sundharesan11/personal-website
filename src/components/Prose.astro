@@ -1,0 +1,15 @@
+---
+// src/components/Prose.astro
+---
+<div class="prose-custom mx-auto" style="max-width: var(--measure)">
+  <slot />
+</div>
+<style is:global>
+  .prose-custom { line-height: 1.7; }
+  .prose-custom h2 { font-size: var(--text-xl); font-weight: 600; margin: 2.5rem 0 1rem; }
+  .prose-custom h3 { font-size: var(--text-lg); font-weight: 600; margin: 2rem 0 0.75rem; }
+  .prose-custom p { margin: 1rem 0; }
+  .prose-custom a { color: var(--color-accent); text-underline-offset: 4px; }
+  .prose-custom a:hover { text-decoration: underline; }
+  .prose-custom ul { margin: 1rem 0; padding-left: 1.25rem; list-style: disc; }
+</style>
