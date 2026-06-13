@@ -1,32 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import FlowField from "../components/FlowField.astro";
+import Hero from "../components/Hero.astro";
 import { getCollection } from "astro:content";
 
 const featured = (await getCollection("projects"))
   .filter((p) => p.data.featured)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Soumyo — Oogway Labs">
+<BaseLayout title="Sundharesan Kumaresan">
+  <Hero />
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
-    <!-- relative + overflow-hidden contains the absolutely-positioned canvas -->
-    <section class="relative overflow-hidden py-24">
-      <FlowField />
-      <div class="relative z-10">
-        <h1 class="max-w-[18ch] text-2xl font-semibold leading-tight sm:text-3xl">
-          Building quiet, considered software at Oogway Labs.
-        </h1>
-        <p class="mt-6 max-w-[60ch] text-lg text-text-muted">
-          Placeholder intro. One or two lines on who Soumyo is and what he makes —
-          replace with real copy.
-        </p>
-      </div>
-    </section>
-
-    <section class="py-12">
-      <div class="mb-8 flex items-baseline justify-between">
-        <h2 class="text-xl font-semibold">Selected work</h2>
+    <section class="py-16">
+      <div class="mb-8 flex items-baseline justify-between border-b border-border pb-3">
+        <h2 class="font-serif text-xl font-semibold">Selected work</h2>
         <a href="/work" class="text-sm text-accent hover:underline underline-offset-4">All work →</a>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
