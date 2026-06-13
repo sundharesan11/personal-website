@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import Kicker from "../../components/Kicker.astro";
 import { getCollection } from "astro:content";
 
 const projects = (await getCollection("projects"))
@@ -8,7 +9,8 @@ const projects = (await getCollection("projects"))
 ---
 <BaseLayout title="Work — Soumyo">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
-    <h1 class="text-2xl font-semibold">Work</h1>
+    <Kicker text="Portfolio" />
+    <h1 class="mt-2 font-serif text-2xl font-semibold">Work</h1>
     <p class="mt-3 max-w-[60ch] text-text-muted">Selected projects.</p>
     <div class="mt-10 grid gap-4 sm:grid-cols-2">
       {projects.map((p) => (

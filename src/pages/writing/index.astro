@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Kicker from "../../components/Kicker.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("writing", ({ data }) => !data.draft))
@@ -8,12 +9,13 @@ const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month:
 ---
 <BaseLayout title="Writing — Soumyo">
   <main id="main-content" class="mx-auto max-w-[720px] px-6 py-16">
-    <h1 class="text-2xl font-semibold">Writing</h1>
+    <Kicker text="Notes" />
+    <h1 class="mt-2 font-serif text-2xl font-semibold">Writing</h1>
     <ul class="mt-10 divide-y divide-border">
       {posts.map((post) => (
         <li class="py-5">
           <a href={`/writing/${post.id}`} class="group flex items-baseline justify-between gap-4">
-            <span class="text-text group-hover:text-accent">{post.data.title}</span>
+            <span class="font-serif text-text group-hover:text-accent">{post.data.title}</span>
             <time class="shrink-0 text-sm text-text-muted">{fmt(post.data.date)}</time>
           </a>
           <p class="mt-1 text-sm text-text-muted">{post.data.description}</p>

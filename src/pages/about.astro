@@ -1,14 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Prose from "../components/Prose.astro";
+import Kicker from "../components/Kicker.astro";
 ---
-<BaseLayout title="About — Soumyo">
+<BaseLayout title="About — Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
+    <div class="mx-auto" style="max-width: var(--measure)">
+      <Kicker text="About" />
+      <h1 class="mt-2 font-serif text-2xl font-semibold">Sundharesan Kumaresan</h1>
+    </div>
     <Prose>
-      <h1 style="font-size: var(--text-2xl); font-weight:600;">About</h1>
       <p>
-        Placeholder bio. Soumyo builds software at Oogway Labs — replace this with
-        the real story: background, what he cares about, how to work with him.
+        Placeholder bio. Sundharesan is a designer &amp; builder of quiet, considered
+        software — replace this with the real story: background, what he cares about,
+        how to work with him.
       </p>
       <p>Replace with a second paragraph of real biography.</p>
     </Prose>
