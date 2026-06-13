@@ -9,7 +9,7 @@ const featured = (await getCollection("projects"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 <BaseLayout title="Soumyo — Oogway Labs">
-  <main class="mx-auto max-w-[1100px] px-6">
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6">
     <!-- relative + overflow-hidden contains the absolutely-positioned canvas -->
     <section class="relative overflow-hidden py-24">
       <FlowField />
