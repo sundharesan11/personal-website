@@ -1,0 +1,13 @@
+---
+title: Atlas
+summary: A spatial knowledge base that turns scattered notes into a navigable map.
+date: 2026-04-02
+tags: [product, design]
+featured: true
+url: https://example.com/atlas
+---
+## Overview
+Placeholder copy. Atlas reframes note-taking as wayfinding — replace with the real write-up.
+
+## Role
+Design + build. Replace with Soumyo's actual contribution.
