@@ -37,10 +37,10 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   if (!ctx) return () => {};
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const speed = opts.speed ?? 0.85;
+  const speed = opts.speed ?? 0.4;
   const blueRatio = opts.blueRatio ?? 0.4;
-  const cursorR = opts.cursorRadius ?? 160;
-  const trail = opts.trail ?? 5;
+  const cursorR = opts.cursorRadius ?? 170;
+  const trail = opts.trail ?? 42;
   const variant = opts.variant ?? "muted";
 
   let w = 0, h = 0, count = 0;
@@ -60,7 +60,7 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   const blueEvery = Math.max(1, Math.round(1 / blueRatio));
 
   function seed() {
-    count = opts.count ?? Math.min(420, Math.round((w * h) / 2400));
+    count = opts.count ?? Math.min(130, Math.round((w * h) / 6500));
     particles = [];
     for (let i = 0; i < count; i++) {
       particles.push({
@@ -86,7 +86,7 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   function step() {
     ctx!.clearRect(0, 0, w, h);
     for (const p of particles) {
-      const jitter = (randFromIndex(Math.floor(T * 60) + p.size * 100) - 0.5) * 0.5;
+      const jitter = (randFromIndex(Math.floor(T * 60) + p.size * 100) - 0.5) * 0.2;
       const a = flowAngle(p.x, p.y, T) + jitter;
       let vx = Math.cos(a) * speed * p.spd;
       let vy = Math.sin(a) * speed * p.spd;
@@ -105,25 +105,29 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
 
       const sp = Math.min(1, Math.hypot(vx, vy) / (speed * 4));
       const c = p.blue ? blue : muted;
-      const headA = (p.blue ? 0.7 : 0.5) + sp * 0.3;
-      const tailA = headA * 0.28;
-      ctx!.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${tailA})`;
+      const headA = (p.blue ? 0.6 : 0.4) + sp * 0.25;
+      // tapering comet tail: transparent at the back, solid at the head
+      const tx = p.x - vx * trail, ty = p.y - vy * trail;
+      const grad = ctx!.createLinearGradient(tx, ty, p.x, p.y);
+      grad.addColorStop(0, `rgba(${c.r}, ${c.g}, ${c.b}, 0)`);
+      grad.addColorStop(1, `rgba(${c.r}, ${c.g}, ${c.b}, ${headA})`);
+      ctx!.strokeStyle = grad;
       ctx!.lineWidth = p.size;
       ctx!.lineCap = "round";
       ctx!.beginPath();
-      ctx!.moveTo(p.x - vx * trail, p.y - vy * trail);
+      ctx!.moveTo(tx, ty);
       ctx!.lineTo(p.x, p.y);
       ctx!.stroke();
       ctx!.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${headA})`;
       ctx!.beginPath();
-      ctx!.arc(p.x, p.y, p.size * (p.blue ? 1.15 : 1), 0, Math.PI * 2);
+      ctx!.arc(p.x, p.y, p.size * (p.blue ? 0.95 : 0.8), 0, Math.PI * 2);
       ctx!.fill();
     }
   }
 
   function frame() {
     raf = 0;
-    T += 0.0028;
+    T += 0.0016;
     step();
     raf = requestAnimationFrame(frame);
   }
