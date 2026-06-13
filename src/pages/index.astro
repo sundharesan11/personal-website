@@ -1,17 +1,9 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Soumyo</title>
-  </head>
-  <body>
-    <h1>Coming soon.</h1>
-  </body>
-</html>
+<BaseLayout title="Soumyo — Oogway Labs">
+  <main class="bg-bg text-text min-h-screen px-6 py-24">
+    <h1 class="text-3xl font-semibold">Layout works</h1>
+    <p class="text-text-muted text-lg mt-4">Token-driven, themed, no-flash.</p>
+  </main>
+</BaseLayout>

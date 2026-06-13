@@ -1,0 +1,38 @@
+---
+// src/layouts/BaseLayout.astro
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Soumyo — Oogway Labs" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Inter via Fontsource is imported in global.css; until then system stack renders -->
+
+    <!-- No-flash: set the theme class BEFORE first paint -->
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const dark =
+            stored === "dark" ||
+            (stored !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
