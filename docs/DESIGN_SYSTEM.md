@@ -12,6 +12,8 @@ The spine of the site. Every UI choice traces back here. Aesthetic: **clean / mi
 4. **Consistency over cleverness.** Reuse patterns; no one-off styling.
 5. **Earn every element.** If removing it doesn't hurt, remove it.
 
+> Editorial elements (serif display, kickers, datelines, hairline rules, the cover hero) are the sanctioned layer. Beyond them, the restraint principles above still hold — don't add decoration that isn't one of these patterns.
+
 ## Color tokens
 
 Neutral-led, near-monochrome, with one accent. Tuned for AA contrast.
@@ -31,6 +33,7 @@ Rules: body text on `bg` only. `text-muted` never for primary reading content. A
 ## Typography
 
 - **Sans (UI + body):** Inter (or system stack fallback: `ui-sans-serif, system-ui, …`)
+- **Serif (display):** Playfair Display via `--font-serif` — used for the hero name and all headings (h1/h2/h3, card and post titles). Inter stays for body, nav, UI, kickers, and datelines.
 - **Optional display:** keep to one weight contrast; no more than 2 families total.
 
 Type scale (rem, ~1.25 ratio):
@@ -68,6 +71,13 @@ Section vertical rhythm: 96–128px between major sections on desktop, 48–64px
 - **Links:** `accent`, underline on hover (or persistent subtle underline). Visible focus ring always.
 - **Cards (project tiles):** hairline border, `md` radius, generous padding, no shadow. Hover: border darkens slightly, subtle lift.
 - **Layout:** single centered column, max-width ~720px for prose, ~1100px for galleries. Consistent horizontal gutter.
+
+## Editorial patterns
+
+- **Kicker:** a small uppercase, letter-spaced (`tracking-[0.14em]`) eyebrow label above page titles and in the hero. The one sanctioned uppercase in the system (editorial convention).
+- **Dateline:** dates rendered small, uppercase, letter-spaced (`tracking-[0.12em]`), muted — on writing posts and project detail.
+- **Hairline rules:** the `border` token as a thin divider under section headings; used sparingly.
+- **Cover hero:** full-bleed (~82vh) photo + dark scrim + the flow-field 'extended dots' overlay (onPhoto variant, light dots) + the name in Playfair + kicker/dateline. Home only.
 
 ## Do / Don't
 

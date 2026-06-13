@@ -38,14 +38,23 @@ The Astro Tailwind integration installs Tailwind v4 (`@tailwindcss/vite`), which
 ### Hero ambient motion: flow field — 2026-06-14 (supersedes the dot-field choice)
 Particles drift continuously along an evolving noise **flow field** behind the hero; near the cursor they are pushed away and **swirl** (radial + tangential force). Rendered as short **line streaks** (not dots), with ~1/3 of them in **stellar blue** (the `accent` token — `#2F6BFF`/`#5B86FF`) and the rest faint muted-gray; streak alpha rises with speed. Canvas-based, single rAF loop. **Why the change:** the earlier reactive dot grid (brightness-only) tested as too tame / not captivating; the flow field is more organic and clearly "shows mouse activity" (the original ask). **Non-negotiables (unchanged):** disabled under `prefers-reduced-motion` (renders one static frame of streaks, no rAF/listeners), GPU-cheap (canvas 2d, capped DPR, particle count scales with area and is capped, paused via IntersectionObserver off-screen), theme-aware (re-reads `--color-accent`/`--color-text-muted` on toggle). **Mobile:** no cursor, but the field keeps drifting on its own so it still reads as alive. **Implementation:** `src/scripts/flowField.ts` (pure `flowAngle()` unit-tested) + `src/components/FlowField.astro`; replaces the removed `dotField.ts`/`DotField.astro`. Stays the second (and only other) piece of client JS after the theme toggle. **Rejected:** reactive dot grid (too tame), magnetic-displacement grid, ripple, ambient glow, drifting blob (all considered; magnetic & ripple were live-prototyped alongside flow before this pick).
 
+### Identity: Sundharesan Kumaresan — 2026-06-14
+The site is Sundharesan Kumaresan's personal portfolio. The earlier "Soumyo — Oogway Labs" was incorrect placeholder identity and has been removed site-wide (header, footer, titles, meta, OG, About, and placeholder copy). Contact email: sundharesansk11@gmail.com.
+
+### Aesthetic pivot: minimal base + editorial layer — 2026-06-14
+Supersedes the earlier "Aesthetic: clean/minimal — Rejected: editorial" decision. Keep the minimal whitespace base, but add an editorial/newspaper layer: serif display (Playfair Display) for headings + hero name, kicker eyebrows, datelines, hairline rules, and a full-bleed cover hero (photo + dark scrim + flow-field "extended dots" overlay + name). Not full newspaper (no multi-column body, no drop caps on content). **Why:** owner wants a newspaper/article feel with a photo hero; the minimal base keeps it from becoming busy.
+
+### Editorial serif: Playfair Display — 2026-06-14
+Resolves the previously-open "Typography — exact families". Self-hosted via @fontsource/playfair-display as `--font-serif`. **Rejected:** Newsreader (more sober) and Fraunces (more boutique) — owner chose Playfair's magazine-cover elegance.
+
+### Hero: full-bleed cover (photo + name overlay + flow field) — 2026-06-14
+Home hero is a full-bleed ~82vh cover: placeholder photo (`/public/hero-placeholder.jpg`, swap later) + dark scrim + the flow field (onPhoto variant, light dots) + name in Playfair + kicker/dateline. **Rejected:** masthead and portrait-split layouts (live-mocked alongside cover).
+
 ---
 
 ## Open / Deferred
 
 These are intentionally undecided. Don't lock them in without confirming.
-
-### Typography — exact families
-`DESIGN_SYSTEM.md` defaults to Inter. **Open:** keep Inter, or pair a display serif (e.g., editorial heading) while staying minimal? Decide once we see the hero.
 
 ### Hosting / deploy target
 Vercel vs Netlify vs Cloudflare Pages — all fine for static Astro. **Open:** pick when we're ready to deploy.

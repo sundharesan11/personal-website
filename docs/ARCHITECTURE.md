@@ -11,6 +11,7 @@ How the site is structured. Update when structure changes.
 ├── astro.config.mjs
 ├── tsconfig.json
 ├── public/                # static assets served as-is (favicon, og image, fonts)
+│   └── hero-placeholder.jpg   # swappable cover hero photo (replace with real portrait)
 └── src/
     ├── content.config.ts  # collection schemas (zod) — Astro v5 location
     ├── content/           # Astro Content Collections
@@ -19,7 +20,9 @@ How the site is structured. Update when structure changes.
     ├── components/        # small composable .astro components
     │   ├── Header.astro
     │   ├── Footer.astro
-    │   ├── FlowField.astro    # decorative hero canvas (aria-hidden)
+    │   ├── Hero.astro         # full-bleed cover hero (photo + scrim + flow field + name)
+    │   ├── Kicker.astro       # editorial eyebrow label (uppercase, letter-spaced)
+    │   ├── FlowField.astro    # decorative hero canvas (aria-hidden); onPhoto variant for cover hero
     │   ├── ProjectCard.astro
     │   ├── ThemeToggle.astro
     │   └── Prose.astro    # styled long-form wrapper
@@ -35,7 +38,7 @@ How the site is structured. Update when structure changes.
     │       ├── index.astro     # post list
     │       └── [slug].astro    # post detail (from content)
     ├── scripts/
-    │   ├── flowField.ts   # canvas particle animation for hero
+    │   ├── flowField.ts   # canvas particle animation for cover hero (onPhoto variant: light dots)
     │   └── theme.ts       # dark-mode toggle logic
     └── styles/
         └── global.css     # @theme tokens (Tailwind v4), base resets, font import

@@ -4,7 +4,7 @@ Root context for this project. Keep this file **lean** — it loads every turn. 
 
 ## What this is
 
-A personal portfolio site for Soumyo (Oogway Labs). Aesthetic: **clean / minimal** — generous whitespace, restrained palette, crisp typography, very little chrome. Content-first.
+A personal portfolio site for Sundharesan Kumaresan. Aesthetic: **minimal base with an editorial (newspaper) layer** — generous whitespace and a restrained palette, with serif display type (Playfair Display), kicker eyebrows, datelines, hairline rules, and a full-bleed cover hero. Content-first.
 
 ## Stack
 
