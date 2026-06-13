@@ -17,3 +17,6 @@ Thumbs.db
 # editor
 .vscode/
 .idea/
+
+# local agent tooling (preview launch config is auto-recreated)
+.claude/
