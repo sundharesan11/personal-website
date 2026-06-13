@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Prose from "../../components/Prose.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("writing", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+---
+<BaseLayout title={`${post.data.title} — Soumyo`} description={post.data.description}>
+  <main class="mx-auto max-w-[720px] px-6 py-16">
+    <a href="/writing" class="text-sm text-text-muted hover:text-text">← Writing</a>
+    <header class="mt-6">
+      <h1 class="text-2xl font-semibold">{post.data.title}</h1>
+      <time class="mt-2 block text-sm text-text-muted">{fmt(post.data.date)}</time>
+    </header>
+    <article class="mt-10"><Prose><Content /></Prose></article>
+  </main>
+</BaseLayout>
