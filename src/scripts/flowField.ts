@@ -14,7 +14,14 @@ export interface FlowFieldOptions {
   speed?: number;
   blueRatio?: number;
   cursorRadius?: number;
-  trailLength?: number;
+  trail?: number;
+  variant?: "muted" | "onPhoto";
+}
+
+/** Pure: deterministic pseudo-random in [0,1) from a particle index. */
+export function randFromIndex(i: number): number {
+  const x = Math.sin((i + 1) * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
 }
 
 interface RGB { r: number; g: number; b: number; }
@@ -25,7 +32,6 @@ function hexToRgb(hex: string): RGB {
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
-/** Mount the flow field on a canvas. Returns a cleanup function. */
 export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions = {}): () => void {
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
@@ -34,10 +40,11 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   const speed = opts.speed ?? 0.85;
   const blueRatio = opts.blueRatio ?? 0.4;
   const cursorR = opts.cursorRadius ?? 160;
-  const trail = opts.trailLength ?? 9;
+  const trail = opts.trail ?? 5;
+  const variant = opts.variant ?? "muted";
 
   let w = 0, h = 0, count = 0;
-  let particles: { x: number; y: number; blue: boolean }[] = [];
+  let particles: { x: number; y: number; blue: boolean; size: number; spd: number }[] = [];
   let mx = -9999, my = -9999, active = false, T = 0, raf = 0, running = false;
 
   const cssVar = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n);
@@ -45,7 +52,9 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   let muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2");
   const readColors = () => {
     blue = hexToRgb(cssVar("--color-accent") || "#5B86FF");
-    muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2");
+    muted = variant === "onPhoto"
+      ? { r: 235, g: 236, b: 240 }
+      : hexToRgb(cssVar("--color-text-muted") || "#9A9AA2");
   };
 
   const blueEvery = Math.max(1, Math.round(1 / blueRatio));
@@ -54,7 +63,13 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
     count = opts.count ?? Math.min(420, Math.round((w * h) / 2400));
     particles = [];
     for (let i = 0; i < count; i++) {
-      particles.push({ x: Math.random() * w, y: Math.random() * h, blue: i % blueEvery === 0 });
+      particles.push({
+        x: randFromIndex(i * 2) * w,
+        y: randFromIndex(i * 2 + 1) * h,
+        blue: i % blueEvery === 0,
+        size: 0.8 + randFromIndex(i + 100) * 1.6,
+        spd: 0.7 + randFromIndex(i + 7) * 0.7,
+      });
     }
   }
 
@@ -70,11 +85,11 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
 
   function step() {
     ctx!.clearRect(0, 0, w, h);
-    ctx!.lineCap = "round";
     for (const p of particles) {
-      const a = flowAngle(p.x, p.y, T);
-      let vx = Math.cos(a) * speed;
-      let vy = Math.sin(a) * speed;
+      const jitter = (randFromIndex(Math.floor(T * 60) + p.size * 100) - 0.5) * 0.5;
+      const a = flowAngle(p.x, p.y, T) + jitter;
+      let vx = Math.cos(a) * speed * p.spd;
+      let vy = Math.sin(a) * speed * p.spd;
       if (active) {
         const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy);
         if (d < cursorR) {
@@ -90,13 +105,19 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
 
       const sp = Math.min(1, Math.hypot(vx, vy) / (speed * 4));
       const c = p.blue ? blue : muted;
-      const alpha = p.blue ? 0.6 + sp * 0.38 : 0.24 + sp * 0.4;
-      ctx!.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
-      ctx!.lineWidth = p.blue ? 1.5 : 1.1;
+      const headA = (p.blue ? 0.7 : 0.5) + sp * 0.3;
+      const tailA = headA * 0.28;
+      ctx!.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${tailA})`;
+      ctx!.lineWidth = p.size;
+      ctx!.lineCap = "round";
       ctx!.beginPath();
       ctx!.moveTo(p.x - vx * trail, p.y - vy * trail);
       ctx!.lineTo(p.x, p.y);
       ctx!.stroke();
+      ctx!.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${headA})`;
+      ctx!.beginPath();
+      ctx!.arc(p.x, p.y, p.size * (p.blue ? 1.15 : 1), 0, Math.PI * 2);
+      ctx!.fill();
     }
   }
 
@@ -136,11 +157,7 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   }, { threshold: 0 });
 
   resize(); readColors();
-  if (reduce.matches) {
-    T = 0; step();
-  } else {
-    io.observe(canvas);
-  }
+  if (reduce.matches) { T = 0; step(); } else { io.observe(canvas); }
 
   return () => {
     stop(); io.disconnect(); mo.disconnect();
