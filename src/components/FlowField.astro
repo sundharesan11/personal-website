@@ -1,0 +1,16 @@
+---
+// src/components/FlowField.astro
+// Decorative hero motion: particles drift along an evolving flow field and
+// swirl away from the cursor; ~1/3 render in stellar blue (the accent).
+// aria-hidden + pointer-events-none so it never interferes with content or AT.
+---
+<canvas
+  id="flow-field"
+  aria-hidden="true"
+  class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+></canvas>
+<script>
+  import { initFlowField } from "../scripts/flowField";
+  const canvas = document.getElementById("flow-field");
+  if (canvas instanceof HTMLCanvasElement) initFlowField(canvas);
+</script>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import DotField from "../components/DotField.astro";
+import FlowField from "../components/FlowField.astro";
 import { getCollection } from "astro:content";
 
 const featured = (await getCollection("projects"))
@@ -12,7 +12,7 @@ const featured = (await getCollection("projects"))
   <main class="mx-auto max-w-[1100px] px-6">
     <!-- relative + overflow-hidden contains the absolutely-positioned canvas -->
     <section class="relative overflow-hidden py-24">
-      <DotField />
+      <FlowField />
       <div class="relative z-10">
         <h1 class="max-w-[18ch] text-3xl font-semibold leading-tight">
           Building quiet, considered software at Oogway Labs.
