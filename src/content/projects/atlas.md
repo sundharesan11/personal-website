@@ -10,4 +10,4 @@ url: https://example.com/atlas
 Placeholder copy. Atlas reframes note-taking as wayfinding — replace with the real write-up.
 
 ## Role
-Design + build. Replace with Soumyo's actual contribution.
+Design + build. Replace with the actual contribution details.

@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 ---
-<BaseLayout title={`${project.data.title} — Soumyo`} description={project.data.summary}>
+<BaseLayout title={`${project.data.title} — Sundharesan Kumaresan`} description={project.data.summary}>
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
     <a href="/work" class="text-sm text-text-muted hover:text-text">← Work</a>
     <header class="mx-auto mt-6" style="max-width: var(--measure)">

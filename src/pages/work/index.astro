@@ -7,7 +7,7 @@ import { getCollection } from "astro:content";
 const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Work — Soumyo">
+<BaseLayout title="Work — Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
     <Kicker text="Portfolio" />
     <h1 class="mt-2 font-serif text-2xl font-semibold">Work</h1>
