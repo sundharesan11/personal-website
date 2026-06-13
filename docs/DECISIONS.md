@@ -23,8 +23,8 @@ Projects and writing as Markdown/MDX, not hardcoded. Keeps content editable with
 ### Site sections / IA: Home + Work + Writing + About — 2026-06-14
 Writing/blog is **in at launch** (not deferred). Launch IA: Home, Work, Writing, About. **Rejected:** minimum-viable Home+Work+About only (Soumyo wants writing surfaced from day one). Contact remains a mailto in the footer, not its own section (see Open).
 
-### Accent color: blue `#2F6BFF` — 2026-06-14
-Confirmed the default blue as the single accent (light) / `#5B86FF` (dark). One token — swappable later if it reads too cool against real content. **Rejected:** warmer/quieter accent for now.
+### Accent color: blue `#1F54E6` (light) / `#5B86FF` (dark) — 2026-06-14
+Single accent. Originally `#2F6BFF` (light), but it measured 4.4988:1 on white — 0.001 below the WCAG AA 4.5:1 bar for body-size links, and AA is a stated project requirement. Darkened the light accent to `#1F54E6` (6.05:1) rather than introduce a second blue, keeping the "one accent" rule. Hover `#163CAE`. Dark accent `#5B86FF` (5.9:1) unchanged. The flow-field "stellar blue" streaks and the favicon use this same accent token. **Rejected:** keeping `#2F6BFF` (fails AA), or adding a separate darker link color (would mean two blues). Still swappable later if it reads too cool against real content.
 
 ### Dark mode at launch (toggle + system default) — 2026-06-14
 Ship light **and** dark from day one with a user toggle, defaulting to system preference and persisting choice. Tokens already define both palettes. **Rejected:** light-only-first, system-only-no-toggle. Implication: the toggle needs the one piece of client JS we'll allow, plus an inline no-flash script in `<head>`.

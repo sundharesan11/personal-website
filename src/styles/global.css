@@ -12,8 +12,8 @@
   --color-text: #16161A;
   --color-text-muted: #6B6B73;
   --color-border: #E6E6E3;
-  --color-accent: #2F6BFF;
-  --color-accent-hover: #1F54E6;
+  --color-accent: #1F54E6;
+  --color-accent-hover: #163CAE;
 
   /* Type scale (rem) — matches DESIGN_SYSTEM.md */
   --text-xs: 0.8rem;
