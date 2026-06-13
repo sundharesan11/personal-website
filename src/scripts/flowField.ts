@@ -31,10 +31,10 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   if (!ctx) return () => {};
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const speed = opts.speed ?? 0.7;
-  const blueRatio = opts.blueRatio ?? 0.35;
-  const cursorR = opts.cursorRadius ?? 150;
-  const trail = opts.trailLength ?? 6;
+  const speed = opts.speed ?? 0.85;
+  const blueRatio = opts.blueRatio ?? 0.4;
+  const cursorR = opts.cursorRadius ?? 160;
+  const trail = opts.trailLength ?? 9;
 
   let w = 0, h = 0, count = 0;
   let particles: { x: number; y: number; blue: boolean }[] = [];
@@ -51,7 +51,7 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
   const blueEvery = Math.max(1, Math.round(1 / blueRatio));
 
   function seed() {
-    count = opts.count ?? Math.min(220, Math.round((w * h) / 5200));
+    count = opts.count ?? Math.min(420, Math.round((w * h) / 2400));
     particles = [];
     for (let i = 0; i < count; i++) {
       particles.push({ x: Math.random() * w, y: Math.random() * h, blue: i % blueEvery === 0 });
@@ -90,9 +90,9 @@ export function initFlowField(canvas: HTMLCanvasElement, opts: FlowFieldOptions 
 
       const sp = Math.min(1, Math.hypot(vx, vy) / (speed * 4));
       const c = p.blue ? blue : muted;
-      const alpha = p.blue ? 0.55 + sp * 0.4 : 0.16 + sp * 0.3;
+      const alpha = p.blue ? 0.6 + sp * 0.38 : 0.24 + sp * 0.4;
       ctx!.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${alpha})`;
-      ctx!.lineWidth = p.blue ? 1.3 : 1;
+      ctx!.lineWidth = p.blue ? 1.5 : 1.1;
       ctx!.beginPath();
       ctx!.moveTo(p.x - vx * trail, p.y - vy * trail);
       ctx!.lineTo(p.x, p.y);
