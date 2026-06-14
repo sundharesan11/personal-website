@@ -2,6 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Kicker from "../components/Kicker.astro";
 import Prose from "../components/Prose.astro";
+const steps = [
+  { label: "The problem", body: "Placeholder — the real problem you see at the intersection of agriculture and finance, and who it leaves out." },
+  { label: "Why it matters", body: "Placeholder — the stakes, tied to the fairness-and-legibility through-line." },
+  { label: "The rough shape", body: "Placeholder — the rough shape of the venture, not a pitch deck." },
+];
 ---
 <BaseLayout title="Ambitions — Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
@@ -11,11 +16,15 @@ import Prose from "../components/Prose.astro";
 
     <section class="mt-16" style="max-width: var(--measure)">
       <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">An agri-fintech thesis</h2>
-      <div class="mt-4"><Prose>
-        <p><strong>The problem.</strong> Placeholder — the real problem you see at the intersection of agriculture and finance, and who it leaves out.</p>
-        <p><strong>Why it matters.</strong> Placeholder — the stakes, tied to the fairness-and-legibility through-line.</p>
-        <p><strong>The rough shape.</strong> Placeholder — the rough shape of the venture, not a pitch deck.</p>
-      </Prose></div>
+      <ol class="relative mt-8 border-l border-border pl-8">
+        {steps.map((s) => (
+          <li class="relative pb-10 last:pb-0">
+            <span class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-stellar"></span>
+            <h3 class="font-serif font-semibold leading-[1.1]" style="font-size: clamp(1.3rem, 3.5vw, 1.9rem);">{s.label}</h3>
+            <p class="mt-2 text-text-muted">{s.body}</p>
+          </li>
+        ))}
+      </ol>
     </section>
 
     <section class="mt-20">

@@ -15,6 +15,8 @@ const lenses = [
   { key: "technical", label: "Technical / AI" },
   { key: "theatrical", label: "Theatrical" },
 ];
+const inLens = (key: string) => published.filter((p) => p.data.lens === key && (!featured || p.id !== featured.id));
+const activeLenses = lenses.filter((l) => inLens(l.key).length > 0);
 const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 <BaseLayout title="Writing — Sundharesan Kumaresan">
@@ -28,6 +30,14 @@ const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month:
         <EditionToggle />
       </div>
 
+      {activeLenses.length > 1 && (
+        <nav aria-label="Jump to lens" class="mt-8 flex flex-wrap gap-2">
+          {activeLenses.map((l) => (
+            <a href={`#lens-${l.key}`} class="rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:border-stellar hover:text-stellar">{l.label}</a>
+          ))}
+        </nav>
+      )}
+
       {featured && (
         <a href={`/writing/${featured.id}`} class="group mt-12 block border-t-2 border-stellar pt-8">
           <div class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">Featured</div>
@@ -36,28 +46,25 @@ const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month:
         </a>
       )}
 
-      {lenses.map((lens) => {
-        const items = published.filter((p) => p.data.lens === lens.key && (!featured || p.id !== featured.id));
-        return items.length > 0 ? (
-          <section class="mt-16">
-            <h2 class="font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{lens.label}</h2>
-            <ul class="mt-5 border-t border-border">
-              {items.map((post, i) => (
-                <li class="border-b border-border">
-                  <a href={`/writing/${post.id}`} class="group block py-6">
-                    <div class="flex items-baseline gap-4">
-                      <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">nº {String(i + 1).padStart(2, "0")}</span>
-                      <time class="text-sm uppercase tracking-[0.14em] text-text-muted">{fmt(post.data.date)}</time>
-                    </div>
-                    <h3 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h3>
-                    <p class="mt-1 max-w-[60ch] text-text-muted">{post.data.description}</p>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null;
-      })}
+      {activeLenses.map((lens) => (
+        <section id={`lens-${lens.key}`} class="mt-16 scroll-mt-24">
+          <h2 class="sticky top-16 z-10 bg-bg py-3 font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{lens.label}</h2>
+          <ul class="mt-3 border-t border-border">
+            {inLens(lens.key).map((post, i) => (
+              <li class="border-b border-border">
+                <a href={`/writing/${post.id}`} class="group block py-6">
+                  <div class="flex items-baseline gap-4">
+                    <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">nº {String(i + 1).padStart(2, "0")}</span>
+                    <time class="text-sm uppercase tracking-[0.14em] text-text-muted">{fmt(post.data.date)}</time>
+                  </div>
+                  <h3 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h3>
+                  <p class="mt-1 max-w-[60ch] text-text-muted">{post.data.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
 
       {desk.length > 0 && (
         <section class="mt-20">
