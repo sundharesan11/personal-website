@@ -10,16 +10,18 @@ export async function getStaticPaths() {
 }
 const { post } = Astro.props;
 const { Content } = await render(post);
-const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 ---
 <BaseLayout title={`${post.data.title} — Sundharesan Kumaresan`} description={post.data.description}>
-  <main id="main-content" class="mx-auto max-w-[720px] px-6 py-16">
-    <a href="/writing" class="text-sm text-text-muted hover:text-text">← Writing</a>
-    <header class="mt-6">
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+    <div class="mx-auto" style="max-width: var(--measure)">
       <Kicker text="Essay" />
-      <h1 class="mt-2 font-serif text-2xl font-semibold">{post.data.title}</h1>
-      <time class="mt-3 block text-sm uppercase tracking-[0.12em] text-text-muted">{fmt(post.data.date)}</time>
-    </header>
-    <article class="mt-10"><Prose><Content /></Prose></article>
+      <h1 class="mt-3 font-serif font-semibold leading-[1.0]" style="font-size: clamp(2.4rem, 7vw, 4.5rem);">{post.data.title}</h1>
+      <p class="mt-4 text-sm uppercase tracking-[0.14em] text-stellar">{fmt(post.data.date)}</p>
+    </div>
+    <div class="mt-12"><Prose dropcap><Content /></Prose></div>
+    <div class="mx-auto mt-16" style="max-width: var(--measure)">
+      <a href="/writing" class="text-xs uppercase tracking-[0.16em] text-text-muted hover:text-text">← Writing</a>
+    </div>
   </main>
 </BaseLayout>
