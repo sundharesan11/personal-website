@@ -63,6 +63,18 @@
   --color-accent-hover: #7CA0FF;
 }
 
+/* Cream palette — warm beige/day mode */
+.theme-cream {
+  --color-bg: #F3EBDD;
+  --color-surface: #EAE0CF;
+  --color-text: #3B342B;
+  --color-text-muted: #756B5B;
+  --color-border: #DCD0BD;
+  --color-accent: #1F54E6;
+  --color-accent-hover: #163CAE;
+  --color-stellar: #5B86FF;
+}
+
 /* Base resets / element defaults */
 :root { color-scheme: light dark; }
 

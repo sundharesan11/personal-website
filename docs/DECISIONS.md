@@ -80,6 +80,9 @@ A global ≡ overlay with a 3D CSS cube (6 faces = the 6 destinations), slow aut
 ### Modern ↔ Evening edition toggle — 2026-06-15
 A reading-mode toggle scoped to Writing pages, a separate axis from the global light/dark theme. Evening = atmospheric dark-warm reading mode (deep `#0E0E12` ground, warm paper text, serif body, larger blue drop cap) via `[data-edition="evening"] .writing-page` overrides + a no-flash inline read. `EditionToggle.astro` + `src/scripts/edition.ts`. Third piece of client JS (after theme toggle + cube).
 
+### Third theme: cream (warm day mode) — 2026-06-15
+Added a third theme alongside light + dark: "cream" — a warm beige/day palette (ground #F3EBDD, warm dark-brown text #3B342B, warm hairlines) inspired by a soft warm reference illustration. Keeps the stellar-blue accent for thread consistency. Implemented via a `.theme-cream` class (the `.dark` class stays so Tailwind `dark:` variants keep working). The theme control is now a 3-state cycle (light → dark → cream). `data-edition` (Modern/Evening on Writing) remains a separate axis.
+
 ---
 
 ## Open / Deferred

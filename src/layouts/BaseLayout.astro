@@ -39,11 +39,11 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
     <script is:inline>
       (() => {
         try {
-          const stored = localStorage.getItem("theme");
-          const dark =
-            stored === "dark" ||
-            (stored !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
-          document.documentElement.classList.toggle("dark", dark);
+          const s = localStorage.getItem("theme");
+          const el = document.documentElement;
+          const t = (s === "light" || s === "dark" || s === "cream") ? s : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          el.classList.toggle("dark", t === "dark");
+          el.classList.toggle("theme-cream", t === "cream");
         } catch (_) {}
       })();
     </script>
