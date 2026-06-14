@@ -65,6 +65,21 @@ Replaced the flow-field canvas with pure-CSS parallax (`background-attachment: f
 ### No boxes / full-bleed; contact = mailto — 2026-06-14
 Removed `ProjectCard` and all card/box/border/shadow/rounded chrome; work & writing are full-bleed/flush-left editorial entries; links underline-only. Contact is a bold serif "Get in touch →" mailto in the footer (functional form deferred — needs backend).
 
+### Publication IA: Home · Now/Work · Writing · Reading · Ambitions · About — 2026-06-15
+Expanded from 4 sections to a full publication (per `docs/plan-and-todo.md`). Home = thin threshold + "Inside this edition" teaser index. Now/Work = role feature (not a project list). Writing = four lenses (Economics/Philosophy/Technical/Theatrical) + a being-written desk. Reading = scatter gallery grouped by "what each opened." Ambitions = a "forming" op-ed (agri-fintech thesis, other ideas, Social Writing manifesto). About = long-read. Contact stays footer-wide (now with social links).
+
+### Projects gallery retired — 2026-06-15
+Removed the `projects` collection, the `/work/[slug]` route, and `WorkEntry`/`ProjectCard`. Now/Work is a confidentiality-safe role feature instead. **Why:** owner's plan + Oogway confidentiality (no client/project names by default).
+
+### Identity: Oogway Labs is the employer — 2026-06-15
+Sundharesan is "AI engineer at Oogway Labs · writer · founder-in-waiting." Oogway Labs appears as his **employer** in content (Now/Work, identity line, About), NOT as the masthead. Reconciles the earlier scrub of "Soumyo — Oogway Labs," which was wrong only in the name.
+
+### Rotating cube ≡ menu — 2026-06-15
+A global ≡ overlay with a 3D CSS cube (6 faces = the 6 destinations), slow auto-spin (static under prefers-reduced-motion), Escape/backdrop close + focus management, and a plain text nav list as the accessible fallback (alongside the header's text nav). `CubeMenu.astro` + `src/scripts/cube.ts`.
+
+### Modern ↔ Evening edition toggle — 2026-06-15
+A reading-mode toggle scoped to Writing pages, a separate axis from the global light/dark theme. Evening = atmospheric dark-warm reading mode (deep `#0E0E12` ground, warm paper text, serif body, larger blue drop cap) via `[data-edition="evening"] .writing-page` overrides + a no-flash inline read. `EditionToggle.astro` + `src/scripts/edition.ts`. Third piece of client JS (after theme toggle + cube).
+
 ---
 
 ## Open / Deferred

@@ -15,32 +15,39 @@ How the site is structured. Update when structure changes.
 └── src/
     ├── content.config.ts  # collection schemas (zod) — Astro v5 location
     ├── content/           # Astro Content Collections
-    │   ├── projects/      # one .md/.mdx per project
-    │   └── writing/       # blog posts
+    │   ├── writing/       # blog posts (lens, status, featured, cover fields added)
+    │   └── reading/       # reading entries (new collection)
+    │   # REMOVED: projects/ collection
     ├── components/        # small composable .astro components (no cards — editorial entries only)
     │   ├── Header.astro
     │   ├── Footer.astro
     │   ├── Monogram.astro     # SK. brand mark; trailing dot is stellar-blue
     │   ├── ParallaxHero.astro # full-bleed CSS parallax cover hero (photo + scrim + name)
-    │   ├── WorkEntry.astro    # alternating full-bleed photo + serif title + blue nº + dateline
     │   ├── Figure.astro       # full-bleed photograph wrapper (no borders/rounded corners)
     │   ├── Kicker.astro       # editorial eyebrow label (uppercase, letter-spaced)
     │   ├── ThemeToggle.astro
-    │   └── Prose.astro    # styled long-form wrapper
-    │   # REMOVED: Hero.astro, FlowField.astro, ProjectCard.astro
+    │   ├── Prose.astro        # styled long-form wrapper
+    │   ├── CubeMenu.astro     # rotating-cube ≡ overlay menu (6 faces = 6 destinations)
+    │   ├── EditionToggle.astro # Modern↔Evening reading-mode toggle (Writing pages only)
+    │   ├── FactsRail.astro    # sidebar facts/pull-quotes rail
+    │   └── TeaserIndex.astro  # "Inside this edition" teaser index (Home)
+    │   # REMOVED: Hero.astro, FlowField.astro, ProjectCard.astro, WorkEntry.astro
     ├── layouts/
     │   └── BaseLayout.astro   # <head>, fonts, meta, slots
     ├── pages/             # file-based routing
-    │   ├── index.astro        # Home
+    │   ├── index.astro        # Home (threshold + teaser index)
     │   ├── work/
-    │   │   ├── index.astro     # project list
-    │   │   └── [slug].astro    # project detail (from content)
-    │   ├── about.astro
-    │   └── writing/
-    │       ├── index.astro     # post list
-    │       └── [slug].astro    # post detail (from content)
+    │   │   └── index.astro    # Now/Work — single role feature page
+    │   ├── writing/
+    │   │   ├── index.astro    # Writing index — four lenses + being-written desk
+    │   │   └── [slug].astro   # Post detail (from content)
+    │   ├── reading.astro      # Reading — scatter gallery grouped by "what each opened"
+    │   ├── ambitions.astro    # Ambitions — "forming" op-ed
+    │   └── about.astro
     ├── scripts/
-    │   └── theme.ts       # dark-mode toggle logic (only JS in the project; flowField.ts removed)
+    │   ├── theme.ts       # dark-mode toggle logic
+    │   ├── cube.ts        # cube menu: auto-spin, Escape/backdrop close, focus management
+    │   └── edition.ts     # edition toggle: Modern↔Evening reading mode, no-flash inline read
     │   # REMOVED: flowField.ts
     └── styles/
         └── global.css     # @theme tokens (Tailwind v4), base resets, font import
@@ -48,14 +55,14 @@ How the site is structured. Update when structure changes.
 
 ## Routing
 
-File-based via `src/pages`. Dynamic project pages generated from the `projects` content collection via `getStaticPaths`.
+File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature), `/writing` (Writing index), `/writing/[slug]` (post detail from `writing` collection), `/reading` (scatter gallery), `/ambitions` (forming op-ed), `/about`. The `/work/[slug]` project detail route was REMOVED along with the `projects` collection.
 
-## Content model (draft)
+## Content model
 
-`projects` frontmatter: `title`, `summary`, `date`, `tags[]`, `cover?`, `url?`, `featured?`.
-`writing` frontmatter (if used): `title`, `description`, `date`, `draft?`.
+`writing` frontmatter: `title`, `description`, `date`, `draft?`, `lens` (Economics | Philosophy | Technical | Theatrical), `status` (published | being-written), `featured?`, `cover?`.
+`reading` frontmatter: `title`, `author`, `date`, `what_it_opened`, `cover?`, `notes?`.
 
-Schemas enforced in `src/content.config.ts` with zod so content stays consistent.
+Schemas enforced in `src/content.config.ts` with zod so content stays consistent. The `projects` collection and its schema were REMOVED.
 
 ## Styling flow
 
@@ -63,7 +70,7 @@ Tailwind v4 (CSS-first): tokens are defined once in `src/styles/global.css` unde
 
 ## Motion
 
-CSS parallax only (`background-attachment: fixed` via Tailwind `bg-fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). No canvas or JS animation — the flow-field canvas was removed. The only client JS remaining is the theme toggle. Static on mobile/iOS (acceptable; `bg-fixed` degrades gracefully).
+CSS parallax only (`background-attachment: fixed` via Tailwind `bg-fixed`) on full-bleed photo bands (hero, about portrait). No canvas or JS animation — the flow-field canvas was removed. Three pieces of client JS: `theme.ts` (dark-mode toggle), `cube.ts` (rotating-cube ≡ menu, slow auto-spin, static under `prefers-reduced-motion`), and `edition.ts` (Modern↔Evening edition toggle, Writing pages only, no-flash inline read). Static parallax on mobile/iOS (acceptable; `bg-fixed` degrades gracefully).
 
 ## Data flow
 

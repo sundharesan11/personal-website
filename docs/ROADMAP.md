@@ -2,6 +2,19 @@
 
 Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
+## Publication sections — built (placeholder copy) — 2026-06-15
+
+All six publication sections are scaffolded with placeholder copy and real component structure:
+- **Home** — threshold page with "Inside this edition" teaser index (`TeaserIndex.astro`)
+- **Now/Work** — single role feature page (confidentiality-safe; no client/project names)
+- **Writing** — four lenses (Economics · Philosophy · Technical · Theatrical) + being-written desk + Modern↔Evening edition toggle (`EditionToggle.astro` + `src/scripts/edition.ts`)
+- **Reading** — scatter gallery grouped by "what each opened" (`reading` content collection)
+- **Ambitions** — "forming" op-ed (agri-fintech thesis, other ideas, Social Writing manifesto)
+- **About** — long-read format
+- **Cube menu** — rotating 3D ≡ overlay linking all six destinations (`CubeMenu.astro` + `src/scripts/cube.ts`)
+
+Owner content/asset work (real copy, photos, writing pieces, reading list) tracked in `docs/plan-and-todo.md` (Part B / C).
+
 ## Phase 0 — Context & foundations
 - [x] Scaffold context files (CLAUDE.md, docs/)
 - [x] Confirm open decisions worth resolving now (IA, dark mode, accent) — see DECISIONS 2026-06-14
