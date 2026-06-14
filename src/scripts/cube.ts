@@ -3,19 +3,16 @@ export function initCube(): void {
   const menu = document.getElementById("cube-menu");
   const closeBtn = document.getElementById("cube-close");
   const cube = document.getElementById("cube");
+  const backdrop = document.getElementById("cube-backdrop");
   if (!trigger || !menu || !closeBtn || !cube) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   let lastFocus: HTMLElement | null = null;
   let rx = -18, ry = -28;
-  let autoSpin = !reduce.matches, dragging = false, raf = 0;
-  let px = 0, py = 0;
+  let autoSpin = !reduce.matches, dragging = false, moved = false, raf = 0;
+  let px = 0, py = 0, downX = 0, downY = 0;
 
   const render = () => { cube.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; };
-  const loop = () => {
-    if (autoSpin && !dragging) ry += 0.22;
-    render();
-    raf = requestAnimationFrame(loop);
-  };
+  const loop = () => { if (autoSpin && !dragging) ry += 0.22; render(); raf = requestAnimationFrame(loop); };
   const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
 
   function open() {
@@ -42,17 +39,18 @@ export function initCube(): void {
 
   trigger.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
-  const backdrop = document.getElementById("cube-backdrop");
   if (backdrop) backdrop.addEventListener("click", close);
 
   cube.addEventListener("pointerenter", () => { autoSpin = false; });
   cube.addEventListener("pointerleave", () => { if (!dragging && !reduce.matches) autoSpin = true; });
   cube.addEventListener("pointerdown", (e) => {
-    dragging = true; autoSpin = false; px = e.clientX; py = e.clientY;
+    dragging = true; moved = false; autoSpin = false;
+    px = downX = e.clientX; py = downY = e.clientY;
     try { cube.setPointerCapture(e.pointerId); } catch (_) {}
   });
   cube.addEventListener("pointermove", (e) => {
     if (!dragging) return;
+    if (Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 6) moved = true;
     ry += (e.clientX - px) * 0.5;
     rx = Math.max(-80, Math.min(80, rx - (e.clientY - py) * 0.5));
     px = e.clientX; py = e.clientY;
@@ -65,6 +63,7 @@ export function initCube(): void {
   };
   cube.addEventListener("pointerup", endDrag);
   cube.addEventListener("pointercancel", endDrag);
+  cube.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
 
   render();
 }

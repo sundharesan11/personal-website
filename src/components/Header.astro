@@ -25,7 +25,7 @@ const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted h
       <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
         {links.map((l) => (
           <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
-             class:list={["text-xs uppercase tracking-[0.16em] transition-colors", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
+             class:list={["text-xs uppercase tracking-[0.16em] transition-colors u-draw", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
         ))}
       </nav>
       <div class="flex items-center gap-3">
@@ -38,7 +38,7 @@ const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted h
     <nav aria-label="Primary" class="mt-4 flex flex-wrap gap-x-5 gap-y-2 sm:hidden">
       {links.map((l) => (
         <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
-           class:list={["text-xs uppercase tracking-[0.16em]", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
+           class:list={["text-xs uppercase tracking-[0.16em] u-draw", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
       ))}
     </nav>
   </div>

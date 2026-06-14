@@ -137,3 +137,9 @@ html { scroll-behavior: smooth; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
   #scroll-progress { display: none !important; }
 }
+
+/* Hover underline-draw for links */
+.u-draw { position: relative; }
+.u-draw::after { content: ""; position: absolute; left: 0; bottom: -3px; height: 1px; width: 100%; background: var(--color-accent); transform: scaleX(0); transform-origin: left center; transition: transform .3s ease; }
+.u-draw:hover::after, .u-draw:focus-visible::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .u-draw::after { transition: none; } }
