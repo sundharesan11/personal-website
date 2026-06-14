@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Kicker from "../components/Kicker.astro";
+import Prose from "../components/Prose.astro";
+---
+<BaseLayout title="Ambitions — Sundharesan Kumaresan">
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+    <Kicker text="The future desk" />
+    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Ambitions</h1>
+    <p class="mt-6 inline-block border border-stellar px-4 py-2 text-xs uppercase tracking-[0.18em] text-stellar">Forming — intentions, not yet built</p>
+
+    <section class="mt-16" style="max-width: var(--measure)">
+      <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">An agri-fintech thesis</h2>
+      <div class="mt-4"><Prose>
+        <p><strong>The problem.</strong> Placeholder — the real problem you see at the intersection of agriculture and finance, and who it leaves out.</p>
+        <p><strong>Why it matters.</strong> Placeholder — the stakes, tied to the fairness-and-legibility through-line.</p>
+        <p><strong>The rough shape.</strong> Placeholder — the rough shape of the venture, not a pitch deck.</p>
+      </Prose></div>
+    </section>
+
+    <section class="mt-20">
+      <h2 class="font-serif font-semibold" style="font-size: clamp(1.6rem, 4vw, 2.4rem);">Other ideas</h2>
+      <ul class="mt-6 border-t border-border" style="max-width: var(--measure)">
+        <li class="border-b border-border py-4 text-text-muted"><span class="text-text">Idea one</span> — a one-line placeholder description.</li>
+        <li class="border-b border-border py-4 text-text-muted"><span class="text-text">Idea two</span> — a one-line placeholder description.</li>
+        <li class="border-b border-border py-4 text-text-muted"><span class="text-text">Idea three</span> — a one-line placeholder description.</li>
+      </ul>
+    </section>
+
+    <section class="mt-20" style="max-width: var(--measure)">
+      <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">Social Writing</h2>
+      <div class="mt-4"><Prose>
+        <p>Placeholder manifesto. Thinking-in-public: what it means, why it matters, and where it stands. No metrics — just the practice.</p>
+      </Prose></div>
+    </section>
+  </main>
+</BaseLayout>
