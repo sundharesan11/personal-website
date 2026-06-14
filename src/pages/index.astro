@@ -1,12 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
-import WorkEntry from "../components/WorkEntry.astro";
-import { getCollection } from "astro:content";
-
-const featured = (await getCollection("projects"))
-  .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 <BaseLayout title="Sundharesan Kumaresan">
   <ParallaxHero image="/img/hero.jpg" />
@@ -16,11 +10,7 @@ const featured = (await getCollection("projects"))
         <h2 class="font-serif font-semibold" style="font-size: clamp(2rem, 5vw, 3.25rem);">Selected work</h2>
         <a href="/work" class="text-xs uppercase tracking-[0.16em] text-text-muted hover:text-text">All work →</a>
       </div>
-      <div class="divide-y divide-border">
-        {featured.map((p, i) => (
-          <WorkEntry href={`/work/${p.id}`} title={p.data.title} summary={p.data.summary} index={i + 1} image={p.data.cover ?? "/img/hero.jpg"} year={p.data.date.getFullYear()} />
-        ))}
-      </div>
+      <p class="mt-6 text-text-muted">Projects coming soon.</p>
     </section>
   </main>
 </BaseLayout>

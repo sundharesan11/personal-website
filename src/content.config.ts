@@ -1,19 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    date: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
-    cover: z.string().optional(),
-    url: z.string().url().optional(),
-    featured: z.boolean().default(false),
-  }),
-});
-
 const writing = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
   schema: z.object({
@@ -21,7 +8,25 @@ const writing = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().default(false),
+    lens: z.enum(["economics", "philosophy", "technical", "theatrical"]),
+    status: z.enum(["published", "writing"]).default("published"),
+    featured: z.boolean().default(false),
+    cover: z.string().optional(),
   }),
 });
 
-export const collections = { projects, writing };
+const reading = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/reading" }),
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    note: z.string(),
+    status: z.enum(["read", "on-deck"]),
+    opened: z.string(),
+    cover: z.string().optional(),
+    link: z.string().optional(),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { writing, reading };

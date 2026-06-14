@@ -1,20 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import WorkEntry from "../../components/WorkEntry.astro";
-import Kicker from "../../components/Kicker.astro";
-import { getCollection } from "astro:content";
-
-const projects = (await getCollection("projects"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Work — Sundharesan Kumaresan">
+<BaseLayout title="Now — Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-8">
-    <Kicker text="Portfolio" />
-    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Work</h1>
-    <div class="mt-10 divide-y divide-border border-t border-border">
-      {projects.map((p, i) => (
-        <WorkEntry href={`/work/${p.id}`} title={p.data.title} summary={p.data.summary} index={i + 1} image={p.data.cover ?? "/img/hero.jpg"} year={p.data.date.getFullYear()} />
-      ))}
-    </div>
+    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Now</h1>
+    <p class="mt-6 text-text-muted">This section is being rebuilt. Check back soon.</p>
   </main>
 </BaseLayout>
