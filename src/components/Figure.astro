@@ -1,0 +1,8 @@
+---
+interface Props { src: string; caption?: string; }
+const { src, caption } = Astro.props;
+---
+<figure class="relative left-1/2 right-1/2 -mx-[50vw] my-14 w-screen">
+  <img src={src} alt="" class="mx-auto block max-h-[80vh] w-full max-w-[1400px] object-cover" />
+  {caption && <figcaption class="mx-auto max-w-[1100px] px-6 pt-3 text-sm text-text-muted">{caption}</figcaption>}
+</figure>
