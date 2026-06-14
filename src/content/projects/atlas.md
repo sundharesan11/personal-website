@@ -5,6 +5,7 @@ date: 2026-04-02
 tags: [product, design]
 featured: true
 url: https://example.com/atlas
+cover: /img/atlas.jpg
 ---
 ## Overview
 Placeholder copy. Atlas reframes note-taking as wayfinding — replace with the real write-up.
