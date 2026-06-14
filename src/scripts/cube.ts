@@ -21,7 +21,7 @@ export function initCube(): void {
   function open() {
     lastFocus = document.activeElement as HTMLElement;
     menu!.classList.remove("hidden");
-    menu!.classList.add("flex");
+    menu!.classList.add("block");
     requestAnimationFrame(() => menu!.classList.add("is-open"));
     trigger!.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
@@ -32,7 +32,7 @@ export function initCube(): void {
   function close() {
     menu!.classList.remove("is-open");
     menu!.classList.add("hidden");
-    menu!.classList.remove("flex");
+    menu!.classList.remove("block");
     trigger!.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
     document.removeEventListener("keydown", onKey);
@@ -42,7 +42,8 @@ export function initCube(): void {
 
   trigger.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
-  menu.addEventListener("click", (e) => { if (e.target === menu) close(); });
+  const backdrop = document.getElementById("cube-backdrop");
+  if (backdrop) backdrop.addEventListener("click", close);
 
   cube.addEventListener("pointerenter", () => { autoSpin = false; });
   cube.addEventListener("pointerleave", () => { if (!dragging && !reduce.matches) autoSpin = true; });
