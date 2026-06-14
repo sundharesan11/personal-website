@@ -26,8 +26,6 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
   </nav>
 </div>
 <style>
-  #cube-menu { opacity: 0; transition: opacity .28s ease; }
-  #cube-menu.is-open { opacity: 1; }
   .cube-scene { perspective: 950px; width: 200px; height: 200px; cursor: grab; transform: scale(.88); opacity: 0; transition: transform .42s cubic-bezier(.2,.7,.2,1), opacity .42s ease; }
   .cube-scene:active { cursor: grabbing; }
   #cube-menu.is-open .cube-scene { transform: scale(1); opacity: 1; }
