@@ -8,17 +8,20 @@ const posts = (await getCollection("writing", ({ data }) => !data.draft))
 const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 <BaseLayout title="Writing — Sundharesan Kumaresan">
-  <main id="main-content" class="mx-auto max-w-[720px] px-6 py-16">
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-12">
     <Kicker text="Notes" />
-    <h1 class="mt-2 font-serif text-2xl font-semibold">Writing</h1>
-    <ul class="mt-10 divide-y divide-border">
-      {posts.map((post) => (
-        <li class="py-5">
-          <a href={`/writing/${post.id}`} class="group flex items-baseline justify-between gap-4">
-            <span class="font-serif text-text group-hover:text-accent">{post.data.title}</span>
-            <time class="shrink-0 text-sm text-text-muted">{fmt(post.data.date)}</time>
+    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
+    <ul class="mt-12 border-t-2 border-stellar">
+      {posts.map((post, i) => (
+        <li class="border-b border-border">
+          <a href={`/writing/${post.id}`} class="group block py-8">
+            <div class="flex items-baseline gap-5">
+              <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">nº {String(i + 1).padStart(2, "0")}</span>
+              <time class="text-sm uppercase tracking-[0.14em] text-text-muted">{fmt(post.data.date)}</time>
+            </div>
+            <h2 class="mt-2 font-serif font-semibold leading-[1.05] text-text transition-colors group-hover:text-accent" style="font-size: clamp(1.8rem, 5vw, 3.2rem);">{post.data.title}</h2>
+            <p class="mt-2 max-w-[60ch] text-text-muted">{post.data.description}</p>
           </a>
-          <p class="mt-1 text-sm text-text-muted">{post.data.description}</p>
         </li>
       ))}
     </ul>
