@@ -1,4 +1,5 @@
 ---
+const path = Astro.url.pathname;
 const links = [
   { href: "/", label: "Home", face: "f-front" },
   { href: "/work", label: "Now / Work", face: "f-right" },
@@ -7,30 +8,42 @@ const links = [
   { href: "/ambitions", label: "Ambitions", face: "f-top" },
   { href: "/about", label: "About", face: "f-bottom" },
 ];
+const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 ---
-<div id="cube-menu" class="hidden fixed inset-0 z-[100] flex-col items-center justify-center gap-14 bg-black/92" role="dialog" aria-modal="true" aria-label="Site menu">
+<div id="cube-menu" class="hidden fixed inset-0 z-[100] flex-col items-center justify-center gap-12 bg-black/92" role="dialog" aria-modal="true" aria-label="Site menu">
   <button id="cube-close" type="button" aria-label="Close menu" class="absolute right-6 top-6 text-3xl leading-none text-white/80 transition-colors hover:text-white">&times;</button>
   <div class="cube-scene" aria-hidden="true">
-    <div class="cube">
-      {links.map((l) => (<a href={l.href} tabindex="-1" class:list={["cube-face", l.face]}>{l.label}</a>))}
+    <div id="cube" class="cube">
+      {links.map((l) => (<span class:list={["cube-face", l.face, isActive(l.href) && "is-active"]}>{l.label}</span>))}
     </div>
   </div>
+  <p class="font-sans text-xs uppercase tracking-[0.18em] text-white/40" aria-hidden="true">Drag to explore</p>
   <nav aria-label="Menu" class="flex flex-col items-center gap-3">
-    {links.map((l) => (<a href={l.href} class="font-serif text-2xl text-white/85 transition-colors hover:text-stellar">{l.label}</a>))}
+    {links.map((l) => (
+      <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
+         class:list={["font-serif text-2xl transition-colors", isActive(l.href) ? "text-stellar" : "text-white/85 hover:text-stellar"]}>{l.label}</a>
+    ))}
   </nav>
 </div>
 <style>
-  .cube-scene { perspective: 900px; width: 200px; height: 200px; }
-  .cube { position: relative; width: 200px; height: 200px; transform-style: preserve-3d; animation: cube-spin 20s linear infinite; }
-  .cube-face { position: absolute; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb, var(--color-stellar) 45%, transparent); background: rgba(10,10,14,0.55); font-family: var(--font-serif); font-size: 1.35rem; color: #fff; text-decoration: none; text-align: center; padding: 0 12px; }
+  #cube-menu { opacity: 0; transition: opacity .28s ease; }
+  #cube-menu.is-open { opacity: 1; }
+  .cube-scene { perspective: 950px; width: 200px; height: 200px; cursor: grab; transform: scale(.88); opacity: 0; transition: transform .42s cubic-bezier(.2,.7,.2,1), opacity .42s ease; }
+  .cube-scene:active { cursor: grabbing; }
+  #cube-menu.is-open .cube-scene { transform: scale(1); opacity: 1; }
+  .cube { position: relative; width: 200px; height: 200px; transform-style: preserve-3d; transform: rotateX(-18deg) rotateY(-28deg); }
+  .cube-face { position: absolute; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb, var(--color-stellar) 38%, transparent); background: rgba(10,10,14,0.5); font-family: var(--font-serif); font-size: 1.35rem; color: #fff; text-align: center; padding: 0 12px; }
+  .cube-face.is-active { border-color: var(--color-stellar); background: color-mix(in srgb, var(--color-stellar) 22%, rgba(10,10,14,0.6)); color: var(--color-stellar); }
   .f-front { transform: rotateY(0deg) translateZ(100px); }
   .f-back { transform: rotateY(180deg) translateZ(100px); }
   .f-right { transform: rotateY(90deg) translateZ(100px); }
   .f-left { transform: rotateY(-90deg) translateZ(100px); }
   .f-top { transform: rotateX(90deg) translateZ(100px); }
   .f-bottom { transform: rotateX(-90deg) translateZ(100px); }
-  @keyframes cube-spin { from { transform: rotateX(-18deg) rotateY(0deg); } to { transform: rotateX(-18deg) rotateY(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .cube { animation: none; transform: rotateX(-18deg) rotateY(-28deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .cube-scene { transition: none; transform: scale(1); opacity: 1; }
+    #cube-menu { transition: none; }
+  }
 </style>
 <script>
   import { initCube } from "../scripts/cube";
