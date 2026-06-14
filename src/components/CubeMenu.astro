@@ -1,0 +1,38 @@
+---
+const links = [
+  { href: "/", label: "Home", face: "f-front" },
+  { href: "/work", label: "Now / Work", face: "f-right" },
+  { href: "/writing", label: "Writing", face: "f-back" },
+  { href: "/reading", label: "Reading", face: "f-left" },
+  { href: "/ambitions", label: "Ambitions", face: "f-top" },
+  { href: "/about", label: "About", face: "f-bottom" },
+];
+---
+<div id="cube-menu" class="hidden fixed inset-0 z-[100] flex-col items-center justify-center gap-14 bg-black/92" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button id="cube-close" type="button" aria-label="Close menu" class="absolute right-6 top-6 text-3xl leading-none text-white/80 transition-colors hover:text-white">&times;</button>
+  <div class="cube-scene" aria-hidden="true">
+    <div class="cube">
+      {links.map((l) => (<a href={l.href} tabindex="-1" class:list={["cube-face", l.face]}>{l.label}</a>))}
+    </div>
+  </div>
+  <nav aria-label="Menu" class="flex flex-col items-center gap-3">
+    {links.map((l) => (<a href={l.href} class="font-serif text-2xl text-white/85 transition-colors hover:text-stellar">{l.label}</a>))}
+  </nav>
+</div>
+<style>
+  .cube-scene { perspective: 900px; width: 200px; height: 200px; }
+  .cube { position: relative; width: 200px; height: 200px; transform-style: preserve-3d; animation: cube-spin 20s linear infinite; }
+  .cube-face { position: absolute; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; border: 1px solid color-mix(in srgb, var(--color-stellar) 45%, transparent); background: rgba(10,10,14,0.55); font-family: var(--font-serif); font-size: 1.35rem; color: #fff; text-decoration: none; text-align: center; padding: 0 12px; }
+  .f-front { transform: rotateY(0deg) translateZ(100px); }
+  .f-back { transform: rotateY(180deg) translateZ(100px); }
+  .f-right { transform: rotateY(90deg) translateZ(100px); }
+  .f-left { transform: rotateY(-90deg) translateZ(100px); }
+  .f-top { transform: rotateX(90deg) translateZ(100px); }
+  .f-bottom { transform: rotateX(-90deg) translateZ(100px); }
+  @keyframes cube-spin { from { transform: rotateX(-18deg) rotateY(0deg); } to { transform: rotateX(-18deg) rotateY(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .cube { animation: none; transform: rotateX(-18deg) rotateY(-28deg); } }
+</style>
+<script>
+  import { initCube } from "../scripts/cube";
+  initCube();
+</script>
