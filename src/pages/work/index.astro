@@ -10,12 +10,12 @@ import FactsRail from "../../components/FactsRail.astro";
     </div>
   </section>
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
-    <div class="grid gap-12 md:grid-cols-[1.3fr_0.7fr]">
+    <div data-reveal class="grid gap-12 md:grid-cols-[1.3fr_0.7fr]">
       <div class="max-w-[60ch] space-y-6 text-lg leading-relaxed text-text-muted">
         <p>Placeholder. I'm an AI engineer at <span class="text-text">Oogway Labs</span>, working on applied AI — reliability, evaluations, and guardrails for systems people actually depend on. Replace with the real, confidentiality-safe description of your craft.</p>
         <p>Replace with a second paragraph: how you think about building, what "good" looks like, and the through-line between the engineering and the writing.</p>
       </div>
-      <div class="md:border-l md:border-border md:pl-10">
+      <div class="md:border-l md:border-border md:pl-10 md:sticky md:top-28 md:self-start">
         <FactsRail items={[
           { label: "Role", value: "AI engineer, Oogway Labs" },
           { label: "What I build", value: "Reliability, evals, guardrails for applied AI" },

@@ -114,3 +114,14 @@ body { margin: 0; }
 }
 :root[data-edition="evening"] .writing-page .prose-custom { font-family: var(--font-serif); line-height: 1.9; }
 :root[data-edition="evening"] .writing-page .dropcap > p:first-of-type::first-letter { font-size: 4.2em; }
+
+/* Motion + wayfinding */
+html { scroll-behavior: smooth; }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: var(--color-stellar); z-index: 60; pointer-events: none; will-change: transform; }
+[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1); }
+[data-reveal].is-revealed { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  #scroll-progress { display: none !important; }
+}
