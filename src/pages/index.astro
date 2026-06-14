@@ -8,7 +8,7 @@ const featured = (await getCollection("projects"))
   .filter((p) => p.data.featured)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Sundharesan Kumaresan" heroOverlay>
+<BaseLayout title="Sundharesan Kumaresan">
   <ParallaxHero image="/img/hero.jpg" />
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
     <section class="py-20">

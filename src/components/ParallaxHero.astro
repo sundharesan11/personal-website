@@ -2,9 +2,12 @@
 interface Props { image?: string; kicker?: string; }
 const { image = "/img/hero.jpg", kicker = "Designer & builder — portfolio 2026" } = Astro.props;
 ---
-<section class="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden bg-fixed bg-cover" style={`min-height:92vh; background-position: center 38%; background-image: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.12) 50%, rgba(0,0,0,.32) 100%), url('${image}')`}>
-  <div class="mx-auto flex max-w-[1100px] flex-col justify-end px-6 pb-16" style="min-height:92vh; padding-top:7rem;">
-    <p class="font-sans text-xs uppercase tracking-[0.2em] text-white/80">{kicker}</p>
-    <h1 class="mt-5 font-serif font-semibold leading-[0.9] text-white" style="font-size: clamp(2.8rem, 10vw, 7rem);">Sundharesan<br />Kumaresan</h1>
+<section class="grid w-full md:min-h-[90vh] md:grid-cols-2">
+  <div class="order-2 flex flex-col justify-center px-6 py-12 sm:px-10 md:order-1 md:py-0 md:pl-[max(1.5rem,8vw)] md:pr-12">
+    <p class="font-sans text-xs uppercase tracking-[0.2em] text-text-muted">{kicker}</p>
+    <h1 class="mt-5 font-serif font-semibold leading-[0.92] text-text" style="font-size: clamp(2.4rem, 6vw, 5rem);">Sundharesan<br />Kumaresan</h1>
+  </div>
+  <div class="relative order-1 min-h-[58vh] md:order-2 md:min-h-0">
+    <img src={image} alt="Sundharesan Kumaresan" class="absolute inset-0 h-full w-full object-cover object-[center_22%]" />
   </div>
 </section>
