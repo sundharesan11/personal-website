@@ -1,90 +1,105 @@
 # Design System
 
-The spine of the site. Every UI choice traces back here. Aesthetic: **clean / minimal** — whitespace does the work, color is restrained, typography carries the personality.
+The spine of the site. Every UI choice traces back here. Aesthetic: **Vogue/magazine editorial** — image-led, black-and-white Didone display type at extreme scale, no boxes or cards, asymmetric flush-left composition, and a single stellar-blue spot colour.
 
 > Tokens are declared once in `src/styles/global.css` under the `@theme` block (Tailwind v4, CSS-first). Tailwind generates utilities from them automatically — there is no `tailwind.config.mjs`. When you add a token, add it to `@theme` in `global.css`; the utility is immediately available.
 
 ## Principles
 
-1. **Whitespace over decoration.** If a divider, box, or shadow can be replaced by space, replace it.
-2. **One accent, used sparingly.** Color draws the eye; reserve it for what matters (links, the single primary action).
-3. **Type is the design.** A tight type scale and good rhythm beat any ornament.
-4. **Consistency over cleverness.** Reuse patterns; no one-off styling.
-5. **Earn every element.** If removing it doesn't hurt, remove it.
+1. **Image first.** Full-bleed photographs carry all colour; the typography sits over or beside them.
+2. **No boxes, no cards.** Borders, shadows, rounded corners, and surface fills are banned. Separation comes from whitespace, hairline rules, and typographic contrast.
+3. **One spot colour.** Stellar blue draws the eye — reserve it for the monogram dot, index numbers, links, hairline rules, and drop caps. Never as a fill.
+4. **Vast negative space.** The restraint is in the emptiness, not the absence of imagery.
+5. **Consistency over cleverness.** Reuse patterns; no one-off styling.
+6. **Earn every element.** If removing it doesn't hurt, remove it.
 
-> Editorial elements (serif display, kickers, datelines, hairline rules, the cover hero) are the sanctioned layer. Beyond them, the restraint principles above still hold — don't add decoration that isn't one of these patterns.
+> The Vogue patterns below are the sanctioned layer. Beyond them, the restraint principles above still hold — no decoration that isn't one of these patterns.
 
 ## Color tokens
 
-Neutral-led, near-monochrome, with one accent. Tuned for AA contrast.
+Ink (black/white, theme-dependent) + full-colour photography + a single stellar-blue spot colour. Photographs carry all other colour.
 
 | Token            | Light       | Dark        | Use |
 |------------------|-------------|-------------|-----|
 | `bg`             | `#FFFFFF`   | `#0B0B0C`   | page background |
-| `surface`        | `#F7F7F5`   | `#161617`   | subtle cards/sections |
+| `surface`        | `#F7F7F5`   | `#161617`   | (use sparingly — prefer plain bg) |
 | `text`           | `#16161A`   | `#EDEDED`   | primary text |
-| `text-muted`     | `#6B6B73`   | `#9A9AA2`   | secondary text, captions |
-| `border`         | `#E6E6E3`   | `#26262A`   | hairlines, dividers |
-| `accent`         | `#2F6BFF`   | `#5B86FF`   | links, primary action |
-| `accent-hover`   | `#1F54E6`   | `#7CA0FF`   | hover state |
+| `text-muted`     | `#6B6B73`   | `#9A9AA2`   | secondary text, captions, datelines |
+| `border`         | `#E6E6E3`   | `#26262A`   | hairline rules only |
+| `accent`         | `#1F54E6`   | `#5B86FF`   | stellar-blue spot colour (AA) |
+| `accent-hover`   | `#163CAE`   | `#7CA0FF`   | hover state |
 
-Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent never as a large fill — it's a highlight, not a background.
+> `--color-stellar: #5B86FF` is the spot colour name; the AA-safe values above are `#1F54E6` (light, 6.05:1) and `#5B86FF` (dark, 5.9:1). Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent (stellar) never as a large fill — it is a highlight, not a background.
 
 ## Typography
 
-- **Sans (UI + body):** Inter (or system stack fallback: `ui-sans-serif, system-ui, …`)
-- **Serif (display):** Playfair Display via `--font-serif` — used for the hero name and all headings (h1/h2/h3, card and post titles). Inter stays for body, nav, UI, kickers, and datelines.
-- **Optional display:** keep to one weight contrast; no more than 2 families total.
+- **Display (Didone):** Playfair Display via `--font-serif` — the display voice for the name, section titles, work/post titles, and drop caps. Used at **extreme `clamp()` sizes**:
+  - Name / hero: `clamp(2.8rem, 10vw, 7rem)`
+  - Section title (Work / Writing / About): `clamp(3rem, 9vw, 6rem)`
+  - Work / post title: `clamp(2rem, 4.5vw, 3.4rem)`
+- **UI + body:** Inter (or `ui-sans-serif, system-ui` fallback) — body copy, nav, kickers (uppercase, letter-spaced), and datelines.
+- Keep to one weight contrast per context; no more than 2 families total.
 
 Type scale (rem, ~1.25 ratio):
 
 | Token   | Size    | Line height | Use |
 |---------|---------|-------------|-----|
 | `xs`    | 0.8     | 1.5         | captions, meta |
-| `sm`    | 0.9     | 1.6         | secondary |
+| `sm`    | 0.9     | 1.6         | secondary, datelines |
 | `base`  | 1.0     | 1.7         | body |
 | `lg`    | 1.25    | 1.5         | lead paragraph |
-| `xl`    | 1.6     | 1.3         | section heading |
+| `xl`    | 1.6     | 1.3         | sub-heading |
 | `2xl`   | 2.1     | 1.2         | page title |
-| `3xl`   | 2.8     | 1.1         | hero |
+| `3xl`   | 2.8     | 1.1         | hero (base; extended via clamp) |
 
-Weights: 400 body, 500 emphasis, 600 headings. Avoid 700+ (too loud for minimal). Body measure: max ~68ch.
+Weights: 400 body, 500 emphasis, 600 headings. Avoid 700+ for body; display headings may use 700 for impact. Body measure: max ~68ch.
 
 ## Spacing
 
 4px base scale: `1=4 2=8 3=12 4=16 6=24 8=32 12=48 16=64 24=96 32=128`.
-Section vertical rhythm: 96–128px between major sections on desktop, 48–64px on mobile. Be generous — whitespace is the aesthetic.
+Section vertical rhythm: 96–128px between major sections on desktop, 48–64px on mobile. Be generous — the negative space is the aesthetic.
 
 ## Radius & elevation
 
-- Radius: `sm=6px`, `md=10px`, `lg=16px`. Default to `md`.
-- Shadows: avoid by default. Prefer a 1px `border` hairline. Use at most one soft shadow (`0 1px 3px rgba(0,0,0,.06)`) for genuinely floating elements.
+- **No rounded corners anywhere** in the editorial system (no `rounded-*` on photos, sections, or any UI chrome).
+- **No shadows.** The system is flat; separation comes from whitespace and hairline rules.
+- Exception: interactive UI micro-elements (the theme toggle button) may use a minimal radius if the component demands it.
 
 ## Motion
 
-- Subtle and fast: 150–250ms, ease-out. Fade/translate a few px on entrance.
+- CSS parallax (`background-attachment: fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). Static on mobile/iOS (acceptable).
+- Subtle micro-interactions: 150–250ms, ease-out. Fade/translate a few px on entrance.
 - Respect `prefers-reduced-motion` — disable non-essential motion.
+- **No canvas / JS animation** (flow field removed; only client JS remaining is the theme toggle).
 
-## Component patterns
+## Vogue editorial patterns
 
-- **Buttons:** primary = solid `accent` text-on-accent; secondary = `border` + `text`. One primary per view.
-- **Links:** `accent`, underline on hover (or persistent subtle underline). Visible focus ring always.
-- **Cards (project tiles):** hairline border, `md` radius, generous padding, no shadow. Hover: border darkens slightly, subtle lift.
-- **Layout:** single centered column, max-width ~720px for prose, ~1100px for galleries. Consistent horizontal gutter.
+- **Full-bleed photo bands:** `-mx-[50vw] w-screen` with `bg-fixed` (CSS parallax). No borders, no rounded corners, no shadows. Full-colour photograph fills the band.
+- **Monogram (SK.):** Playfair Display, flush-left; the trailing dot is stellar-blue (`text-accent`). Used in the site header/brand.
+- **Parallax hero:** Full-bleed, full-viewport photo band with the name at extreme `clamp()` size in Playfair over a dark scrim, plus kicker eyebrow and dateline.
+- **Work entry:** Alternating full-bleed parallax photo + serif title at `clamp(2rem, 4.5vw, 3.4rem)` + stellar-blue `nº` index number + dateline + short description. No cards or borders.
+- **Writing contents list:** Flush-left list entries; stellar-blue `nº` index number; Playfair serif title; hairline `border` rule between items. No cards.
+- **Drop cap:** First letter of first body paragraph, Playfair Display, stellar-blue (`text-accent`), class `.dropcap`.
+- **Pull quote:** Playfair Display italic, stellar-blue left hairline rule (`border-l-2 border-accent`), generous indent.
+- **Kicker:** Small uppercase, `tracking-[0.14em]`, Inter — editorial eyebrow label. The one sanctioned uppercase element.
+- **Dateline:** Dates rendered small, uppercase, `tracking-[0.12em]`, `text-muted`, Inter.
+- **Hairline rules:** `border` token as a 1px divider; used sparingly under section headings and between writing entries.
+- **Links:** Underline only (no box); stellar-blue accent (`text-accent underline`). Visible focus ring always.
+- **Editorial footer:** Bold serif "Get in touch →" mailto link; no contact form (needs backend — deferred).
 
-## Editorial patterns
+## Removed patterns
 
-- **Kicker:** a small uppercase, letter-spaced (`tracking-[0.14em]`) eyebrow label above page titles and in the hero. The one sanctioned uppercase in the system (editorial convention).
-- **Dateline:** dates rendered small, uppercase, letter-spaced (`tracking-[0.12em]`), muted — on writing posts and project detail.
-- **Hairline rules:** the `border` token as a thin divider under section headings; used sparingly.
-- **Cover hero:** full-bleed (~82vh) photo + dark scrim + the flow-field 'extended dots' overlay (onPhoto variant, light dots) + the name in Playfair + kicker/dateline. Home only.
+- ~~**Cards / ProjectCard:**~~ Removed. No card chrome (borders, shadows, `rounded-*`, surface fills) anywhere.
+- ~~**Flow field canvas:**~~ Removed. CSS parallax replaces it.
 
 ## Do / Don't
 
 | Do | Don't |
 |----|-------|
-| Lean on whitespace and hairlines | Add boxes, shadows, gradients to fill space |
-| Use the one accent for emphasis | Introduce a second accent color |
-| Keep to the type scale | Pick arbitrary font sizes |
-| Left-align long text | Center long paragraphs |
-| Reuse existing components | Create one-off styled variants |
+| Use full-bleed photographs | Add boxes, cards, borders, shadows, or rounded corners |
+| Let stellar-blue be the single accent | Introduce a second accent or use stellar as a fill |
+| Playfair Display at extreme clamp sizes | Use display type at modest/predictable sizes |
+| Vast negative space between sections | Fill whitespace with decoration or extra elements |
+| Left-align everything (flush-left composition) | Center headings or long text |
+| Reuse the Vogue patterns above | Create one-off styled variants |
+| CSS parallax for photo motion | Add JS-driven animation or canvas overlays |

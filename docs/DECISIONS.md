@@ -50,6 +50,21 @@ Resolves the previously-open "Typography — exact families". Self-hosted via @f
 ### Hero: full-bleed cover (photo + name overlay + flow field) — 2026-06-14
 Home hero is a full-bleed ~82vh cover: placeholder photo (`/public/hero-placeholder.jpg`, swap later) + dark scrim + the flow field (onPhoto variant, light dots) + name in Playfair + kicker/dateline. **Rejected:** masthead and portrait-split layouts (live-mocked alongside cover).
 
+### Aesthetic pivot: Vogue/magazine editorial — 2026-06-14
+Supersedes the "minimal base + editorial layer" (cards) direction. New system: black/white Didone display type at extreme scale, full-bleed full-colour photography, NO cards/boxes/borders/rounded corners, asymmetric flush-left composition, and a single stellar-blue spot colour threaded throughout (monogram dot, work nº, links, hairline rules, drop caps). Both light & dark kept. **Why:** owner wants a Vogue-cover / magazine feel — image-led, free-flowing, no uniform grid of boxes. Reference: Wix "Street Artist Portfolio (Industrial)". **Rejected:** industrial-grotesque type voice (chose Didone), pure B&W with no accent (chose the stellar-blue thread), functional contact form (mailto only — needs backend).
+
+### Display type: Playfair Display (Didone) — 2026-06-14
+Playfair Display (already self-hosted) is the Didone display voice (name, section titles, work/post titles, drop caps); Inter for body/nav/kickers/datelines. **Rejected:** Bodoni Moda (truer Vogue hairlines) — Playfair is sufficient and already loaded; swappable later.
+
+### Stellar-blue spot colour — 2026-06-14
+`--color-stellar: #5B86FF` plus the AA accent `#1F54E6` (light) / `#5B86FF` (dark). The one editorial spot colour throughout: monogram dot, nº numbering, links, hairline rules, drop caps, datelines. Photographs carry all other colour.
+
+### Motion: CSS parallax (flow field removed) — 2026-06-14
+Replaced the flow-field canvas with pure-CSS parallax (`background-attachment: fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). Zero new JS (only the theme toggle remains). Static on mobile/iOS (acceptable). The flow-field code was removed (in git history).
+
+### No boxes / full-bleed; contact = mailto — 2026-06-14
+Removed `ProjectCard` and all card/box/border/shadow/rounded chrome; work & writing are full-bleed/flush-left editorial entries; links underline-only. Contact is a bold serif "Get in touch →" mailto in the footer (functional form deferred — needs backend).
+
 ---
 
 ## Open / Deferred
