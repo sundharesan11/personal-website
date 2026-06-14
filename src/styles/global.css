@@ -18,6 +18,7 @@
   --color-border: #E6E6E3;
   --color-accent: #1F54E6;
   --color-accent-hover: #163CAE;
+  --color-stellar: #5B86FF;
 
   /* Type scale (rem) — matches DESIGN_SYSTEM.md */
   --text-xs: 0.8rem;
@@ -88,3 +89,15 @@ body { margin: 0; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Editorial base */
+.dropcap > p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  float: left;
+  font-size: 3.4em;
+  line-height: 0.74;
+  margin: 0.04em 0.1em 0 0;
+  color: var(--color-stellar);
+}
+.u-underline { text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
