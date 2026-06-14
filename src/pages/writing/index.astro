@@ -1,29 +1,77 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Kicker from "../../components/Kicker.astro";
+import EditionToggle from "../../components/EditionToggle.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("writing", ({ data }) => !data.draft))
+const all = (await getCollection("writing", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const published = all.filter((p) => p.data.status === "published");
+const desk = all.filter((p) => p.data.status === "writing");
+const featured = published.find((p) => p.data.featured);
+const lenses = [
+  { key: "economics", label: "Economics" },
+  { key: "philosophy", label: "Philosophy" },
+  { key: "technical", label: "Technical / AI" },
+  { key: "theatrical", label: "Theatrical" },
+];
 const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 <BaseLayout title="Writing — Sundharesan Kumaresan">
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-12">
-    <Kicker text="Notes" />
-    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
-    <ul class="mt-12 border-t-2 border-stellar">
-      {posts.map((post, i) => (
-        <li class="border-b border-border">
-          <a href={`/writing/${post.id}`} class="group block py-8">
-            <div class="flex items-baseline gap-5">
-              <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">nº {String(i + 1).padStart(2, "0")}</span>
-              <time class="text-sm uppercase tracking-[0.14em] text-text-muted">{fmt(post.data.date)}</time>
-            </div>
-            <h2 class="mt-2 font-serif font-semibold leading-[1.05] text-text transition-colors group-hover:text-accent" style="font-size: clamp(1.8rem, 5vw, 3.2rem);">{post.data.title}</h2>
-            <p class="mt-2 max-w-[60ch] text-text-muted">{post.data.description}</p>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </main>
+  <div class="writing-page min-h-screen">
+    <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <Kicker text="Notes" />
+          <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
+        </div>
+        <EditionToggle />
+      </div>
+
+      {featured && (
+        <a href={`/writing/${featured.id}`} class="group mt-12 block border-t-2 border-stellar pt-8">
+          <div class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">Featured</div>
+          <h2 class="mt-2 font-serif font-semibold leading-[1.02] transition-colors group-hover:text-accent" style="font-size: clamp(2rem, 5.5vw, 3.6rem);">{featured.data.title}</h2>
+          <p class="mt-2 max-w-[60ch] text-text-muted">{featured.data.description}</p>
+        </a>
+      )}
+
+      {lenses.map((lens) => {
+        const items = published.filter((p) => p.data.lens === lens.key && (!featured || p.id !== featured.id));
+        return items.length > 0 ? (
+          <section class="mt-16">
+            <h2 class="font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{lens.label}</h2>
+            <ul class="mt-5 border-t border-border">
+              {items.map((post, i) => (
+                <li class="border-b border-border">
+                  <a href={`/writing/${post.id}`} class="group block py-6">
+                    <div class="flex items-baseline gap-4">
+                      <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">nº {String(i + 1).padStart(2, "0")}</span>
+                      <time class="text-sm uppercase tracking-[0.14em] text-text-muted">{fmt(post.data.date)}</time>
+                    </div>
+                    <h3 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h3>
+                    <p class="mt-1 max-w-[60ch] text-text-muted">{post.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null;
+      })}
+
+      {desk.length > 0 && (
+        <section class="mt-20">
+          <h2 class="font-serif font-semibold" style="font-size: clamp(1.6rem, 4vw, 2.4rem);">The being-written desk</h2>
+          <ul class="mt-6 border-t border-border">
+            {desk.map((post) => (
+              <li class="flex flex-wrap items-baseline justify-between gap-3 border-b border-border py-5">
+                <span class="font-serif text-xl text-text-muted">{post.data.title}</span>
+                <span class="font-sans text-xs uppercase tracking-[0.18em] text-stellar">forming</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </main>
+  </div>
 </BaseLayout>

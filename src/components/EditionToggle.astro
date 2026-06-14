@@ -1,0 +1,16 @@
+---
+---
+<button id="edition-toggle" type="button" aria-pressed="false" aria-label="Toggle reading edition" class="inline-flex items-center rounded-md border border-border p-1 text-xs uppercase tracking-[0.14em]">
+  <span class="ed-modern rounded px-2.5 py-1">Modern</span>
+  <span class="ed-evening rounded px-2.5 py-1">Evening</span>
+</button>
+<script>
+  import { initEdition } from "../scripts/edition";
+  const btn = document.getElementById("edition-toggle");
+  if (btn) initEdition(btn);
+</script>
+<style is:global>
+  #edition-toggle .ed-modern, #edition-toggle .ed-evening { color: var(--color-text-muted); transition: color .15s, background .15s; }
+  :root[data-edition="modern"] #edition-toggle .ed-modern { background: var(--color-accent); color: #fff; }
+  :root[data-edition="evening"] #edition-toggle .ed-evening { background: var(--color-stellar); color: #0b0b0c; }
+</style>
