@@ -1,15 +1,16 @@
 ---
-// src/components/Prose.astro
+interface Props { dropcap?: boolean; }
+const { dropcap = false } = Astro.props;
 ---
-<div class="prose-custom mx-auto" style="max-width: var(--measure)">
+<div class:list={["prose-custom mx-auto", dropcap && "dropcap"]} style="max-width: var(--measure)">
   <slot />
 </div>
 <style is:global>
-  .prose-custom { line-height: 1.7; }
-  .prose-custom h2 { font-size: var(--text-xl); font-weight: 600; margin: 2.5rem 0 1rem; }
-  .prose-custom h3 { font-size: var(--text-lg); font-weight: 600; margin: 2rem 0 0.75rem; }
-  .prose-custom p { margin: 1rem 0; }
-  .prose-custom a { color: var(--color-accent); text-underline-offset: 4px; }
-  .prose-custom a:hover { text-decoration: underline; }
+  .prose-custom { line-height: 1.8; font-size: 1.125rem; }
+  .prose-custom h2 { font-family: var(--font-serif); font-size: var(--text-xl); font-weight: 600; margin: 2.6rem 0 1rem; }
+  .prose-custom h3 { font-family: var(--font-serif); font-size: var(--text-lg); font-weight: 600; margin: 2rem 0 0.75rem; }
+  .prose-custom p { margin: 1.15rem 0; }
+  .prose-custom a { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
+  .prose-custom a:hover { color: var(--color-accent); }
   .prose-custom ul { margin: 1rem 0; padding-left: 1.25rem; list-style: disc; }
 </style>
