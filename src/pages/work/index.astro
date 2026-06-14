@@ -1,9 +1,27 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import FactsRail from "../../components/FactsRail.astro";
 ---
-<BaseLayout title="Now — Sundharesan Kumaresan">
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-8">
-    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Now</h1>
-    <p class="mt-6 text-text-muted">This section is being rebuilt. Check back soon.</p>
+<BaseLayout title="Now / Work — Sundharesan Kumaresan" heroOverlay>
+  <section class="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden bg-fixed bg-cover bg-center" style="min-height:60vh; background-image: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.22) 60%, rgba(0,0,0,.42)), url('/img/work.jpg')">
+    <div class="mx-auto flex max-w-[1100px] flex-col justify-end px-6 pb-12" style="min-height:60vh; padding-top:7rem;">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">The present</p>
+      <h1 class="mt-3 font-serif font-semibold leading-[0.95] text-white" style="font-size: clamp(2.6rem, 8vw, 5rem);">Now</h1>
+    </div>
+  </section>
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-[1.3fr_0.7fr]">
+      <div class="max-w-[60ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>Placeholder. I'm an AI engineer at <span class="text-text">Oogway Labs</span>, working on applied AI — reliability, evaluations, and guardrails for systems people actually depend on. Replace with the real, confidentiality-safe description of your craft.</p>
+        <p>Replace with a second paragraph: how you think about building, what "good" looks like, and the through-line between the engineering and the writing.</p>
+      </div>
+      <div class="md:border-l md:border-border md:pl-10">
+        <FactsRail items={[
+          { label: "Role", value: "AI engineer, Oogway Labs" },
+          { label: "What I build", value: "Reliability, evals, guardrails for applied AI" },
+          { label: "How I work", value: "Legible systems; small, verifiable steps" },
+        ]} />
+      </div>
+    </div>
   </main>
 </BaseLayout>

@@ -1,16 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
+import TeaserIndex from "../components/TeaserIndex.astro";
 ---
 <BaseLayout title="Sundharesan Kumaresan">
   <ParallaxHero image="/img/hero.jpg" />
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
     <section class="py-20">
-      <div class="mb-4 flex items-baseline justify-between border-b-2 border-stellar pb-3">
-        <h2 class="font-serif font-semibold" style="font-size: clamp(2rem, 5vw, 3.25rem);">Selected work</h2>
-        <a href="/work" class="text-xs uppercase tracking-[0.16em] text-text-muted hover:text-text">All work →</a>
-      </div>
-      <p class="mt-6 text-text-muted">Projects coming soon.</p>
+      <p class="max-w-[60ch] text-lg leading-relaxed text-text-muted">Placeholder intro — two or three sentences on who you are and what this publication is. Replace with your real one-liner voice.</p>
+      <p class="mt-8 max-w-[24ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.8rem, 5vw, 3.2rem);">A standfirst — one curiosity-gap line that makes them want to read on.</p>
+    </section>
+    <section class="pb-24">
+      <div class="mb-8 font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Inside this edition</div>
+      <TeaserIndex items={[
+        { href: "/work", label: "Now / Work", hook: "What I'm building at Oogway Labs — applied AI you can trust.", n: 1 },
+        { href: "/writing", label: "Writing", hook: "Four lenses — economics, philosophy, technical, theatrical.", n: 2 },
+        { href: "/reading", label: "Reading", hook: "The books that opened something, and what they opened.", n: 3 },
+        { href: "/ambitions", label: "Ambitions", hook: "What's forming — an agri-fintech thesis, and ideas in public.", n: 4 },
+      ]} />
     </section>
   </main>
 </BaseLayout>
