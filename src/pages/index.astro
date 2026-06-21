@@ -1,23 +1,69 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
-import TeaserIndex from "../components/TeaserIndex.astro";
+
+const frames = [
+  { src: "/img/home/frame-1.jpg", caption: "A frame I keep — film, year" },
+  { src: "/img/home/frame-2.jpg", caption: "A still that stays with me — replace" },
+  { src: "/img/home/frame-3.jpg", caption: "Light I think about — replace" },
+  { src: "/img/home/frame-4.jpg", caption: "A frame I keep — film, year" },
+  { src: "/img/home/frame-5.jpg", caption: "Something I keep looking at — replace" },
+];
+const doodles = [
+  { src: "/img/home/doodle-1.jpg", title: "Untitled — replace" },
+  { src: "/img/home/doodle-2.jpg", title: "Quiet window — replace" },
+  { src: "/img/home/doodle-3.jpg", title: "Study — replace" },
+];
 ---
 <BaseLayout title="Sundharesan Kumaresan">
   <ParallaxHero image="/img/hero.jpg" />
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
-    <section class="py-20">
-      <p class="max-w-[60ch] text-lg leading-relaxed text-text-muted">Placeholder intro — two or three sentences on who you are and what this publication is. Replace with your real one-liner voice.</p>
-      <p class="mt-8 max-w-[24ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.8rem, 5vw, 3.2rem);">A standfirst — one curiosity-gap line that makes them want to read on.</p>
+
+    <section class="py-20 md:py-28">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">From the desk</p>
+      <div class="mt-6 grid gap-10 md:grid-cols-[1.5fr_0.5fr] md:gap-16">
+        <div class="dropcap max-w-[60ch] text-lg leading-[1.8] text-text-muted">
+          <p>Placeholder context. An AI engineer who writes, and a writer who draws — words, code, and doodles made by the same hand. Replace this with the real lead: who you are, what you're chasing, and why this place exists. Keep it personal; it sets the voice for everything else.</p>
+        </div>
+        <aside class="md:border-l md:border-border md:pl-10">
+          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.5rem, 3.2vw, 2.2rem);">&ldquo;A standfirst — one line that makes a stranger want to stay.&rdquo;</p>
+        </aside>
+      </div>
     </section>
-    <section class="pb-24">
-      <div class="mb-8 font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Inside this edition</div>
-      <TeaserIndex items={[
-        { href: "/work", label: "Now / Work", hook: "What I'm building at Oogway Labs — applied AI you can trust.", n: 1 },
-        { href: "/writing", label: "Writing", hook: "Four lenses — economics, philosophy, technical, theatrical.", n: 2 },
-        { href: "/reading", label: "Reading", hook: "The books that opened something, and what they opened.", n: 3 },
-        { href: "/ambitions", label: "Ambitions", hook: "What's forming — an agri-fintech thesis, and ideas in public.", n: 4 },
-      ]} />
+
+    <section class="py-16">
+      <div class="flex items-baseline justify-between border-b border-border pb-3">
+        <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">Frames I keep</h2>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted">What I'm looking at</span>
+      </div>
+      <div class="mt-10 columns-2 gap-4 md:columns-3 md:gap-6 [&>figure]:mb-4 md:[&>figure]:mb-6">
+        {frames.map((f) => (
+          <figure class="break-inside-avoid">
+            <img src={f.src} alt="" loading="lazy" class="w-full" />
+            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="mt-6 text-xs text-text-muted">Placeholder imagery — swap for your own film stills or licensed images.</p>
+    </section>
+
+    <section class="py-16">
+      <div class="flex items-baseline justify-between border-b border-stellar pb-3">
+        <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">From the sketchbook</h2>
+        <a href="#" class="u-draw font-sans text-xs uppercase tracking-[0.16em] text-stellar">@inked doodler</a>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+        {doodles.map((d) => (
+          <figure>
+            <img src={d.src} alt="" loading="lazy" class="w-full" />
+            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{d.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border py-20">
+      <p class="max-w-[34ch] font-serif leading-[1.15]" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">More inside — <a href="/work" class="u-draw">the work</a>, <a href="/writing" class="u-draw">the writing</a>, <a href="/reading" class="u-draw">the reading</a>, and <a href="/ambitions" class="u-draw">what's forming</a>.</p>
     </section>
   </main>
 </BaseLayout>
