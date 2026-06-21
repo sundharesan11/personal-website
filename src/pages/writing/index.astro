@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Kicker from "../../components/Kicker.astro";
 import EditionToggle from "../../components/EditionToggle.astro";
+import Sunflower from "../../components/Sunflower.astro";
 import { getCollection } from "astro:content";
 
 const all = (await getCollection("writing", ({ data }) => !data.draft))
@@ -16,56 +17,79 @@ const inLens = (key: string) => all.filter((p) => p.data.lens === key && (!featu
 const activeLenses = lenses.filter((l) => inLens(l.key).length > 0);
 const metaOf = (p: any) => p.data.link ? "Read on Medium ↗" : p.data.status === "writing" ? "Being written" : p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 const linkOf = (p: any) => p.data.link ?? (p.data.status === "published" ? `/writing/${p.id}` : null);
+// scattered placement, matching the Reading room (deeper indent pairs with a narrower measure)
+const layout = [
+  { ml: "", w: "md:max-w-[52ch]" },
+  { ml: "md:ml-[22%]", w: "md:max-w-[42ch]" },
+  { ml: "md:ml-[8%]", w: "md:max-w-[50ch]" },
+  { ml: "md:ml-[28%]", w: "md:max-w-[40ch]" },
+  { ml: "md:ml-[13%]", w: "md:max-w-[48ch]" },
+  { ml: "md:ml-[4%]", w: "md:max-w-[52ch]" },
+  { ml: "md:ml-[18%]", w: "md:max-w-[44ch]" },
+];
 ---
 <BaseLayout title="Writing · Sundharesan Kumaresan">
   <div class="writing-page min-h-screen">
-    <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-      <div class="flex flex-wrap items-end justify-between gap-6">
+    <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+      <div class="md:grid md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
         <div>
-          <Kicker text="Notes" />
-          <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
-        </div>
-        <EditionToggle />
-      </div>
+          <div class="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Kicker text="Notes" />
+              <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
+            </div>
+            <EditionToggle />
+          </div>
 
-      {activeLenses.length > 1 && (
-        <nav aria-label="Jump to lens" class="mt-8 flex flex-wrap gap-2">
-          {activeLenses.map((l) => (
-            <a href={`#lens-${l.key}`} class="rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:border-stellar hover:text-stellar">{l.label}</a>
+          {activeLenses.length > 1 && (
+            <nav aria-label="Jump to lens" class="mt-8 flex flex-wrap gap-2">
+              {activeLenses.map((l) => (
+                <a href={`#lens-${l.key}`} class="rounded-full border border-border px-4 py-1.5 text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:border-stellar hover:text-stellar">{l.label}</a>
+              ))}
+            </nav>
+          )}
+
+          {featured && (
+            <a href={linkOf(featured)} target={featured.data.link ? "_blank" : undefined} rel={featured.data.link ? "noopener noreferrer" : undefined} class="group mt-12 block border-t-2 border-stellar pt-8">
+              <div class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">{featured.data.link ? "Featured · Read on Medium ↗" : "Featured"}</div>
+              <h2 class="mt-2 font-serif font-semibold leading-[1.02] transition-colors group-hover:text-accent" style="font-size: clamp(2rem, 5vw, 3.4rem);">{featured.data.title}</h2>
+              <p class="mt-2 max-w-[60ch] text-text-muted">{featured.data.description}</p>
+            </a>
+          )}
+
+          {activeLenses.map((lens) => (
+            <section id={`lens-${lens.key}`} class="mt-16 scroll-mt-24">
+              <h2 class="sticky top-16 z-10 bg-bg py-3 font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{lens.label}</h2>
+              <div class="mt-6 flex flex-col gap-10">
+                {inLens(lens.key).map((post, i) => {
+                  const L = layout[all.findIndex((x) => x.id === post.id) % layout.length];
+                  const link = linkOf(post);
+                  return (
+                    <article class:list={["max-w-[58ch] transition-transform duration-300 hover:-translate-y-1", L.ml, L.w]}>
+                      <a href={link ?? undefined} target={post.data.link ? "_blank" : undefined} rel={post.data.link ? "noopener noreferrer" : undefined}
+                         class:list={["group block", !link && "pointer-events-none"]}>
+                        <div class="flex items-baseline gap-4">
+                          <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")}</span>
+                          <span class="text-sm uppercase tracking-[0.14em] text-text-muted">{metaOf(post)}</span>
+                        </div>
+                        <h3 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h3>
+                        <p class="mt-1 text-text-muted">{post.data.description}</p>
+                      </a>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
           ))}
-        </nav>
-      )}
 
-      {featured && (
-        <a href={linkOf(featured)} target={featured.data.link ? "_blank" : undefined} rel={featured.data.link ? "noopener noreferrer" : undefined} class="group mt-12 block border-t-2 border-stellar pt-8">
-          <div class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">{featured.data.link ? "Featured · Read on Medium ↗" : "Featured"}</div>
-          <h2 class="mt-2 font-serif font-semibold leading-[1.02] transition-colors group-hover:text-accent" style="font-size: clamp(2rem, 5.5vw, 3.6rem);">{featured.data.title}</h2>
-          <p class="mt-2 max-w-[60ch] text-text-muted">{featured.data.description}</p>
-        </a>
-      )}
-
-      {activeLenses.map((lens) => (
-        <section id={`lens-${lens.key}`} class="mt-16 scroll-mt-24">
-          <h2 class="sticky top-16 z-10 bg-bg py-3 font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{lens.label}</h2>
-          <ul class="mt-3 border-t border-border">
-            {inLens(lens.key).map((post, i) => (
-              <li class="border-b border-border">
-                <a href={linkOf(post) ?? undefined} target={post.data.link ? "_blank" : undefined} rel={post.data.link ? "noopener noreferrer" : undefined}
-                   class:list={["group block py-6", !linkOf(post) && "pointer-events-none"]}>
-                  <div class="flex items-baseline gap-4">
-                    <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")}</span>
-                    <span class="text-sm uppercase tracking-[0.14em] text-text-muted">{metaOf(post)}</span>
-                  </div>
-                  <h3 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h3>
-                  <p class="mt-1 max-w-[60ch] text-text-muted">{post.data.description}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
-
-      <p class="mt-16 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesansk11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium ↗</a></p>
+          <p class="mt-16 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesansk11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium ↗</a></p>
+        </div>
+        <div class="hidden md:block" aria-hidden="true">
+          <div class="pointer-events-none sticky top-28 h-[clamp(280px,42vh,440px)] w-full opacity-80">
+            <Sunflower />
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 </BaseLayout>
