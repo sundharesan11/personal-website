@@ -12,6 +12,7 @@ const writing = defineCollection({
     status: z.enum(["published", "writing"]).default("published"),
     featured: z.boolean().default(false),
     cover: z.string().optional(),
+    link: z.string().optional(),
   }),
 });
 

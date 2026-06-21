@@ -6,7 +6,7 @@ import EditionToggle from "../../components/EditionToggle.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("writing", ({ data }) => !data.draft);
+  const posts = await getCollection("writing", ({ data }) => !data.draft && !data.link && data.status === "published");
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 const { post } = Astro.props;
