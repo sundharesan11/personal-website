@@ -1,19 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
+import { getCollection } from "astro:content";
 
-const frames = [
-  { src: "/img/home/frame-1.jpg", caption: "A frame I keep — film, year" },
-  { src: "/img/home/frame-2.jpg", caption: "A still that stays with me — replace" },
-  { src: "/img/home/frame-3.jpg", caption: "Light I think about — replace" },
-  { src: "/img/home/frame-4.jpg", caption: "A frame I keep — film, year" },
-  { src: "/img/home/frame-5.jpg", caption: "Something I keep looking at — replace" },
-];
-const doodles = [
-  { src: "/img/home/doodle-1.jpg", title: "Untitled — replace" },
-  { src: "/img/home/doodle-2.jpg", title: "Quiet window — replace" },
-  { src: "/img/home/doodle-3.jpg", title: "Study — replace" },
-];
+const gallery = await getCollection("gallery");
+const frames = gallery
+  .filter((g) => g.data.kind === "frame")
+  .sort((a, b) => a.data.order - b.data.order);
+const doodles = gallery
+  .filter((g) => g.data.kind === "doodle")
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout title="Sundharesan Kumaresan">
   <ParallaxHero image="/img/hero.jpg" />
@@ -39,8 +35,8 @@ const doodles = [
       <div class="mt-10 columns-2 gap-4 md:columns-3 md:gap-6 [&>figure]:mb-4 md:[&>figure]:mb-6">
         {frames.map((f) => (
           <figure class="break-inside-avoid">
-            <img src={f.src} alt="" loading="lazy" class="w-full" />
-            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.caption}</figcaption>
+            <img src={f.data.image} alt="" loading="lazy" class="w-full" />
+            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.data.caption}{f.data.credit ? ` — ${f.data.credit}` : ""}</figcaption>
           </figure>
         ))}
       </div>
@@ -55,8 +51,8 @@ const doodles = [
       <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
         {doodles.map((d) => (
           <figure>
-            <img src={d.src} alt="" loading="lazy" class="w-full" />
-            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{d.title}</figcaption>
+            <img src={d.data.image} alt="" loading="lazy" class="w-full" />
+            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{d.data.caption}</figcaption>
           </figure>
         ))}
       </div>

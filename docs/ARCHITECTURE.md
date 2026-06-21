@@ -64,6 +64,8 @@ File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature),
 
 Schemas enforced in `src/content.config.ts` with zod so content stays consistent. The `projects` collection and its schema were REMOVED.
 
+`gallery` collection (`src/content/gallery/*.md`) powers Home's Frames (kind: frame) and Sketchbook (kind: doodle). To add one: drop an image in `public/img/home/` and create a markdown file with frontmatter `kind`, `image`, `caption`, optional `credit`/`link`, and `order`.
+
 ## Styling flow
 
 Tailwind v4 (CSS-first): tokens are defined once in `src/styles/global.css` under an `@theme` block. Tailwind reads `@theme` and auto-generates utilities from those variables — there is no `tailwind.config.mjs`. Components use Tailwind utility classes (`text-accent`, `bg-surface`, etc.) that map directly to the `@theme` tokens. No raw hex/px in components.
