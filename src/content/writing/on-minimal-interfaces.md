@@ -7,4 +7,4 @@ lens: technical
 status: published
 featured: true
 ---
-Placeholder essay body. Minimalism is a discipline of removal, not absence — replace with real writing.
+Placeholder essay body. Minimalism is a discipline of removal, not absence. Replace with real writing.

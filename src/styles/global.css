@@ -10,7 +10,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Color — light is the default palette */
+  /* Color: light is the default palette */
   --color-bg: #FFFFFF;
   --color-surface: #F7F7F5;
   --color-text: #16161A;
@@ -20,7 +20,7 @@
   --color-accent-hover: #163CAE;
   --color-stellar: #5B86FF;
 
-  /* Type scale (rem) — matches DESIGN_SYSTEM.md */
+  /* Type scale (rem): matches DESIGN_SYSTEM.md */
   --text-xs: 0.8rem;
   --text-xs--line-height: 1.5;
   --text-sm: 0.9rem;
@@ -52,7 +52,7 @@
   --measure: 68ch;
 }
 
-/* Dark palette — overrides the color tokens only */
+/* Dark palette: overrides the color tokens only */
 .dark {
   --color-bg: #0B0B0C;
   --color-surface: #161617;
@@ -63,7 +63,7 @@
   --color-accent-hover: #7CA0FF;
 }
 
-/* Cream palette — warm beige/day mode */
+/* Cream palette: warm beige/day mode */
 .theme-cream {
   --color-bg: #F3EBDD;
   --color-surface: #EAE0CF;
@@ -88,7 +88,7 @@ html {
 
 body { margin: 0; }
 
-/* Visible focus ring everywhere — accessibility is a requirement */
+/* Visible focus ring everywhere: accessibility is a requirement */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -114,7 +114,7 @@ body { margin: 0; }
 }
 .u-underline { text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
 
-/* Evening edition — atmospheric reading mode, scoped to .writing-page */
+/* Evening edition: atmospheric reading mode, scoped to .writing-page */
 :root[data-edition="evening"] .writing-page {
   --color-bg: #0E0E12;
   --color-surface: #16161B;

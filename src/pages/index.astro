@@ -19,10 +19,10 @@ const doodles = gallery
       <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">From the desk</p>
       <div class="mt-6 grid gap-10 md:grid-cols-[1.5fr_0.5fr] md:gap-16">
         <div class="dropcap max-w-[60ch] text-lg leading-[1.8] text-text-muted">
-          <p>Placeholder context. An AI engineer who writes, and a writer who draws — words, code, and doodles made by the same hand. Replace this with the real lead: who you are, what you're chasing, and why this place exists. Keep it personal; it sets the voice for everything else.</p>
+          <p>Placeholder context. An AI engineer who writes, and a writer who draws: words, code, and doodles made by the same hand. Replace this with the real lead: who you are, what you're chasing, and why this place exists. Keep it personal; it sets the voice for everything else.</p>
         </div>
         <aside class="md:border-l md:border-border md:pl-10">
-          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.5rem, 3.2vw, 2.2rem);">&ldquo;A standfirst — one line that makes a stranger want to stay.&rdquo;</p>
+          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.5rem, 3.2vw, 2.2rem);">&ldquo;A standfirst, one line that makes a stranger want to stay.&rdquo;</p>
         </aside>
       </div>
     </section>
@@ -36,11 +36,11 @@ const doodles = gallery
         {frames.map((f) => (
           <figure class="break-inside-avoid">
             <img src={f.data.image} alt="" loading="lazy" class="w-full" />
-            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.data.caption}{f.data.credit ? ` — ${f.data.credit}` : ""}</figcaption>
+            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.data.caption}{f.data.credit ? ` · ${f.data.credit}` : ""}</figcaption>
           </figure>
         ))}
       </div>
-      <p class="mt-6 text-xs text-text-muted">Placeholder imagery — swap for your own film stills or licensed images.</p>
+      <p class="mt-6 text-xs text-text-muted">Placeholder imagery. Swap for your own film stills or licensed images.</p>
     </section>
 
     <section class="py-16">
@@ -59,7 +59,7 @@ const doodles = gallery
     </section>
 
     <section class="border-t border-border py-20">
-      <p class="max-w-[34ch] font-serif leading-[1.15]" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">More inside — <a href="/work" class="u-draw">the work</a>, <a href="/writing" class="u-draw">the writing</a>, <a href="/reading" class="u-draw">the reading</a>, and <a href="/ambitions" class="u-draw">what's forming</a>.</p>
+      <p class="max-w-[34ch] font-serif leading-[1.15]" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">More inside: <a href="/work" class="u-draw">the work</a>, <a href="/writing" class="u-draw">the writing</a>, <a href="/reading" class="u-draw">the reading</a>, and <a href="/ambitions" class="u-draw">what's forming</a>.</p>
     </section>
   </main>
 </BaseLayout>

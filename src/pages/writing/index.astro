@@ -19,7 +19,7 @@ const inLens = (key: string) => published.filter((p) => p.data.lens === key && (
 const activeLenses = lenses.filter((l) => inLens(l.key).length > 0);
 const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
-<BaseLayout title="Writing — Sundharesan Kumaresan">
+<BaseLayout title="Writing · Sundharesan Kumaresan">
   <div class="writing-page min-h-screen">
     <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
       <div class="flex flex-wrap items-end justify-between gap-6">

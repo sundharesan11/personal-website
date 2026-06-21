@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 const books = (await getCollection("reading")).sort((a, b) => a.data.order - b.data.order);
 const groups = [...new Set(books.map((b) => b.data.opened))];
 ---
-<BaseLayout title="Reading — Sundharesan Kumaresan">
+<BaseLayout title="Reading · Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
     <Kicker text="The reading room" />
     <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Reading</h1>

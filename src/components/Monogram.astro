@@ -2,4 +2,4 @@
 interface Props { tone?: "light" | "ink"; size?: string; }
 const { tone = "ink", size = "1.4rem" } = Astro.props;
 ---
-<a href="/" class:list={["font-serif font-bold leading-none", tone === "light" ? "text-white" : "text-text"]} style={`font-size:${size}`} aria-label="Sundharesan Kumaresan — home">SK<span class="text-stellar">.</span></a>
+<a href="/" class:list={["font-serif font-bold leading-none", tone === "light" ? "text-white" : "text-text"]} style={`font-size:${size}`} aria-label="Sundharesan Kumaresan, home">SK<span class="text-stellar">.</span></a>

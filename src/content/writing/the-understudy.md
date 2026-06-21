@@ -7,4 +7,4 @@ lens: theatrical
 status: writing
 featured: false
 ---
-Being written — placeholder. Replace with the real story.
+Being written. Placeholder. Replace with the real story.

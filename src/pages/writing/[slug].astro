@@ -13,7 +13,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 ---
-<BaseLayout title={`${post.data.title} — Sundharesan Kumaresan`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} · Sundharesan Kumaresan`} description={post.data.description}>
   <div class="writing-page min-h-screen">
     <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
       <div class="mx-auto flex items-start justify-between gap-4" style="max-width: var(--measure)">
