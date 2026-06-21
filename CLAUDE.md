@@ -38,6 +38,7 @@ npm run preview    # preview the build
 
 ## Docs index
 
+- `docs/VOICE.md` — site voice & character (ALL copy in this register: casual, dry-witted, storyteller)
 - `docs/DESIGN_SYSTEM.md` — tokens, type, spacing, components, do/don't
 - `docs/DECISIONS.md` — decision log (Decided + Open/Deferred)
 - `docs/ARCHITECTURE.md` — structure, routing, content model
