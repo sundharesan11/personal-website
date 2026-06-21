@@ -1,0 +1,10 @@
+---
+interface Props { class?: string; }
+const { class: cls = "" } = Astro.props;
+---
+<canvas id="sunflower" aria-hidden="true" class:list={["block h-full w-full", cls]}></canvas>
+<script>
+  import { initSunflower } from "../scripts/sunflower";
+  const c = document.getElementById("sunflower");
+  if (c instanceof HTMLCanvasElement) initSunflower(c);
+</script>

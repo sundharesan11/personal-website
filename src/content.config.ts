@@ -21,6 +21,7 @@ const reading = defineCollection({
     title: z.string(),
     author: z.string(),
     note: z.string(),
+    question: z.string().optional(),
     status: z.enum(["read", "on-deck"]),
     opened: z.string(),
     cover: z.string().optional(),
