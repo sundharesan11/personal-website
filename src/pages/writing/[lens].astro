@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EditionToggle from "../../components/EditionToggle.astro";
+import Sunflower from "../../components/Sunflower.astro";
+import { getCollection } from "astro:content";
+import { lenses, lensIntro, scatter, linkOf, metaOf } from "../../lib/writing";
+
+export async function getStaticPaths() {
+  const all = await getCollection("writing", ({ data }) => !data.draft);
+  return lenses
+    .filter((l) => all.some((p) => p.data.lens === l.key))
+    .map((l) => ({ params: { lens: l.key }, props: { lens: l } }));
+}
+const { lens } = Astro.props;
+const posts = (await getCollection("writing", ({ data }) => !data.draft && data.lens === lens.key))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const isTech = lens.key === "technical";
+---
+<BaseLayout title={`${lens.label} · Writing · Sundharesan Kumaresan`}>
+  <div class="writing-page min-h-screen">
+    <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+      <div class="md:grid md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
+        <div>
+          <div class="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <a href="/writing" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; Writing</a>
+              <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">{lens.label}</h1>
+            </div>
+            <EditionToggle />
+          </div>
+          <p class="mt-6 max-w-[60ch] text-lg leading-relaxed text-text-muted">{lensIntro[lens.key]}</p>
+
+          <div class="mt-12 flex flex-col gap-10 border-t border-border pt-10">
+            {posts.map((post, i) => {
+              const L = scatter[i % scatter.length];
+              const link = linkOf(post);
+              return (
+                <article class:list={["max-w-[58ch] transition-transform duration-300 hover:-translate-y-1", L.ml, L.w]}>
+                  <a href={link ?? undefined} target={post.data.link ? "_blank" : undefined} rel={post.data.link ? "noopener noreferrer" : undefined} class:list={["group block", !link && "pointer-events-none"]}>
+                    <div class="flex items-baseline gap-4">
+                      <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")}</span>
+                      <span class="text-sm uppercase tracking-[0.14em] text-text-muted">{metaOf(post)}</span>
+                    </div>
+                    <h2 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h2>
+                    <p class="mt-1 text-text-muted">{post.data.description}</p>
+                  </a>
+                </article>
+              );
+            })}
+          </div>
+
+          {isTech && (
+            <p class="mt-12 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesank11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium &#8599;</a></p>
+          )}
+        </div>
+        <div class="hidden md:block" aria-hidden="true">
+          <div class="pointer-events-none sticky top-28 h-[clamp(280px,42vh,440px)] w-full opacity-80">
+            <Sunflower />
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

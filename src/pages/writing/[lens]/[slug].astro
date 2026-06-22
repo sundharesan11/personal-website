@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Prose from "../../components/Prose.astro";
-import Kicker from "../../components/Kicker.astro";
-import EditionToggle from "../../components/EditionToggle.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Prose from "../../../components/Prose.astro";
+import Kicker from "../../../components/Kicker.astro";
+import EditionToggle from "../../../components/EditionToggle.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("writing", ({ data }) => !data.draft && !data.link && data.status === "published");
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { lens: post.data.lens, slug: post.id }, props: { post } }));
 }
 const { post } = Astro.props;
 const { Content } = await render(post);
@@ -26,7 +26,7 @@ const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month:
       </div>
       <div class="mt-12"><Prose dropcap><Content /></Prose></div>
       <div class="mx-auto mt-16" style="max-width: var(--measure)">
-        <a href="/writing" class="text-xs uppercase tracking-[0.16em] text-text-muted hover:text-text">← Writing</a>
+        <a href={`/writing/${post.data.lens}`} class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; back</a>
       </div>
     </main>
   </div>
