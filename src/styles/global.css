@@ -114,19 +114,6 @@ body { margin: 0; }
 }
 .u-underline { text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
 
-/* Evening edition: atmospheric reading mode, scoped to .writing-page */
-:root[data-edition="evening"] .writing-page {
-  --color-bg: #0E0E12;
-  --color-surface: #16161B;
-  --color-text: #E8E4DA;
-  --color-text-muted: #B9B3A6;
-  --color-border: #2A2A30;
-  background: var(--color-bg);
-  color: var(--color-text);
-}
-:root[data-edition="evening"] .writing-page .prose-custom { font-family: var(--font-serif); line-height: 1.9; }
-:root[data-edition="evening"] .writing-page .dropcap > p:first-of-type::first-letter { font-size: 4.2em; }
-
 /* Motion + wayfinding */
 html { scroll-behavior: smooth; }
 #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: var(--color-stellar); z-index: 60; pointer-events: none; will-change: transform; }

@@ -2,7 +2,6 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Prose from "../../../components/Prose.astro";
 import Kicker from "../../../components/Kicker.astro";
-import EditionToggle from "../../../components/EditionToggle.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -16,13 +15,10 @@ const fmt = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month:
 <BaseLayout title={`${post.data.title} · Sundharesan Kumaresan`} description={post.data.description}>
   <div class="writing-page min-h-screen">
     <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-      <div class="mx-auto flex items-start justify-between gap-4" style="max-width: var(--measure)">
-        <div>
-          <Kicker text="Essay" />
-          <h1 class="mt-3 font-serif font-semibold leading-[1.0]" style="font-size: clamp(2.4rem, 7vw, 4.5rem);">{post.data.title}</h1>
-          <p class="mt-4 text-sm uppercase tracking-[0.14em] text-stellar">{fmt(post.data.date)}</p>
-        </div>
-        <EditionToggle />
+      <div class="mx-auto" style="max-width: var(--measure)">
+        <Kicker text="Essay" />
+        <h1 class="mt-3 font-serif font-semibold leading-[1.0]" style="font-size: clamp(2.4rem, 7vw, 4.5rem);">{post.data.title}</h1>
+        <p class="mt-4 text-sm uppercase tracking-[0.14em] text-stellar">{fmt(post.data.date)}</p>
       </div>
       <div class="mt-12"><Prose dropcap><Content /></Prose></div>
       <div class="mx-auto mt-16" style="max-width: var(--measure)">

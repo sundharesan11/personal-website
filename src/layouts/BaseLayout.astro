@@ -47,9 +47,6 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
         } catch (_) {}
       })();
     </script>
-    <script is:inline>
-      (() => { try { const e = localStorage.getItem("edition"); document.documentElement.setAttribute("data-edition", e === "evening" ? "evening" : "modern"); } catch (_) {} })();
-    </script>
   </head>
   <body>
     <div id="scroll-progress" aria-hidden="true"></div>

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import EditionToggle from "../../components/EditionToggle.astro";
 import Sunflower from "../../components/Sunflower.astro";
 import { getCollection } from "astro:content";
 import { lenses, lensIntro, scatter, linkOf, metaOf } from "../../lib/writing";
@@ -21,12 +20,9 @@ const isTech = lens.key === "technical";
     <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
       <div class="md:grid md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
         <div>
-          <div class="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <a href="/writing" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; Writing</a>
-              <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">{lens.label}</h1>
-            </div>
-            <EditionToggle />
+          <div>
+            <a href="/writing" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; Writing</a>
+            <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">{lens.label}</h1>
           </div>
           <p class="mt-6 max-w-[60ch] text-lg leading-relaxed text-text-muted">{lensIntro[lens.key]}</p>
 
@@ -50,7 +46,7 @@ const isTech = lens.key === "technical";
           </div>
 
           {isTech && (
-            <p class="mt-12 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesank11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium &#8599;</a></p>
+            <p class="mt-12 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesansk11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium &#8599;</a></p>
           )}
         </div>
         <div class="hidden md:block" aria-hidden="true">
