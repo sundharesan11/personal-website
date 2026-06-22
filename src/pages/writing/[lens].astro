@@ -12,7 +12,11 @@ export async function getStaticPaths() {
 }
 const { lens } = Astro.props;
 const posts = (await getCollection("writing", ({ data }) => !data.draft && data.lens === lens.key))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => {
+    const rank = (s: string) => (s === "published" ? 0 : 1);
+    const d = rank(a.data.status) - rank(b.data.status);
+    return d !== 0 ? d : b.data.date.valueOf() - a.data.date.valueOf();
+  });
 const isTech = lens.key === "technical";
 ---
 <BaseLayout title={`${lens.label} · Writing · Sundharesan Kumaresan`}>
