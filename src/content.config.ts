@@ -43,4 +43,18 @@ const gallery = defineCollection({
   }),
 });
 
-export const collections = { writing, reading, gallery };
+const modelling = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/modelling" }),
+  schema: z.object({
+    image: z.string(),
+    title: z.string().optional(),
+    photographer: z.string().optional(),
+    brand: z.string().optional(),
+    location: z.string().optional(),
+    year: z.string().optional(),
+    featured: z.boolean().default(false),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { writing, reading, gallery, modelling };

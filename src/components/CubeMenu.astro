@@ -1,13 +1,14 @@
 ---
 const path = Astro.url.pathname;
-const links = [
-  { href: "/", label: "Home", face: "f-front" },
-  { href: "/work", label: "Now / Work", face: "f-right" },
-  { href: "/writing", label: "Writing", face: "f-back" },
-  { href: "/reading", label: "Reading", face: "f-left" },
-  { href: "/ambitions", label: "Ambitions", face: "f-top" },
+const faces = [
+  { href: "/work", label: "Now / Work", face: "f-front" },
+  { href: "/writing", label: "Writing", face: "f-right" },
+  { href: "/reading", label: "Reading", face: "f-back" },
+  { href: "/to", label: "To", face: "f-left" },
+  { href: "/modelling", label: "Modelling", face: "f-top" },
   { href: "/about", label: "About", face: "f-bottom" },
 ];
+const navLinks = [{ href: "/", label: "Home" }, ...faces];
 const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 ---
 <div id="cube-menu" class="hidden fixed inset-0 z-[100]">
@@ -16,12 +17,12 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
     <button id="cube-close" type="button" aria-label="Close menu" class="absolute right-6 top-6 text-3xl leading-none text-white/80 transition-colors hover:text-white">&times;</button>
     <div class="cube-scene" aria-hidden="true">
       <div id="cube" class="cube">
-        {links.map((l) => (<a href={l.href} tabindex="-1" class:list={["cube-face", l.face, isActive(l.href) && "is-active"]}>{l.label}</a>))}
+        {faces.map((l) => (<a href={l.href} tabindex="-1" class:list={["cube-face", l.face, isActive(l.href) && "is-active"]}>{l.label}</a>))}
       </div>
     </div>
     <p class="font-sans text-xs uppercase tracking-[0.18em] text-white/40" aria-hidden="true">Drag to explore</p>
     <nav aria-label="Menu" class="flex flex-col items-center gap-3">
-      {links.map((l) => (
+      {navLinks.map((l) => (
         <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
            class:list={["font-serif text-2xl transition-colors u-draw", isActive(l.href) ? "text-stellar" : "text-white/85 hover:text-stellar"]}>{l.label}</a>
       ))}
