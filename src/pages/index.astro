@@ -1,65 +1,56 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParallaxHero from "../components/ParallaxHero.astro";
-import { getCollection } from "astro:content";
 
-const gallery = await getCollection("gallery");
-const frames = gallery
-  .filter((g) => g.data.kind === "frame")
-  .sort((a, b) => a.data.order - b.data.order);
-const doodles = gallery
-  .filter((g) => g.data.kind === "doodle")
-  .sort((a, b) => a.data.order - b.data.order);
+const contents = [
+  { href: "/work", title: "Now / Work", teaser: "What happens when someone hands me a hard problem and a deadline that was already yesterday." },
+  { href: "/writing", title: "Writing", teaser: "Fiction, economics, and the machines in between. Three lenses, one stubborn question." },
+  { href: "/reading", title: "Reading", teaser: "The books that rewired how I think about who a system leaves out." },
+  { href: "/to", title: "To", teaser: "Things I intend to build: a capital network for farmers, a future for Indian sport." },
+  { href: "/modelling", title: "Modelling", teaser: "The same face that stares down bugs, occasionally in front of a camera." },
+  { href: "/about", title: "About", teaser: "The long version, where the engineer and the writer turn out to be the same person." },
+];
 ---
 <BaseLayout title="Sundharesan Kumaresan">
-  <ParallaxHero image="/img/hero-crop.png" />
+  <ParallaxHero
+    image="/img/hero-crop.png"
+    kicker="AI engineer · writer · Oogway Labs"
+    lines={[
+      "Forward-deployed engineer by day.",
+      "Writer of fiction by night.",
+      "Building things for farmers and athletes in between.",
+    ]}
+  />
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
 
     <section class="py-20 md:py-28">
       <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">From the desk</p>
       <div class="mt-6 grid gap-10 md:grid-cols-[1.5fr_0.5fr] md:gap-16">
         <div class="dropcap max-w-[60ch] text-lg leading-[1.8] text-text-muted">
-          <p>Placeholder context. An AI engineer who writes, and a writer who draws: words, code, and doodles made by the same hand. Replace this with the real lead: who you are, what you're chasing, and why this place exists. Keep it personal; it sets the voice for everything else.</p>
+          <p>I build AI for a living: someone shows up with a hard problem and a deadline that was already yesterday, and I turn it into something that actually ships. Then I go home and write fiction. In between I read about economies and the people they overlook, and I'm slowly building ventures for exactly those people. It all comes back to one question: who a system sees, and who it quietly leaves out.</p>
         </div>
         <aside class="md:border-l md:border-border md:pl-10">
-          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.5rem, 3.2vw, 2.2rem);">&ldquo;A standfirst, one line that makes a stranger want to stay.&rdquo;</p>
+          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.5rem, 3.2vw, 2.2rem);">An engineer who tells stories, and a storyteller who ships.</p>
         </aside>
       </div>
     </section>
 
-    <section class="py-16">
+    <section class="border-t border-border py-16">
       <div class="flex items-baseline justify-between border-b border-border pb-3">
-        <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">Frames I keep</h2>
-        <span class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted">What I'm looking at</span>
+        <h2 class="font-serif font-semibold" style="font-size: clamp(1.6rem, 4vw, 2.4rem);">Inside</h2>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted">The contents</span>
       </div>
-      <div class="mt-10 columns-2 gap-4 md:columns-3 md:gap-6 [&>figure]:mb-4 md:[&>figure]:mb-6">
-        {frames.map((f) => (
-          <figure class="break-inside-avoid">
-            <img src={f.data.image} alt="" loading="lazy" class="w-full" />
-            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{f.data.caption}{f.data.credit ? ` · ${f.data.credit}` : ""}</figcaption>
-          </figure>
+      <div>
+        {contents.map((c, i) => (
+          <a href={c.href} class="group block border-b border-border py-8">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+              <h3 class="font-serif font-semibold leading-[1.0] transition-colors group-hover:text-accent" style="font-size: clamp(1.8rem, 5vw, 3rem);">{c.title}</h3>
+              <span class="font-sans text-xs uppercase tracking-[0.16em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")} &rarr;</span>
+            </div>
+            <p class="mt-2 max-w-[62ch] text-text-muted">{c.teaser}</p>
+          </a>
         ))}
       </div>
-      <p class="mt-6 text-xs text-text-muted">Placeholder imagery. Swap for your own film stills or licensed images.</p>
-    </section>
-
-    <section class="py-16">
-      <div class="flex items-baseline justify-between border-b border-stellar pb-3">
-        <h2 class="font-serif font-semibold" style="font-size: clamp(1.8rem, 5vw, 3rem);">From the sketchbook</h2>
-        <a href="#" class="u-draw font-sans text-xs uppercase tracking-[0.16em] text-stellar">@inked doodler</a>
-      </div>
-      <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-        {doodles.map((d) => (
-          <figure>
-            <img src={d.data.image} alt="" loading="lazy" class="w-full" />
-            <figcaption class="mt-2 text-xs uppercase tracking-[0.12em] text-text-muted">{d.data.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-
-    <section class="border-t border-border py-20">
-      <p class="max-w-[34ch] font-serif leading-[1.15]" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">More inside: <a href="/work" class="u-draw">the work</a>, <a href="/writing" class="u-draw">the writing</a>, <a href="/reading" class="u-draw">the reading</a>, <a href="/modelling" class="u-draw">the camera</a>, and <a href="/to" class="u-draw">what's forming</a>.</p>
     </section>
   </main>
 </BaseLayout>
