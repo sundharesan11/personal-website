@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Kicker from "../../components/Kicker.astro";
 
 const ambitions = [
   {
@@ -19,11 +18,15 @@ const ambitions = [
 ---
 <BaseLayout title="To · Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <Kicker text="The future desk" />
-    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">To</h1>
-    <p class="mt-6 inline-block border border-stellar px-4 py-2 text-xs uppercase tracking-[0.18em] text-stellar">Forming: intentions, not yet built</p>
+    <header class="border-t border-border pt-5">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">The future desk</span>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-stellar">Forming</span>
+      </div>
+      <h1 class="mt-5 font-serif font-semibold leading-[0.9]" style="font-size: clamp(3rem, 10vw, 7rem);">To</h1>
+    </header>
 
-    <p data-reveal class="mt-12 max-w-[20ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.9rem, 5.5vw, 3.4rem);">Things I intend to build. All of them.</p>
+    <p data-reveal class="mt-10 max-w-[20ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.9rem, 5.5vw, 3.4rem);">Things I intend to build. All of them.</p>
 
     <section class="mt-14">
       {ambitions.map((a) => (

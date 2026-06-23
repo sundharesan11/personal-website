@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Kicker from "../../components/Kicker.astro";
 import { getCollection } from "astro:content";
 import { lenses, lensIntro } from "../../lib/writing";
 
@@ -10,9 +9,14 @@ const activeLenses = lenses.filter((l) => count(l.key) > 0);
 ---
 <BaseLayout title="Writing · Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <Kicker text="Notes" />
-    <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Writing</h1>
-    <p class="mt-6 max-w-[58ch] text-lg leading-relaxed text-text-muted">I write to find out what I actually think. Three things keep dragging me back: the stories we tell, the systems that decide who gets seen, and the machines we're building in the middle of it all. Different lenses, same stubborn question.</p>
+    <header class="border-t border-border pt-5">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">The writing desk</span>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-stellar">Three lenses</span>
+      </div>
+      <h1 class="mt-5 font-serif font-semibold leading-[0.9]" style="font-size: clamp(3rem, 10vw, 7rem);">Writing</h1>
+      <p class="mt-7 max-w-[58ch] text-lg leading-relaxed text-text-muted">I write to find out what I actually think. Three things keep dragging me back: the stories we tell, the systems that decide who gets seen, and the machines we're building in the middle of it all. Different lenses, same stubborn question.</p>
+    </header>
 
     <section class="mt-14">
       {activeLenses.map((l) => (

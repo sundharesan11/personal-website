@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Kicker from "../../components/Kicker.astro";
 import Sunflower from "../../components/Sunflower.astro";
 import { getCollection } from "astro:content";
 
@@ -20,10 +19,15 @@ const layout = [
 ---
 <BaseLayout title="Reading · Sundharesan Kumaresan">
   <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <div class="md:grid md:grid-cols-[minmax(0,1fr)_320px] md:gap-12">
+    <header class="border-t border-border pt-5">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">The reading room</span>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-stellar">{books.length} books</span>
+      </div>
+      <h1 class="mt-5 font-serif font-semibold leading-[0.9]" style="font-size: clamp(3rem, 10vw, 7rem);">Reading</h1>
+    </header>
+    <div class="mt-12 md:grid md:grid-cols-[minmax(0,1fr)_320px] md:gap-12">
       <div>
-        <Kicker text="The reading room" />
-        <h1 class="mt-3 font-serif font-semibold leading-[0.95]" style="font-size: clamp(3rem, 9vw, 6rem);">Reading</h1>
         {groups.map((g) => (
           <section class="mt-16">
             <h2 class="font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{g}</h2>
