@@ -6,7 +6,7 @@ export const lenses = [
 
 export const lensIntro: Record<string, string> = {
   theatrical: "The fiction is where I get to cheat. When an argument can't hold something true, I hand it to a character and let them carry it. I'm a sucker for structure as meaning: stories told out of order, lives that read differently depending on which way you go.",
-  economics: "I keep circling the unglamorous machinery: how food, money, and goods actually move, and who the system can and can't see while they do. Macroeconomics, agronomics, logistics. Less theory, more the seams where they grind.",
+  economics: "I keep circling the unglamorous machinery: how food, money, and goods actually move, and who gets quietly priced out while they do. Macroeconomics, agronomics, logistics. Not the theory, the seams where it grinds.",
   technical: "The day job, thinking out loud. Mostly AI and data systems, written the way I wish someone had written them for me: less hand-waving, more here's-how-it-actually-works-and-where-it-breaks.",
 };
 
