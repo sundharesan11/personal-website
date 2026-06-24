@@ -38,7 +38,7 @@ const isTech = lens.key === "technical";
                 <article class:list={["max-w-[58ch] transition-transform duration-300 hover:-translate-y-1", L.ml, L.w]}>
                   <a href={link ?? undefined} target={post.data.link ? "_blank" : undefined} rel={post.data.link ? "noopener noreferrer" : undefined} class:list={["group block", !link && "pointer-events-none"]}>
                     <div class="flex items-baseline gap-4">
-                      <span class="font-sans text-sm uppercase tracking-[0.18em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")}</span>
+                      <span class="font-sans text-sm uppercase tracking-[0.18em] text-accent">n&ordm; {String(i + 1).padStart(2, "0")}</span>
                       <span class="text-sm uppercase tracking-[0.14em] text-text-muted">{metaOf(post)}</span>
                     </div>
                     <h2 class="mt-1 font-serif font-semibold leading-[1.06] transition-colors group-hover:text-accent" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">{post.data.title}</h2>

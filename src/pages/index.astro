@@ -24,7 +24,7 @@ const contents = [
   <main id="main-content" class="mx-auto max-w-[1100px] px-6">
 
     <section class="py-20 md:py-28">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">From the desk</p>
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">From the desk</p>
       <div class="mt-6 grid gap-10 md:grid-cols-[1.5fr_0.5fr] md:gap-16">
         <div class="dropcap max-w-[60ch] text-lg leading-[1.8] text-text-muted">
           <p>I'm a software engineer, and I build AI products. I take something half-defined and slightly impossible and turn it into a real thing people use, the architecture, the build, the whole thing, usually against a deadline that was already yesterday. I love it, which probably says more about me than the work. I write fiction too, not as often as I'd like, usually when there's something I'm trying to work out on the page. Lately I've also been knee-deep in economics and logistics, partly because the work needs it, mostly because I find it genuinely gripping. And under all of it, the same question keeps nagging at me: who does a system really see, and who does it leave out?</p>
@@ -45,7 +45,7 @@ const contents = [
           <a href={c.href} class="group block border-b border-border py-8">
             <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
               <h3 class="font-serif font-semibold leading-[1.0] transition-colors group-hover:text-accent" style="font-size: clamp(1.8rem, 5vw, 3rem);">{c.title}</h3>
-              <span class="font-sans text-xs uppercase tracking-[0.16em] text-stellar">n&ordm; {String(i + 1).padStart(2, "0")} &rarr;</span>
+              <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">n&ordm; {String(i + 1).padStart(2, "0")} &rarr;</span>
             </div>
             <p class="mt-2 max-w-[62ch] text-text-muted">{c.teaser}</p>
           </a>
