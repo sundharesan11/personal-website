@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Sunflower from "../../components/Sunflower.astro";
 import { getCollection } from "astro:content";
 import { lenses, lensIntro, scatter, linkOf, metaOf } from "../../lib/writing";
 
@@ -22,7 +21,7 @@ const isTech = lens.key === "technical";
 <BaseLayout title={`${lens.label} · Writing · Sundharesan Kumaresan`}>
   <div class="writing-page min-h-screen">
     <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-      <div class="md:grid md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
+      <div>
         <div>
           <div>
             <a href="/writing" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; Writing</a>
@@ -52,11 +51,6 @@ const isTech = lens.key === "technical";
           {isTech && (
             <p class="mt-12 text-sm text-text-muted">More on <a href="https://medium.com/@sundharesansk11" target="_blank" rel="noopener noreferrer" class="u-draw text-text">Medium &#8599;</a></p>
           )}
-        </div>
-        <div class="hidden md:block" aria-hidden="true">
-          <div class="pointer-events-none sticky top-28 h-[clamp(280px,42vh,440px)] w-full opacity-80">
-            <Sunflower />
-          </div>
         </div>
       </div>
     </main>

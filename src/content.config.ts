@@ -31,18 +31,6 @@ const reading = defineCollection({
   }),
 });
 
-const gallery = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/gallery" }),
-  schema: z.object({
-    kind: z.enum(["frame", "doodle"]),
-    image: z.string(),
-    caption: z.string(),
-    credit: z.string().optional(),
-    link: z.string().optional(),
-    order: z.number().default(0),
-  }),
-});
-
 const modelling = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/modelling" }),
   schema: z.object({
@@ -57,4 +45,4 @@ const modelling = defineCollection({
   }),
 });
 
-export const collections = { writing, reading, gallery, modelling };
+export const collections = { writing, reading, modelling };

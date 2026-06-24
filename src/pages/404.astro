@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Not found · Sundharesan Kumaresan">
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+    <header class="border-t border-border pt-5">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Off the map</span>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">404</span>
+      </div>
+      <h1 class="mt-5 font-serif font-semibold leading-[0.9]" style="font-size: clamp(3rem, 10vw, 7rem);">Nothing here.</h1>
+    </header>
+    <p class="mt-8 max-w-[40ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.5rem, 4vw, 2.3rem);">This page doesn't exist, or it did and I moved it. Either way, you've wandered off the edge of the publication.</p>
+    <nav aria-label="Back into the site" class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm uppercase tracking-[0.14em]">
+      <a href="/" class="u-draw text-text transition-colors hover:text-accent">Home</a>
+      <a href="/work" class="u-draw text-text-muted transition-colors hover:text-text">Now / Work</a>
+      <a href="/writing" class="u-draw text-text-muted transition-colors hover:text-text">Writing</a>
+      <a href="/reading" class="u-draw text-text-muted transition-colors hover:text-text">Reading</a>
+      <a href="/to" class="u-draw text-text-muted transition-colors hover:text-text">To</a>
+      <a href="/modelling" class="u-draw text-text-muted transition-colors hover:text-text">Modelling</a>
+      <a href="/about" class="u-draw text-text-muted transition-colors hover:text-text">About</a>
+    </nav>
+  </main>
+</BaseLayout>

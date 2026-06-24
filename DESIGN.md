@@ -118,6 +118,9 @@ Flat by doctrine. The system uses no card shadows and no decorative depth. The s
 ### Named Rules
 **The Flat Rule.** Surfaces are flat at rest and flat on hover. If a thing needs to feel separated, use a hairline rule or more whitespace, never a shadow or a card.
 
+### Scrims & Overlays
+Dark overlays are intentional system values (not palette drift): the photo-hero gradient scrim (`rgba(0,0,0,.72 / .42 / .22)`), the modal backdrop (`rgba(0,0,0,0.5)`), and the cube faces (`rgba(14,14,20,0.66)`, `rgba(10,10,14,0.7)`). They sit outside the monochrome token palette by design, for text-over-photo legibility and modal dimming.
+
 ## 5. Components
 
 The component set is deliberately tiny. This is a publication, not an app: there are no buttons-as-CTAs, no input fields, no cards.
@@ -125,7 +128,7 @@ The component set is deliberately tiny. This is a publication, not an app: there
 ### Navigation
 - **Style:** Inter, uppercase, 0.16em tracking, small. Default muted (#6B6B73), hover/active ink. Active page carries `aria-current`.
 - **Hover:** an underline draws in left-to-right (`.u-draw`, a 1px accent line scaling on hover), with a reduced-motion fallback.
-- **Mobile:** a flush-left wrapped row plus a rotating-cube drawer menu (the `≡` trigger opens a right-side panel with six section faces).
+- **Mobile:** the text nav is hidden; navigation is the rotating-cube drawer only (the `≡` trigger opens a right-side panel). The 3D cube is hidden below the `sm` breakpoint, leaving a clean text list of Home + six sections.
 
 ### Links (inline)
 - **Style:** Accent blue (#1F54E6), no underline at rest; the `.u-draw` underline animates in on hover/focus. Visible focus ring everywhere (2px accent outline, 2px offset).
