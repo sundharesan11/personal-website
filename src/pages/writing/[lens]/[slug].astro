@@ -20,7 +20,7 @@ const lensLabel = lenses.find((l) => l.key === post.data.lens)?.label ?? "Writin
     <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
       <div class="mx-auto" style="max-width: var(--measure)">
         <Kicker text={kind} />
-        <h1 class="mt-3 font-serif font-semibold leading-[1.0]" style="font-size: clamp(2.4rem, 7vw, 4.5rem);">{post.data.title}</h1>
+        <h1 class="mt-3 font-serif font-semibold leading-[1.0]" style="font-size: clamp(2rem, 5.5vw, 3.6rem);">{post.data.title}</h1>
         <p class="mt-4 text-sm uppercase tracking-[0.14em] text-accent">{fmt(post.data.date)}</p>
         <p class="mt-6 font-serif italic leading-snug text-text-muted" style="font-size: clamp(1.1rem, 2.6vw, 1.5rem);">{post.data.description}</p>
       </div>
