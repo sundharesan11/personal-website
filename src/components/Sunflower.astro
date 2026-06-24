@@ -2,9 +2,13 @@
 interface Props { class?: string; }
 const { class: cls = "" } = Astro.props;
 ---
-<canvas id="sunflower" aria-hidden="true" class:list={["block h-full w-full", cls]}></canvas>
+<canvas aria-hidden="true" class:list={["sunflower-canvas block h-full w-full", cls]}></canvas>
 <script>
   import { initSunflower } from "../scripts/sunflower";
-  const c = document.getElementById("sunflower");
-  if (c instanceof HTMLCanvasElement) initSunflower(c);
+  document.querySelectorAll(".sunflower-canvas").forEach((c) => {
+    if (c instanceof HTMLCanvasElement && !c.dataset.sfInit) {
+      c.dataset.sfInit = "1";
+      initSunflower(c);
+    }
+  });
 </script>
