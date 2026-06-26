@@ -24,3 +24,4 @@ Thumbs.db
 
 # uncropped source photography (cropped versions live in public/img)
 assets/
+.superpowers/
