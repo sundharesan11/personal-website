@@ -1,63 +1,116 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const steps = [
-  {
-    label: "The problem",
-    body: "Farmers don't just lack money. They lack the right money at the right time, tied to the right support: capital before sowing, when the income only lands after harvest; feed today, when the milk pays out tomorrow. Meanwhile the people with money to put to work want in, but they can't tell which farmer to trust, can't watch the fields from the city, and fear the fraud and the blame if a season fails. So the real gap isn't only capital. It's trust.",
-  },
-  {
-    label: "Who it's for",
-    body: "The people who grow everyone's food and get served last by everyone's banks. I'm not interested in another loan app dressing up the same old extraction. I want to make the farmer and the investor legible to each other, honestly, and do it without bulldozing the local relationships that already hold these places together. My people first. Fairness as the architecture, not the marketing.",
-  },
-  {
-    label: "The shape",
-    body: "A trust-and-operations layer between three people: the farmer who needs seasonal capital and a hand executing, the investor who needs proof and a real downside, and the local operator who actually knows the ground. Money tied to a specific use. Verified locally before anyone funds it. Tracked through the season. Repaid through a real event: milk at the collection centre, produce at the buyer, grain at the mandi. Start manual, a ledger and field visits and a phone, and earn the right to become software later. Not a loan app. Infrastructure.",
-  },
+const experiments = [
+  "One geography",
+  "A trusted local partner",
+  "A small group of farmers",
+  "A handful of investors",
+  "Manual coordination using simple tools",
 ];
 
-const prove = [
-  "Farmers will take outside capital, if a trusted local face introduces it.",
-  "Investors will fund a farm, if the ask is specific, verified, and reported like it's real.",
-  "A local operator can verify and monitor without quietly becoming the next middleman.",
-  "Repayment can hang on a real cash-flow event, not a promise.",
-  "The farmer walks away feeling helped, not trapped.",
+const success = [
+  "Farmers feel supported rather than financially trapped.",
+  "Investors gain enough transparency to participate with confidence.",
+  "Local relationships become stronger instead of being replaced.",
+  "Capital reaches farmers when it is actually needed.",
+  "Repayment follows real agricultural cash flows.",
+  "Trust grows through consistent execution rather than promises.",
 ];
 ---
-<BaseLayout title="A farmer capital network · Sundharesan Kumaresan" description="A trusted network where capital and logistics reach farmers directly. The whole thing rests on trust.">
+<BaseLayout
+  title="Farmer Capital Network · Sundharesan Kumaresan"
+  description="A trusted way to coordinate capital, people, and execution around a farming season."
+>
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
     <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
-    <p class="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-accent">A venture</p>
-    <h1 class="mt-3 font-serif font-semibold leading-[0.98]" style="font-size: clamp(2.2rem, 6.5vw, 4rem);">A farmer capital network</h1>
-    <p class="mt-6 max-w-[60ch] text-lg leading-relaxed text-text-muted">A trusted network where capital reaches farmers directly, on terms that fit how a farm actually works: timely money, logistics, inputs, and a real route to market. Across crops, dairy, and the seasons in between.</p>
-    <p class="mt-8 max-w-[30ch] font-serif font-semibold leading-[1.08]" style="font-size: clamp(1.45rem, 3.8vw, 2.25rem);">Capital and logistics are the work. <span class="text-accent">Trust</span> is the ground it all stands on.</p>
 
-    <section class="mt-14" style="max-width: var(--measure)">
-      <ol class="relative border-l border-border pl-8">
-        {steps.map((s) => (
-          <li class="relative pb-10 last:pb-0">
-            <span class="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-stellar"></span>
-            <h2 class="font-serif font-semibold leading-[1.1]" style="font-size: clamp(1.2rem, 3vw, 1.6rem);">{s.label}</h2>
-            <p class="mt-2 text-text-muted">{s.body}</p>
-          </li>
-        ))}
-      </ol>
+    <header class="mt-8">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">A venture</p>
+      <h1 class="mt-3 max-w-[12ch] font-serif font-semibold leading-[0.98]" style="font-size: clamp(2.4rem, 7.5vw, 5.2rem);">Farmer Capital Network</h1>
+      <p class="mt-8 max-w-[24ch] font-serif font-semibold leading-[1.08]" style="font-size: clamp(1.45rem, 3.8vw, 2.35rem);">A trusted way to coordinate capital, people, and execution around a farming season.</p>
+      <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>Agriculture isn't short of hardworking people. It is short of coordination.</p>
+        <p>A farmer may need capital before sowing, quality inputs during the season, reliable logistics at harvest, and access to the right market at the right time. Investors, on the other hand, want to support agriculture but often lack visibility into where their money goes, how risks are managed, and who they can trust.</p>
+        <p>I'm interested in exploring whether these two worlds can be connected through transparency, local relationships, and carefully designed workflows rather than another lending platform.</p>
+      </div>
+    </header>
+
+    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
+      <div>
+        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">The problem</p>
+      </div>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>Most agricultural finance focuses on moving money.</p>
+        <p>I'm more interested in helping complete successful farming seasons.</p>
+        <p>Capital alone doesn't solve the problem if logistics fail, buyers disappear, prices change unexpectedly, or communication breaks down.</p>
+        <p>The real challenge is coordinating many independent participants: farmers, investors, buyers, local operators, logistics providers, and support systems, so that each has the information and confidence to make better decisions.</p>
+        <blockquote class="border-l-2 border-accent pl-6 font-serif italic leading-[1.2] text-text" style="font-size: clamp(1.5rem, 3.8vw, 2.3rem);">Trust is the missing infrastructure.</blockquote>
+      </div>
     </section>
 
-    <section class="mt-20" style="max-width: var(--measure)">
-      <h2 class="font-serif font-semibold" style="font-size: clamp(1.4rem, 3.4vw, 1.95rem);">Where I'd start</h2>
-      <p class="mt-4 text-text-muted">The shortest, most verifiable loop wins. Dairy feed and cattle finance, where the milk pays back daily, or logistics finance tied to one known buyer. Prove repayment and honest reporting in one narrow loop, then earn the right to do seasonal crop finance. Ninety days, fifty farmers, one geography, one trusted local partner. No grand launch.</p>
+    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
+      <div>
+        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">The idea</p>
+      </div>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>The Farmer Capital Network is an exploration of what a trusted coordination layer could look like.</p>
+        <p>Rather than treating financing as an isolated transaction, every production cycle becomes a shared workflow.</p>
+        <p>A farmer receives timely support throughout the season. An investor gains visibility into how capital is being used. Local operators contribute ground-level verification and context.</p>
+        <p>Repayment is connected to real agricultural events, such as milk collection or crop sales, instead of relying only on fixed repayment schedules disconnected from farming realities.</p>
+        <p class="font-serif text-text" style="font-size: clamp(1.35rem, 3vw, 1.9rem);">The long-term goal isn't simply to finance farms. It's to build a system where every participant can collaborate with greater confidence.</p>
+      </div>
     </section>
 
     <section class="mt-20">
-      <h2 class="font-serif font-semibold" style="font-size: clamp(1.4rem, 3.4vw, 1.95rem);">What I'd prove first</h2>
-      <p class="mt-4 max-w-[60ch] text-text-muted">None of it starts with software. It starts with five assumptions that have to hold:</p>
+      <div class="flex flex-wrap items-end gap-5">
+        <h2 class="font-serif font-semibold leading-[0.95]" style="font-size: clamp(2rem, 6vw, 4.2rem);">Why Start Small</h2>
+        <span class="mb-4 h-px flex-1 bg-stellar"></span>
+      </div>
+      <div class="mt-8 grid gap-10 md:grid-cols-[1fr_0.8fr]">
+        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+          <p>Before building software, I want to understand how these relationships work in practice.</p>
+          <p>The first experiments would likely be intentionally small. Every conversation, delay, success, and failure becomes an opportunity to learn.</p>
+          <p>Only after understanding these workflows would software begin to replace repetitive operational work.</p>
+        </div>
+        <ul class="border-t border-border">
+          {experiments.map((item) => (
+            <li class="border-b border-border py-4 text-text-muted">{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-20">
+      <h2 class="font-serif font-semibold" style="font-size: clamp(1.4rem, 3.4vw, 1.95rem);">What Success Looks Like</h2>
+      <p class="mt-4 max-w-[60ch] text-text-muted">I'll consider the idea worth pursuing if I can demonstrate that:</p>
       <ul class="mt-6 border-t border-border" style="max-width: var(--measure)">
-        {prove.map((p) => (
-          <li class="border-b border-border py-4 text-text-muted">{p}</li>
+        {success.map((item) => (
+          <li class="border-b border-border py-4 text-text-muted">{item}</li>
         ))}
       </ul>
-      <p class="mt-6 max-w-[60ch] text-text-muted">If those don't hold, the app doesn't matter. So I'd test them before writing a line of it.</p>
+    </section>
+
+    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
+      <div>
+        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Relationship with iyal</p>
+      </div>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>This project is one of the first practical explorations within <a href="/iyal" class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>.</p>
+        <p>While iyal studies the broader questions of coordination, trust, and agricultural systems, the Farmer Capital Network focuses on one specific challenge: enabling trusted seasonal capital between farmers and those willing to support them.</p>
+        <p>The lessons learned here may eventually shape a much broader platform, but this is where I'd like to begin.</p>
+      </div>
+    </section>
+
+    <section class="mt-20 border-t-2 border-stellar pt-10">
+      <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Current Status</p>
+      <h2 class="mt-4 max-w-[22ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.6rem, 4.5vw, 2.8rem);">Research and validation, conversation before software.</h2>
+      <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+        <p>This project is currently in the research and validation stage.</p>
+        <p>I'm actively learning from farmers, investors, agricultural professionals, researchers, and anyone working close to the ecosystem. If this problem resonates with you, or if you think I'm approaching it the wrong way, I'd genuinely like to hear your perspective.</p>
+        <p>The best ideas are usually shaped through conversation long before they're built.</p>
+        <a href="mailto:sundharesansk11@gmail.com?subject=Farmer%20Capital%20Network" class="inline-block font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.5rem, 4vw, 2.35rem);">Share your perspective <span class="text-accent">&rarr;</span></a>
+      </div>
     </section>
 
     <div class="mt-16" style="max-width: var(--measure)">

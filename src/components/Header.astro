@@ -5,9 +5,9 @@ interface Props { heroOverlay?: boolean; }
 const { heroOverlay = false } = Astro.props;
 const links = [
   { href: "/work", label: "Now / Work" },
-  { href: "/writing", label: "Writing" },
-  { href: "/reading", label: "Reading" },
   { href: "/to", label: "To" },
+  { href: "/reading", label: "Reading" },
+  { href: "/writing", label: "Writing" },
   { href: "/modelling", label: "Modelling" },
   { href: "/about", label: "About" },
 ];
@@ -22,7 +22,15 @@ const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted h
 <header class:list={[wrap, "w-full"]}>
   <div class="mx-auto max-w-[1100px] px-6 py-6">
     <div class="flex items-center justify-between gap-4 sm:justify-normal sm:gap-8">
-      <span class="sm:mr-auto"><Monogram tone={tone} /></span>
+      <div class="flex items-center gap-5 sm:mr-auto">
+        <Monogram tone={tone} />
+        <a
+          href="/iyal"
+          aria-current={isActive("/iyal") ? "page" : undefined}
+          class="font-script font-normal leading-none text-accent transition-colors hover:text-accent-hover"
+          style="font-size: clamp(2.15rem, 4.7vw, 2.9rem); text-shadow: 0.018em 0 currentColor;"
+        >iyal</a>
+      </div>
       <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
         {links.map((l) => (
           <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}

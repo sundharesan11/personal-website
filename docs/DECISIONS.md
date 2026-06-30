@@ -11,6 +11,21 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### Home frame-clipped fixed portrait, About editorial frame — 2026-07-01
+Home uses a frame-clipped fixed background on the portrait side of the hero: the image stays visually fixed while the page scrolls, but it is only painted inside the image frame, so forced scroll and page-edge pull do not reveal it behind unrelated content. The Home image side is wider than the text side and anchors the image to the right so the full portrait fits inside the frame. About intentionally keeps its earlier two-column editorial portrait frame instead of replicating the Home hero behavior, but uses the real image ratio so the full portrait is visible. Both use `/img/hero-crop.jpeg` and preserve the full image instead of zooming or cropping it. **Why:** the previous viewport-fixed layer leaked during pull/force scroll; the sticky replacement made the image scroll too much; the narrow frame clipped the portrait. **Rejected:** sharing the Home reveal on About, keeping the previous zoom/crop treatment, and keeping a permanent viewport-fixed image layer.
+
+### Codex guidance lives in AGENTS.md — 2026-07-01
+Codex should use the repo-root `AGENTS.md` as its durable project instruction file instead of a global user skill. **Why:** the guidance is project-specific, versioned with the site, and mirrors `CLAUDE.md` while adding Codex operating guardrails. **Rejected:** creating a global `~/.codex/skills` skill for this repo, which would not travel with the repository.
+
+### iyal standalone page and wordmark — 2026-07-01
+`iyal` is an active farmer capital network research/product flow, not a future-desk item. It gets a standalone `/iyal` page and a persistent top-header wordmark link beside `SK.`. The name is always rendered lowercase as `iyal`; the wordmark uses Sacramento and the existing blue accent/stellar colour. **Rejected:** keeping it only under `/to/agri-fintech`, listing it inside `/to`, or introducing a new brand colour outside the one-accent system.
+
+### Contact forms use Web3Forms — 2026-07-01
+The `/iyal` contribution section and `/contact` page use embedded Web3Forms static forms instead of mailto-only CTAs. `/iyal` is a field-note form for agriculture, capital, logistics, policy, and field operations context. `/contact` is the broad front door for work, writing, iyal, modelling, speaking, collaboration, and strange ideas worth discussing. Both read the access key from `PUBLIC_WEB3FORMS_ACCESS_KEY` so the key stays out of source. The footer headline routes to `/contact`; the main nav and cube stay unchanged for now. **Rejected:** pushing readers through prescribed prompt lists, adding a custom backend before validation needs one, or adding Contact to the already-dense masthead.
+
+### Brand blue: #0057B8 — 2026-07-01
+The site blue is now `#0057B8` for light and cream themes. Dark mode uses the AA-safe tint `#6BB6FF` so blue links, rules, and wordmarks remain readable on `#0B0B0C`. **Rejected:** the too-dark `#011F4B`, which did not visibly read as blue in the UI, and `#2552B4`, which leaned too violet.
+
 ### Stack: Astro + Tailwind, static — 2026-06-14
 Personal portfolio is content-heavy and low-interactivity. Astro ships near-zero JS by default and Tailwind keeps styling token-driven. **Rejected:** Next.js (heavier than needed for a static portfolio), plain HTML/CSS (loses content collections + componentization).
 
@@ -23,11 +38,11 @@ Projects and writing as Markdown/MDX, not hardcoded. Keeps content editable with
 ### Site sections / IA: Home + Work + Writing + About — 2026-06-14
 Writing/blog is **in at launch** (not deferred). Launch IA: Home, Work, Writing, About. **Rejected:** minimum-viable Home+Work+About only (Soumyo wants writing surfaced from day one). Contact remains a mailto in the footer, not its own section (see Open).
 
-### Accent color: blue `#1F54E6` (light) / `#5B86FF` (dark) — 2026-06-14
-Single accent. Originally `#2F6BFF` (light), but it measured 4.4988:1 on white — 0.001 below the WCAG AA 4.5:1 bar for body-size links, and AA is a stated project requirement. Darkened the light accent to `#1F54E6` (6.05:1) rather than introduce a second blue, keeping the "one accent" rule. Hover `#163CAE`. Dark accent `#5B86FF` (5.9:1) unchanged. The flow-field "stellar blue" streaks and the favicon use this same accent token. **Rejected:** keeping `#2F6BFF` (fails AA), or adding a separate darker link color (would mean two blues). Still swappable later if it reads too cool against real content.
+### Accent color: blue `#0057B8` — 2026-06-14, updated 2026-07-01
+Single accent. The active light/cream brand blue is now `#0057B8`. Dark mode uses the AA-safe tint `#6BB6FF` because `#0057B8` is not readable enough on `#0B0B0C`. **Rejected:** the previous brighter stellar blue, the too-dark `#011F4B`, violet-leaning `#2552B4`, and applying dark blues unchanged in dark mode where they fail contrast.
 
-### Dark mode at launch (toggle + system default) — 2026-06-14
-Ship light **and** dark from day one with a user toggle, defaulting to system preference and persisting choice. Tokens already define both palettes. **Rejected:** light-only-first, system-only-no-toggle. Implication: the toggle needs the one piece of client JS we'll allow, plus an inline no-flash script in `<head>`.
+### Dark mode at launch (toggle + light default) — 2026-06-14
+Ship light **and** dark from day one with a user toggle, defaulting to light on first visit and persisting explicit choices. Tokens already define both palettes. **Rejected:** system-default-first and system-only-no-toggle. Implication: the toggle needs the one piece of client JS we'll allow, plus an inline no-flash script in `<head>`.
 
 ### Build approach: shell-first with placeholders — 2026-06-14
 Scaffold structure, layout, and components against the design system using realistic placeholder content; swap in Soumyo's real bio/projects/copy later. **Rejected:** blocking the build on final content. Risk accepted: minor layout rework when real copy lands.
@@ -56,8 +71,8 @@ Supersedes the "minimal base + editorial layer" (cards) direction. New system: b
 ### Display type: Playfair Display (Didone) — 2026-06-14
 Playfair Display (already self-hosted) is the Didone display voice (name, section titles, work/post titles, drop caps); Inter for body/nav/kickers/datelines. **Rejected:** Bodoni Moda (truer Vogue hairlines) — Playfair is sufficient and already loaded; swappable later.
 
-### Stellar-blue spot colour — 2026-06-14
-`--color-stellar: #5B86FF` plus the AA accent `#1F54E6` (light) / `#5B86FF` (dark). The one editorial spot colour throughout: monogram dot, nº numbering, links, hairline rules, drop caps, datelines. Photographs carry all other colour.
+### Blue spot colour — 2026-06-14, updated 2026-07-01
+`--color-stellar: #0057B8` plus the AA accent `#0057B8` (light/cream) / `#6BB6FF` (dark). The one editorial spot colour throughout: monogram dot, nº numbering, links, hairline rules, drop caps, datelines. Photographs carry all other colour.
 
 ### Motion: CSS parallax (flow field removed) — 2026-06-14
 Replaced the flow-field canvas with pure-CSS parallax (`background-attachment: fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). Zero new JS (only the theme toggle remains). Static on mobile/iOS (acceptable). The flow-field code was removed (in git history).
@@ -81,7 +96,7 @@ A global ≡ overlay with a 3D CSS cube (6 faces = the 6 destinations), slow aut
 A reading-mode toggle scoped to Writing pages, a separate axis from the global light/dark theme. Evening = atmospheric dark-warm reading mode (deep `#0E0E12` ground, warm paper text, serif body, larger blue drop cap) via `[data-edition="evening"] .writing-page` overrides + a no-flash inline read. `EditionToggle.astro` + `src/scripts/edition.ts`. Third piece of client JS (after theme toggle + cube).
 
 ### Third theme: cream (warm day mode) — 2026-06-15
-Added a third theme alongside light + dark: "cream" — a warm beige/day palette (ground #F3EBDD, warm dark-brown text #3B342B, warm hairlines) inspired by a soft warm reference illustration. Keeps the stellar-blue accent for thread consistency. Implemented via a `.theme-cream` class (the `.dark` class stays so Tailwind `dark:` variants keep working). The theme control is now a 3-state cycle (light → dark → cream). `data-edition` (Modern/Evening on Writing) remains a separate axis.
+Added a third theme alongside light + dark: "cream" — a warm beige/day palette (ground #F3EBDD, warm dark-brown text #3B342B, warm hairlines) inspired by a soft warm reference illustration. Keeps the stellar-blue accent for thread consistency. Implemented via a `.theme-cream` class (the `.dark` class stays so Tailwind `dark:` variants keep working). The theme control is now a 3-state cycle (light → cream → dark). `data-edition` (Modern/Evening on Writing) remains a separate axis.
 
 ---
 

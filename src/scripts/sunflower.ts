@@ -11,7 +11,7 @@ interface RGB { r: number; g: number; b: number; }
 function hexToRgb(hex: string): RGB {
   const h = hex.trim().replace("#", "");
   const v = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
-  const n = parseInt(v || "5b86ff", 16);
+  const n = parseInt(v || "0057b8", 16);
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
@@ -22,9 +22,9 @@ export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number 
   const N = opts.count ?? 260;
   let w = 0, h = 0, cx = 0, cy = 0, scale = 0, rot = 0, t = 0, raf = 0, running = false;
   const cssVar = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n);
-  let accent = hexToRgb(cssVar("--color-accent") || "#5B86FF");
+  let accent = hexToRgb(cssVar("--color-accent") || "#0057B8");
   let muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2");
-  const readColors = () => { accent = hexToRgb(cssVar("--color-accent") || "#5B86FF"); muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2"); };
+  const readColors = () => { accent = hexToRgb(cssVar("--color-accent") || "#0057B8"); muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2"); };
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.getBoundingClientRect();

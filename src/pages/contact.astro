@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EditorialField from "../components/EditorialField.astro";
+
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+---
+<BaseLayout
+  title="Contact · Sundharesan Kumaresan"
+  description="Contact Sundharesan Kumaresan for AI work, writing, iyal, modelling, speaking, collaboration, or a strange idea worth discussing."
+>
+  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
+    <header class="border-t border-border pt-5">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Contact</span>
+        <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">Work · writing · strange ideas</span>
+      </div>
+    </header>
+
+    <section class="mt-10 grid gap-14 md:grid-cols-[0.82fr_1.18fr] md:gap-20">
+      <div data-reveal>
+        <h1 class="font-serif font-semibold leading-[0.92]" style="font-size: clamp(2.8rem, 9vw, 6rem);">Send the version with a pulse.</h1>
+        <p class="mt-8 max-w-[42ch] text-lg leading-relaxed text-text-muted">Work, writing, <span class="font-script text-3xl leading-none text-accent">iyal</span>, modelling, speaking, or a strange idea with a pulse. Give me enough context to know whether I can help. I will do the decent thing and not make you guess what that means.</p>
+      </div>
+
+      <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6" data-reveal>
+        <input type="hidden" name="access_key" value={web3formsAccessKey} />
+        <input type="hidden" name="subject" value="Website contact" />
+        <input type="hidden" name="from_name" value="Sundharesan website" />
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <div class="grid gap-8 sm:grid-cols-2">
+          <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Human name, preferably. Brand name also tolerated." />
+          <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where should I reply?" />
+        </div>
+
+        <div class="mt-8">
+          <EditorialField
+            required
+            type="select"
+            label="What is this about?"
+            name="inquiry_type"
+            placeholder="Pick the closest door"
+            options={[
+              { value: "work_ai_build", label: "Work / AI build" },
+              { value: "writing", label: "Writing" },
+              { value: "iyal", label: "iyal" },
+              { value: "modelling", label: "Modelling" },
+              { value: "speaking_collaboration", label: "Speaking / collaboration" },
+              { value: "something_else", label: "Something else" },
+            ]}
+          />
+        </div>
+
+        <div class="mt-8">
+          <EditorialField
+            required
+            type="textarea"
+            label="Message"
+            name="message"
+            rows={8}
+            placeholder="Give me the useful version: context, ask, timeline, and what would make this worth discussing."
+          />
+        </div>
+
+        <button type="submit" class="mt-10 font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.45rem, 3.4vw, 2.25rem);">Send note <span class="text-accent">&rarr;</span></button>
+      </form>
+    </section>
+  </main>
+</BaseLayout>

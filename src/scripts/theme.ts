@@ -1,11 +1,11 @@
 export type Theme = "light" | "dark" | "cream";
 export const STORAGE_KEY = "theme";
-const THEMES: Theme[] = ["light", "dark", "cream"];
+const THEMES: Theme[] = ["light", "cream", "dark"];
 
-/** Pure resolver: stored preference wins (light/dark/cream), else fall back to system. */
-export function resolveTheme(stored: string | null, systemPrefersDark: boolean): Theme {
+/** Pure resolver: stored preference wins (light/dark/cream), else use the site default. */
+export function resolveTheme(stored: string | null, _systemPrefersDark: boolean): Theme {
   if (stored === "light" || stored === "dark" || stored === "cream") return stored;
-  return systemPrefersDark ? "dark" : "light";
+  return "light";
 }
 
 /** Apply a theme to the document and persist the explicit choice. */
@@ -24,7 +24,7 @@ export function currentTheme(): Theme {
   return "light";
 }
 
-/** Next theme in the cycle light -> dark -> cream -> light. */
+/** Next theme in the cycle light -> cream -> dark -> light. */
 export function nextTheme(t: Theme): Theme {
   return THEMES[(THEMES.indexOf(t) + 1) % THEMES.length];
 }

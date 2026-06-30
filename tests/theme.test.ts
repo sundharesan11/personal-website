@@ -7,19 +7,19 @@ describe("resolveTheme", () => {
     expect(resolveTheme("light", false)).toBe("light");
     expect(resolveTheme("cream", true)).toBe("cream");
   });
-  it("falls back to system when no stored preference", () => {
-    expect(resolveTheme(null, true)).toBe("dark");
+  it("uses light as the default when no stored preference exists", () => {
+    expect(resolveTheme(null, true)).toBe("light");
     expect(resolveTheme(null, false)).toBe("light");
   });
-  it("ignores invalid stored values and uses system", () => {
-    expect(resolveTheme("purple", true)).toBe("dark");
+  it("ignores invalid stored values and uses light", () => {
+    expect(resolveTheme("purple", true)).toBe("light");
   });
 });
 
 describe("nextTheme", () => {
-  it("cycles light -> dark -> cream -> light", () => {
-    expect(nextTheme("light")).toBe("dark");
-    expect(nextTheme("dark")).toBe("cream");
-    expect(nextTheme("cream")).toBe("light");
+  it("cycles light -> cream -> dark -> light", () => {
+    expect(nextTheme("light")).toBe("cream");
+    expect(nextTheme("cream")).toBe("dark");
+    expect(nextTheme("dark")).toBe("light");
   });
 });

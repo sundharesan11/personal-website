@@ -1,0 +1,59 @@
+---
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  label: string;
+  name: string;
+  placeholder: string;
+  type?: "text" | "email" | "select" | "textarea";
+  autocomplete?: string;
+  required?: boolean;
+  rows?: number;
+  options?: Option[];
+}
+
+const {
+  label,
+  name,
+  placeholder,
+  type = "text",
+  autocomplete,
+  required = false,
+  rows = 6,
+  options = [],
+} = Astro.props;
+
+const fieldClass =
+  "mt-3 w-full border-b border-border bg-transparent py-3 text-text outline-none transition-colors placeholder:text-text-muted focus:border-accent";
+---
+<label class="block">
+  <span class="font-sans text-xs uppercase tracking-[0.18em] text-accent">{label}</span>
+  {type === "textarea" ? (
+    <textarea
+      required={required}
+      name={name}
+      rows={rows}
+      placeholder={placeholder}
+      class:list={[fieldClass, "resize-y"]}
+    ></textarea>
+  ) : type === "select" ? (
+    <select required={required} name={name} class={fieldClass}>
+      <option value="" disabled selected>{placeholder}</option>
+      {options.map((option) => (
+        <option value={option.value}>{option.label}</option>
+      ))}
+    </select>
+  ) : (
+    <input
+      required={required}
+      type={type}
+      name={name}
+      autocomplete={autocomplete}
+      placeholder={placeholder}
+      class={fieldClass}
+    />
+  )}
+</label>

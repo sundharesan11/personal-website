@@ -26,10 +26,10 @@ Ink (black/white, theme-dependent) + full-colour photography + a single stellar-
 | `text`           | `#16161A`   | `#EDEDED`   | primary text |
 | `text-muted`     | `#6B6B73`   | `#9A9AA2`   | secondary text, captions, datelines |
 | `border`         | `#E6E6E3`   | `#26262A`   | hairline rules only |
-| `accent`         | `#1F54E6`   | `#5B86FF`   | stellar-blue spot colour (AA) |
-| `accent-hover`   | `#163CAE`   | `#7CA0FF`   | hover state |
+| `accent`         | `#0057B8`   | `#6BB6FF`   | blue spot colour (AA) |
+| `accent-hover`   | `#00438F`   | `#9CCFFF`   | hover state |
 
-> `--color-stellar: #5B86FF` is the spot colour name; the AA-safe values above are `#1F54E6` (light, 6.05:1) and `#5B86FF` (dark, 5.9:1). Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent (stellar) never as a large fill — it is a highlight, not a background.
+> `--color-stellar: #0057B8` is the spot colour name in light and cream themes. Dark mode uses `#6BB6FF`, an AA-safe tint of the same blue family, because `#0057B8` is too dark on the dark background. Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent (stellar) never as a large fill — it is a highlight, not a background.
 
 ## Typography
 

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ParallaxHero from "../components/ParallaxHero.astro";
+import FixedPhotoHero from "../components/FixedPhotoHero.astro";
 
 const contents = [
   { href: "/work", title: "Now / Work", teaser: "The day job, minus the gloss: AI products, built end to end." },
@@ -12,11 +12,17 @@ const contents = [
 ];
 ---
 <BaseLayout title="Sundharesan Kumaresan">
-  <ParallaxHero
-    image="/img/hero-crop.png"
-    kicker="AI engineer · writer · Oogway Labs"
-  />
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6">
+  <FixedPhotoHero
+    image="/img/hero-crop.jpeg"
+    alt="Sundharesan Kumaresan"
+    fit="contain"
+    objectPosition="right center"
+  >
+    <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">AI engineer &middot; writer &middot; Oogway Labs</p>
+    <h1 class="mt-5 font-serif font-semibold leading-[0.92] text-text" style="font-size: clamp(2rem, 5vw, 4rem);">Sundharesan<br />Kumaresan</h1>
+  </FixedPhotoHero>
+  <main id="main-content" class="relative z-10 bg-bg">
+    <div class="mx-auto max-w-[1100px] px-6">
 
     <section class="py-20 md:py-28">
       <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">From the desk</p>
@@ -47,5 +53,6 @@ const contents = [
         ))}
       </div>
     </section>
+    </div>
   </main>
 </BaseLayout>

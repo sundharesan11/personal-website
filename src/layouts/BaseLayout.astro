@@ -41,7 +41,7 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
         try {
           const s = localStorage.getItem("theme");
           const el = document.documentElement;
-          const t = (s === "light" || s === "dark" || s === "cream") ? s : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          const t = (s === "light" || s === "dark" || s === "cream") ? s : "light";
           el.classList.toggle("dark", t === "dark");
           el.classList.toggle("theme-cream", t === "cream");
         } catch (_) {}
