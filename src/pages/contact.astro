@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import EditorialField from "../components/EditorialField.astro";
 
 const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 ---
 <BaseLayout
   title="Contact · Sundharesan Kumaresan"
@@ -10,60 +11,69 @@ const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 >
   <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
     <header class="border-t border-border pt-5">
-      <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Contact</span>
-        <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">Work · writing · strange ideas</span>
+      <div class="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-4 sm:gap-y-1">
+        <span class="label-fit font-sans text-xs uppercase tracking-[0.18em] text-text-muted">Contact</span>
+        <span class="label-fit font-sans text-xs uppercase tracking-[0.16em] text-accent">Work · writing · strange ideas</span>
       </div>
     </header>
 
     <section class="mt-10 grid gap-14 md:grid-cols-[0.82fr_1.18fr] md:gap-20">
       <div data-reveal>
-        <h1 class="font-serif font-semibold leading-[0.92]" style="font-size: clamp(2.8rem, 9vw, 6rem);">Send the version with a pulse.</h1>
-        <p class="mt-8 max-w-[42ch] text-lg leading-relaxed text-text-muted">Work, writing, <span class="font-script text-3xl leading-none text-accent">iyal</span>, modelling, speaking, or a strange idea with a pulse. Give me enough context to know whether I can help. I will do the decent thing and not make you guess what that means.</p>
+        <h1 class="display-fit font-serif font-semibold leading-[0.92]" style="font-size: clamp(2.35rem, 9vw, 6rem);">Send the version with a pulse.</h1>
+        <p class="text-fit mt-8 max-w-[42ch] text-lg leading-relaxed text-text-muted">Work, writing, <span class="font-script text-3xl leading-none text-accent">iyal</span>, modelling, speaking, or a strange idea with a pulse. Give me enough context to know whether I can help. I will do the decent thing and not make you guess what that means.</p>
       </div>
 
-      <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6" data-reveal>
-        <input type="hidden" name="access_key" value={web3formsAccessKey} />
-        <input type="hidden" name="subject" value="Website contact" />
-        <input type="hidden" name="from_name" value="Sundharesan website" />
-        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+      {hasWeb3FormsKey ? (
+        <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6" data-reveal>
+          <input type="hidden" name="access_key" value={web3formsAccessKey} />
+          <input type="hidden" name="subject" value="Website contact" />
+          <input type="hidden" name="from_name" value="Sundharesan website" />
+          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
-        <div class="grid gap-8 sm:grid-cols-2">
-          <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Human name, preferably. Brand name also tolerated." />
-          <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where should I reply?" />
-        </div>
+          <div class="grid gap-8 sm:grid-cols-2">
+            <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Human name, preferably. Brand name also tolerated." />
+            <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where should I reply?" />
+          </div>
 
-        <div class="mt-8">
-          <EditorialField
-            required
-            type="select"
-            label="What is this about?"
-            name="inquiry_type"
-            placeholder="Pick the closest door"
-            options={[
-              { value: "work_ai_build", label: "Work / AI build" },
-              { value: "writing", label: "Writing" },
-              { value: "iyal", label: "iyal" },
-              { value: "modelling", label: "Modelling" },
-              { value: "speaking_collaboration", label: "Speaking / collaboration" },
-              { value: "something_else", label: "Something else" },
-            ]}
-          />
-        </div>
+          <div class="mt-8">
+            <EditorialField
+              required
+              type="select"
+              label="What is this about?"
+              name="inquiry_type"
+              placeholder="Pick the closest door"
+              options={[
+                { value: "work_ai_build", label: "Work / AI build" },
+                { value: "writing", label: "Writing" },
+                { value: "iyal", label: "iyal" },
+                { value: "modelling", label: "Modelling" },
+                { value: "speaking_collaboration", label: "Speaking / collaboration" },
+                { value: "something_else", label: "Something else" },
+              ]}
+            />
+          </div>
 
-        <div class="mt-8">
-          <EditorialField
-            required
-            type="textarea"
-            label="Message"
-            name="message"
-            rows={8}
-            placeholder="Give me the useful version: context, ask, timeline, and what would make this worth discussing."
-          />
-        </div>
+          <div class="mt-8">
+            <EditorialField
+              required
+              type="textarea"
+              label="Message"
+              name="message"
+              rows={8}
+              placeholder="Give me the useful version: context, ask, timeline, and what would make this worth discussing."
+            />
+          </div>
 
-        <button type="submit" class="mt-10 font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.45rem, 3.4vw, 2.25rem);">Send note <span class="text-accent">&rarr;</span></button>
-      </form>
+          <p class="text-fit mt-8 max-w-[52ch] text-sm leading-relaxed text-text-muted">I usually reply by email if there is a real thread to pull. If the form misbehaves, send the same note to <a href="mailto:sundharesansk11@gmail.com" class="u-underline text-text hover:text-accent">sundharesansk11@gmail.com</a>.</p>
+          <button type="submit" class="mt-8 font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.45rem, 3.4vw, 2.25rem);">Send note <span class="text-accent">&rarr;</span></button>
+        </form>
+      ) : (
+        <section class="border-t border-border pt-6" data-reveal>
+          <p class="label-fit font-sans text-xs uppercase tracking-[0.18em] text-accent">Form offline</p>
+          <p class="text-fit mt-5 max-w-[54ch] text-lg leading-relaxed text-text-muted">The static form needs a Web3Forms key before it can send properly. For now, use the honest door: email me with the context, ask, timeline, and what would make this worth discussing.</p>
+          <a href="mailto:sundharesansk11@gmail.com?subject=Website%20contact" class="mt-8 inline-block font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.45rem, 3.4vw, 2.25rem);">Email Sundharesan <span class="text-accent">&rarr;</span></a>
+        </section>
+      )}
     </section>
   </main>
 </BaseLayout>

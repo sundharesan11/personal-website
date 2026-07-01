@@ -3,6 +3,7 @@ interface Props {
   image: string;
   alt: string;
   fit?: "cover" | "contain";
+  backgroundSize?: string;
   objectPosition?: string;
 }
 
@@ -10,20 +11,22 @@ const {
   image,
   alt,
   fit = "cover",
+  backgroundSize,
   objectPosition = "center center",
 } = Astro.props;
 
-const backgroundSize = fit === "contain" ? "contain" : "cover";
+const resolvedBackgroundSize = backgroundSize ?? (fit === "contain" ? "contain" : "cover");
 ---
-<section class="relative isolate bg-bg md:grid md:min-h-[90vh] md:grid-cols-[38vw_62vw]">
-  <div class="order-2 flex flex-col justify-center bg-bg px-6 py-12 sm:px-10 md:order-1 md:min-h-[90vh] md:py-0 md:pl-[max(1.5rem,8vw)] md:pr-12">
+<section class="relative isolate bg-bg md:grid md:min-h-[96vh] md:grid-cols-[38vw_62vw]">
+  <div class="order-2 flex flex-col justify-center bg-bg px-6 py-12 sm:px-10 md:order-1 md:min-h-[96vh] md:py-0 md:pl-[max(1.5rem,8vw)] md:pr-12">
     <slot />
   </div>
   <div
-    class="order-1 h-[58vh] overflow-hidden bg-bg bg-no-repeat md:order-2 md:h-auto md:bg-fixed"
-    style={`background-image: url('${image}'); background-size: ${backgroundSize}; background-position: ${objectPosition};`}
+    class="order-1 h-[70vh] overflow-hidden bg-bg bg-no-repeat md:order-2 md:h-auto md:bg-fixed"
+    style={`background-image: url('${image}'); background-size: ${resolvedBackgroundSize}; background-position: ${objectPosition};`}
     role="img"
     aria-label={alt}
+    data-home-photo-frame
   >
   </div>
 </section>

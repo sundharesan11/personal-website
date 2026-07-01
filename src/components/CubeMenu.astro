@@ -8,7 +8,7 @@ const faces = [
   { href: "/modelling", label: "Modelling", face: "f-top" },
   { href: "/about", label: "About", face: "f-bottom" },
 ];
-const navLinks = [{ href: "/", label: "Home" }, ...faces];
+const navLinks = [{ href: "/", label: "Home" }, ...faces, { href: "/contact", label: "Contact" }];
 const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 ---
 <div id="cube-menu" class="hidden fixed inset-0 z-[100]">
@@ -30,7 +30,7 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
   </aside>
 </div>
 <style>
-  .cube-panel { transform: translateX(100%); transition: transform .42s cubic-bezier(.2,.7,.2,1); box-shadow: -24px 0 60px rgba(0,0,0,0.5); }
+  .cube-panel { transform: translateX(100%); transition: transform .42s cubic-bezier(.2,.7,.2,1); border-left: 1px solid color-mix(in srgb, var(--color-stellar) 36%, transparent); }
   #cube-menu.is-open .cube-panel { transform: none; }
   .cube-scene { perspective: 900px; width: 180px; height: 180px; cursor: grab; }
   .cube-scene:active { cursor: grabbing; }

@@ -13,31 +13,34 @@ const links = [
 ];
 const path = Astro.url.pathname;
 const isActive = (href: string) => path.startsWith(href);
+const deferUntilHomeImageHidden = path === "/";
 const tone = heroOverlay ? "light" : "ink";
-const wrap = heroOverlay ? "absolute inset-x-0 top-0 z-50" : "sticky top-0 z-50 bg-bg";
+const wrap = deferUntilHomeImageHidden || heroOverlay ? "fixed inset-x-0 top-0 z-50 bg-transparent" : "sticky top-0 z-50 bg-transparent";
 const linkBase = heroOverlay ? "text-white/75 hover:text-white" : "text-text-muted hover:text-text";
 const linkActive = heroOverlay ? "text-white" : "text-text";
 const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted hover:text-text";
 ---
-<header class:list={[wrap, "w-full"]}>
-  <div class="mx-auto max-w-[1100px] px-6 py-6">
-    <div class="flex items-center justify-between gap-4 sm:justify-normal sm:gap-8">
-      <div class="flex items-center gap-5 sm:mr-auto">
-        <Monogram tone={tone} />
+<header class:list={[wrap, "site-header w-full"]} data-deferred-header={deferUntilHomeImageHidden ? "home-photo" : undefined}>
+  <div class="mx-auto w-[calc(100%-2rem)] max-w-[1600px] pt-2 pb-0 sm:w-[calc(100%-3rem)] sm:pt-3 sm:pb-0">
+    <div class:list={["glass-topbar flex min-w-0 items-center justify-between gap-3 px-4 py-2 sm:justify-normal sm:gap-7 sm:px-5", heroOverlay && "glass-topbar--overlay"]}>
+      <div class="flex min-w-0 items-center gap-4 sm:mr-auto sm:gap-5">
+        <Monogram tone={tone} size="1.45rem" />
         <a
           href="/iyal"
+          aria-label="iyal, Sundharesan's farmer capital network research"
+          title="iyal, farmer capital network research"
           aria-current={isActive("/iyal") ? "page" : undefined}
           class="font-script font-normal leading-none text-accent transition-colors hover:text-accent-hover"
-          style="font-size: clamp(2.15rem, 4.7vw, 2.9rem); text-shadow: 0.018em 0 currentColor;"
+          style="font-size: clamp(1.55rem, 3.9vw, 2.35rem); text-shadow: 0.032em 0 currentColor;"
         >iyal</a>
       </div>
       <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
         {links.map((l) => (
           <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
-             class:list={["text-xs uppercase tracking-[0.16em] transition-colors u-draw", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
+             class:list={["text-xs font-semibold uppercase tracking-[0.18em] transition-colors u-draw", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
         ))}
       </nav>
-      <div class="flex items-center gap-3">
+      <div class="flex shrink-0 items-center gap-2 sm:gap-3">
         <ThemeToggle />
         <button id="cube-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="cube-menu" aria-label="Open menu" class:list={["rounded-md border border-border p-2 transition-colors", ctrl]}>
           <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -46,3 +49,36 @@ const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted h
     </div>
   </div>
 </header>
+{deferUntilHomeImageHidden && (
+  <script>
+    const header = document.querySelector("[data-deferred-header='home-photo']");
+
+    function initDeferredHeader() {
+      if (!(header instanceof HTMLElement)) return;
+
+      let ticking = false;
+      const update = () => {
+        const photo = document.querySelector("[data-home-photo-frame]");
+        const shouldShow = !(photo instanceof HTMLElement) || photo.getBoundingClientRect().bottom <= 0;
+        header.classList.toggle("is-visible", shouldShow);
+        ticking = false;
+      };
+
+      header.classList.add("is-deferred-ready");
+      update();
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      window.addEventListener("resize", update, { passive: true });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initDeferredHeader, { once: true });
+    } else {
+      initDeferredHeader();
+    }
+  </script>
+)}

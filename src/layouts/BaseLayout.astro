@@ -10,7 +10,7 @@ interface Props {
   description?: string;
   heroOverlay?: boolean;
 }
-const { title, description = "Sundharesan Kumaresan · designer & builder", heroOverlay = false } = Astro.props;
+const { title, description = "Sundharesan Kumaresan · AI engineer, writer, and founder-in-waiting", heroOverlay = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://example.com").href;
 const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").href;
 ---

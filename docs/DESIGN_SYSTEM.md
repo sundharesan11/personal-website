@@ -31,6 +31,8 @@ Ink (black/white, theme-dependent) + full-colour photography + a single stellar-
 
 > `--color-stellar: #0057B8` is the spot colour name in light and cream themes. Dark mode uses `#6BB6FF`, an AA-safe tint of the same blue family, because `#0057B8` is too dark on the dark background. Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent (stellar) never as a large fill — it is a highlight, not a background.
 
+Cream theme keeps the same roles with warmer neutrals; `text-muted` is `#685E50` so small editorial labels clear AA contrast on `#F3EBDD`.
+
 ## Typography
 
 - **Display (Didone):** Playfair Display via `--font-serif` — the display voice for the name, section titles, work/post titles, and drop caps. Used at **extreme `clamp()` sizes**:
@@ -63,19 +65,20 @@ Section vertical rhythm: 96–128px between major sections on desktop, 48–64px
 
 - **No rounded corners anywhere** in the editorial system (no `rounded-*` on photos, sections, or any UI chrome).
 - **No shadows.** The system is flat; separation comes from whitespace and hairline rules.
-- Exception: interactive UI micro-elements (the theme toggle button) may use a minimal radius if the component demands it.
+- Exception: interactive UI micro-elements and the approved macOS-style glass topbar may use radius. The topbar is the only sanctioned floating pill.
 
 ## Motion
 
-- CSS parallax (`background-attachment: fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). Static on mobile/iOS (acceptable).
+- CSS parallax (`background-attachment: fixed`) on full-bleed photo bands where used. Static on mobile/iOS is acceptable.
 - Subtle micro-interactions: 150–250ms, ease-out. Fade/translate a few px on entrance.
 - Respect `prefers-reduced-motion` — disable non-essential motion.
-- **No canvas / JS animation** (flow field removed; only client JS remaining is the theme toggle).
+- Client JS is allowed only for narrow enhancements already in use: theme toggle, rotating cube menu, progressive reveal/scroll progress, and the sunflower interaction. Content must remain visible if JavaScript fails.
 
 ## Vogue editorial patterns
 
 - **Full-bleed photo bands:** `-mx-[50vw] w-screen` with `bg-fixed` (CSS parallax). No borders, no rounded corners, no shadows. Full-colour photograph fills the band.
 - **Monogram (SK.):** Playfair Display, flush-left; the trailing dot is stellar-blue (`text-accent`). Used in the site header/brand.
+- **Glass topbar:** The site header is a floating macOS-style glass pill over a transparent sticky/overlay header. It uses blur, translucency, and a hairline border, with no heavy shadow.
 - **Parallax hero:** Full-bleed, full-viewport photo band with the name at extreme `clamp()` size in Playfair over a dark scrim, plus kicker eyebrow and dateline.
 - **Work entry:** Alternating full-bleed parallax photo + serif title at `clamp(2rem, 4.5vw, 3.4rem)` + stellar-blue `nº` index number + dateline + short description. No cards or borders.
 - **Writing contents list:** Flush-left list entries; stellar-blue `nº` index number; Playfair serif title; hairline `border` rule between items. No cards.
@@ -85,7 +88,7 @@ Section vertical rhythm: 96–128px between major sections on desktop, 48–64px
 - **Dateline:** Dates rendered small, uppercase, `tracking-[0.12em]`, `text-muted`, Inter.
 - **Hairline rules:** `border` token as a 1px divider; used sparingly under section headings and between writing entries.
 - **Links:** Underline only (no box); stellar-blue accent (`text-accent underline`). Visible focus ring always.
-- **Editorial footer:** Bold serif "Get in touch →" mailto link; no contact form (needs backend — deferred).
+- **Editorial footer:** Bold serif "Get in touch →" route to `/contact`. Contact and iyal use Web3Forms when configured and show a mail fallback when no `PUBLIC_WEB3FORMS_ACCESS_KEY` is present.
 
 ## Removed patterns
 

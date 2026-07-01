@@ -9,13 +9,15 @@ describe("Web3Forms contact surfaces", () => {
 
     expect(iyal).toContain('action="https://api.web3forms.com/submit"');
     expect(iyal).toContain('name="subject" value="iyal field note"');
-    expect(iyal).toContain("Your role in the ecosystem");
-    expect(iyal).toContain("Farmer, investor, buyer, logistics, policy, researcher, operator...");
+    expect(iyal).toContain("Your role in the season");
+    expect(iyal).toContain("Farmer, lender, buyer, transporter, policy, researcher, operator...");
     expect(iyal).toContain("Where are you working from?");
     expect(iyal).toContain("Village, district, state, country, or the market you know best");
     expect(iyal).toContain("What are you seeing on the ground?");
     expect(iyal).toContain("Tell me what breaks, what works, who is trusted, or what I am probably missing.");
     expect(iyal).toContain("Can I follow up?");
+    expect(iyal).toContain("I read these as field notes, not leads in a funnel.");
+    expect(iyal).toContain("Email field note");
     expect(iyal).toContain("Send field note");
   });
 
@@ -27,6 +29,8 @@ describe("Web3Forms contact surfaces", () => {
     expect(contact).toContain("What is this about?");
     expect(contact).toContain("Work / AI build");
     expect(contact).toContain("Give me the useful version: context, ask, timeline, and what would make this worth discussing.");
+    expect(contact).toContain("I usually reply by email if there is a real thread to pull.");
+    expect(contact).toContain("Email Sundharesan");
     expect(contact).toContain("Send note");
   });
 

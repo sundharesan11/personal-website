@@ -4,7 +4,7 @@ Root context for Codex and other coding agents working on this project. Keep thi
 
 ## What this is
 
-A personal portfolio site for Sundharesan Kumaresan. Aesthetic: **Vogue/magazine editorial** — black-and-white Didone display type at extreme scale, full-bleed full-colour photography, no boxes or cards, asymmetric flush-left composition, and a single **stellar-blue** spot colour threaded throughout (monogram dot, index numbers, links, rules, drop caps). Light + dark. Content-first. Structured as a publication: Home (threshold) · Now/Work (role feature) · Writing (four lenses + a being-written desk, with a Modern↔Evening edition toggle) · Reading (scatter gallery) · Ambitions (a 'forming' op-ed) · About (long-read), with Contact in the footer and a rotating-cube ≡ menu. Owner: Sundharesan Kumaresan, AI engineer at Oogway Labs (employer, not the masthead).
+A personal portfolio site for Sundharesan Kumaresan. Aesthetic: **Vogue/magazine editorial** — black-and-white Didone display type at extreme scale, full-bleed full-colour photography, no boxes or cards, asymmetric flush-left composition, and a single **stellar-blue** spot colour threaded throughout (monogram dot, index numbers, links, rules, drop caps). Light + dark. Content-first. Structured as a publication: Home (threshold) · Now/Work (role feature) · Writing (three live lenses + a being-written desk, with a Modern↔Evening edition toggle) · Reading (scatter gallery) · To (future desk, with `/ambitions` as an alias) · About (long-read), with Contact in the footer/cube menu and a rotating-cube ≡ menu. Owner: Sundharesan Kumaresan, AI engineer at Oogway Labs (employer, not the masthead).
 
 ## Stack
 

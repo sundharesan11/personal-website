@@ -1,4 +1,5 @@
 export function initMotion(): void {
+  document.documentElement.classList.add("js-reveal");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal], main section"));
   els.forEach((el) => el.setAttribute("data-reveal", ""));

@@ -9,6 +9,12 @@ const contactLinks = (source: string) =>
   }));
 
 describe("contact link sets", () => {
+  it("keeps Contact reachable from the global cube menu", () => {
+    const cube = read("../src/components/CubeMenu.astro");
+
+    expect(cube).toContain('{ href: "/contact", label: "Contact" }');
+  });
+
   it("keeps the shared footer to Email, X, LinkedIn", () => {
     const footer = read("../src/components/Footer.astro");
 

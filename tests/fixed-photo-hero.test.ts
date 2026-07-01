@@ -10,10 +10,13 @@ describe("FixedPhotoHero", () => {
     expect(source).toContain("md:bg-fixed");
     expect(source).toContain("background-image");
     expect(source).toContain("md:grid-cols-[38vw_62vw]");
+    expect(source).toContain("md:min-h-[96vh]");
+    expect(source).toContain("h-[70vh]");
     expect(source).toContain("overflow-hidden");
     expect(source).toContain("bg-bg");
     expect(source).toContain("background-size");
     expect(source).toContain("background-position");
+    expect(source).toContain("data-home-photo-frame");
     expect(source).not.toContain("fixed inset-x-0 top-0");
   });
 
@@ -23,7 +26,8 @@ describe("FixedPhotoHero", () => {
     expect(home).toContain('import FixedPhotoHero from "../components/FixedPhotoHero.astro"');
     expect(home).toContain('image="/img/hero-crop.jpeg"');
     expect(home).toContain('fit="contain"');
-    expect(home).toContain('objectPosition="right center"');
+    expect(home).toContain('backgroundSize="auto calc(100% - 28px)"');
+    expect(home).toContain('objectPosition="right 18px"');
   });
 
   it("keeps About on the original inline portrait frame with the placeholder crop", () => {
