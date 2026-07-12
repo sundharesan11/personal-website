@@ -1,120 +1,108 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import NextPageLink from "../../components/NextPageLink.astro";
 
 const experiments = [
   "One geography",
   "A trusted local partner",
   "A small group of farmers",
-  "A handful of investors",
+  "A handful of investors and backers",
+  "Rural workers and local operators in the loop",
   "Manual coordination using simple tools",
 ];
 
 const success = [
-  "Farmers feel supported rather than financially trapped.",
-  "Investors gain enough transparency to participate with confidence.",
-  "Local relationships become stronger instead of being replaced.",
-  "Capital reaches farmers when it is actually needed.",
-  "Repayment follows real agricultural cash flows.",
-  "Trust grows through consistent execution rather than promises.",
+  "Farmers feel backed, not financially trapped.",
+  "Investors can see where the money went without needing a translator.",
+  "Rural workers and local operators know what is expected, when, and by whom.",
+  "Local relationships get stronger instead of being replaced.",
+  "Capital lands in the week it's needed, not the quarter after.",
+  "Repayment follows the harvest, not a spreadsheet's imagination.",
+  "Trust compounds because people keep showing up.",
 ];
 ---
 <BaseLayout
-  title="Farmer Capital Network · Sundharesan Kumaresan"
-  description="A trusted way to coordinate capital, people, and execution around a farming season."
+  title="Season Trust · Sundharesan Kumaresan"
+  description="A practical trust layer for farmers, buyers, investors, workers, local operators, and logistics moving one season well."
 >
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
+  <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
+    <a href="/to" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-8">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">A venture</p>
-      <h1 class="mt-3 max-w-[12ch] font-serif font-semibold leading-[0.98]" style="font-size: clamp(2.4rem, 7.5vw, 5.2rem);">Farmer Capital Network</h1>
-      <p class="mt-8 max-w-[24ch] font-serif font-semibold leading-[1.08]" style="font-size: clamp(1.45rem, 3.8vw, 2.35rem);">A trusted way to coordinate capital, people, and execution around a farming season.</p>
-      <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">A venture</p>
+      <h1 data-reveal class="reveal-tracking mt-3 max-w-[12ch] font-serif text-display-page font-semibold leading-[0.98]">Season Trust</h1>
+      <p data-reveal class="reveal-scale mt-8 max-w-[25ch] font-serif text-statement font-semibold leading-[1.08]">A practical trust layer for moving one season well.</p>
+      <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
         <p>Agriculture isn't short of hardworking people. It is short of coordination.</p>
-        <p>A farmer may need capital before sowing, quality inputs during the season, reliable logistics at harvest, and access to the right market at the right time. Investors, on the other hand, want to support agriculture but often lack visibility into where their money goes, how risks are managed, and who they can trust.</p>
-        <p>I'm interested in exploring whether these two worlds can be connected through transparency, local relationships, and carefully designed workflows rather than another lending platform.</p>
+        <p>A farmer needs capital before sowing, rural workers need steady work and clear instructions, local operators need to know who is doing what, a truck has to actually show up at harvest, and the buyer still has to answer the phone. Investors, meanwhile, need enough trust to participate without pretending a dashboard understands the village.</p>
+        <p>The work begins with <a href="/iyal" class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>, where I am learning how a season actually runs: who is trusted, where handoffs break, and which relationships already carry the work. Season Trust is a practical way to test whether farmers, buyers, investors, rural workers, local operators, and logistics can move one season with enough shared context to keep showing up for one another.</p>
       </div>
     </header>
 
     <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">The problem</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">The problem</p>
       </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p>Most agricultural finance focuses on moving money.</p>
-        <p>I'm more interested in helping complete successful farming seasons.</p>
-        <p>Capital alone doesn't solve the problem if logistics fail, buyers disappear, prices change unexpectedly, or communication breaks down.</p>
-        <p>The real challenge is coordinating many independent participants: farmers, investors, buyers, local operators, logistics providers, and support systems, so that each has the information and confidence to make better decisions.</p>
-        <blockquote class="border-l-2 border-accent pl-6 font-serif italic leading-[1.2] text-text" style="font-size: clamp(1.5rem, 3.8vw, 2.3rem);">Trust is the missing infrastructure.</blockquote>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>Most agricultural finance is obsessed with moving money.</p>
+        <p>I'm more interested in finishing seasons.</p>
+        <p>Capital alone fixes nothing if the truck doesn't come, the buyer ghosts, the price moves, or nobody says anything until it's too late.</p>
+        <p>The real work is coordination: farmers, investors, rural workers, buyers, local operators, and logistics, all making decisions half-blind about each other. Hand each of them the piece of the picture they're missing, and the whole season gets less brutal.</p>
+        <blockquote class="border-l-2 border-accent pl-6 font-serif text-statement italic leading-[1.2] text-text">Trust is the missing infrastructure.</blockquote>
       </div>
     </section>
 
     <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">The idea</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">The idea</p>
       </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p>The Farmer Capital Network is an exploration of what a trusted coordination layer could look like.</p>
-        <p>Rather than treating financing as an isolated transaction, every production cycle becomes a shared workflow.</p>
-        <p>A farmer receives timely support throughout the season. An investor gains visibility into how capital is being used. Local operators contribute ground-level verification and context.</p>
-        <p>Repayment is connected to real agricultural events, such as milk collection or crop sales, instead of relying only on fixed repayment schedules disconnected from farming realities.</p>
-        <p class="font-serif text-text" style="font-size: clamp(1.35rem, 3vw, 1.9rem);">The long-term goal isn't simply to finance farms. It's to build a system where every participant can collaborate with greater confidence.</p>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>Season Trust is my sketch of what a trusted coordination layer could look like.</p>
+        <p>Not financing as a one-off transaction. A season as a shared workflow: the farmer gets support when the season needs it, the investor can see what their money is actually doing, rural workers and local operators know what has to happen next, and the person everyone already calls does the verifying no dashboard can.</p>
+        <p>Repayment follows the season's actual cash, milk collections and crop sales, instead of a repayment calendar drawn up in an office by someone who has never waited on rain.</p>
+        <p class="font-serif text-list-title text-text">The long game isn't financing farms. It's a season where everyone involved can see enough to act with confidence.</p>
       </div>
     </section>
 
     <section class="mt-20">
       <div class="flex flex-wrap items-end gap-5">
-        <h2 class="font-serif font-semibold leading-[0.95]" style="font-size: clamp(2rem, 6vw, 4.2rem);">Why Start Small</h2>
+        <h2 class="font-serif text-display-page font-semibold leading-[0.95]">Why start small</h2>
         <span class="mb-4 h-px flex-1 bg-stellar"></span>
       </div>
       <div class="mt-8 grid gap-10 md:grid-cols-[1fr_0.8fr]">
-        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-          <p>Before building software, I want to understand how these relationships work in practice.</p>
-          <p>The first experiments would likely be intentionally small. Every conversation, delay, success, and failure becomes an opportunity to learn.</p>
-          <p>Only after understanding these workflows would software begin to replace repetitive operational work.</p>
+        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+          <p>Before software, homework. I want to watch these relationships work in the wild first.</p>
+          <p>The first experiments stay deliberately tiny. Every conversation, delay, success, and minor disaster is the curriculum.</p>
+          <p>Software earns its cape later, by doing the boring parts well.</p>
         </div>
         <ul class="border-t border-border">
           {experiments.map((item) => (
-            <li class="border-b border-border py-4 text-text-muted">{item}</li>
+            <li class="border-b border-border py-4 text-text">{item}</li>
           ))}
         </ul>
       </div>
     </section>
 
     <section class="mt-20">
-      <h2 class="font-serif font-semibold" style="font-size: clamp(1.4rem, 3.4vw, 1.95rem);">What Success Looks Like</h2>
-      <p class="mt-4 max-w-[60ch] text-text-muted">I'll consider the idea worth pursuing if I can demonstrate that:</p>
+      <h2 class="font-serif text-list-title font-semibold">What success looks like</h2>
+      <p class="mt-4 max-w-[60ch] text-text-muted">I'll consider the idea worth pursuing if I can show that:</p>
       <ul class="mt-6 border-t border-border" style="max-width: var(--measure)">
         {success.map((item) => (
-          <li class="border-b border-border py-4 text-text-muted">{item}</li>
+          <li class="border-b border-border py-4 text-text">{item}</li>
         ))}
       </ul>
     </section>
 
-    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
-      <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Relationship with iyal</p>
-      </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p>This project is one of the first practical explorations within <a href="/iyal" class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>.</p>
-        <p>While iyal studies the broader questions of coordination, trust, and agricultural systems, the Farmer Capital Network focuses on one specific challenge: enabling trusted seasonal capital between farmers and those willing to support them.</p>
-        <p>The lessons learned here may eventually shape a much broader platform, but this is where I'd like to begin.</p>
-      </div>
-    </section>
-
     <section class="mt-20 border-t-2 border-stellar pt-10">
-      <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Current Status</p>
-      <h2 class="mt-4 max-w-[22ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.6rem, 4.5vw, 2.8rem);">Research and validation, conversation before software.</h2>
-      <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p>This project is currently in the research and validation stage.</p>
-        <p>I'm actively learning from farmers, investors, agricultural professionals, researchers, and anyone working close to the ecosystem. If this problem resonates with you, or if you think I'm approaching it the wrong way, I'd genuinely like to hear your perspective.</p>
-        <p>The best ideas are usually shaped through conversation long before they're built.</p>
-        <a href="mailto:sundharesansk11@gmail.com?subject=Farmer%20Capital%20Network" class="inline-block font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.5rem, 4vw, 2.35rem);">Share your perspective <span class="text-accent">&rarr;</span></a>
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">Current status</p>
+      <h2 class="mt-4 max-w-[22ch] font-serif text-entry font-semibold leading-[1.05]">Research and validation. Conversation before software.</h2>
+      <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>I'm learning from farmers, investors, rural workers, agronomists, researchers, and anyone who works close to the ground. If this problem resonates with you, or if you're fairly sure I'm approaching it the wrong way, I'd genuinely like to hear it.</p>
+        <p>Ideas get better in conversation long before they get built.</p>
+        <a href="/contact" class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
       </div>
     </section>
 
-    <div class="mt-16" style="max-width: var(--measure)">
-      <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
-    </div>
+    <NextPageLink href="/to/sports-development">The Long Game</NextPageLink>
   </main>
 </BaseLayout>

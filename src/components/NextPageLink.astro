@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  eyebrow?: string;
+  class?: string;
+}
+
+const { href, eyebrow = "Next on the desk", class: className } = Astro.props;
+---
+
+<nav class:list={["mt-12 ml-auto w-fit max-w-[18rem] border-t border-border pt-5 text-right", className]} aria-label={eyebrow}>
+  <p class="font-sans text-xs uppercase tracking-kicker text-text-muted">{eyebrow}</p>
+  <a href={href} class="group mt-2 inline-block font-serif text-list-title font-semibold leading-[1.08] text-text transition-colors hover:text-accent">
+    <slot /> <span class="adv-arrow text-accent">&rarr;</span>
+  </a>
+</nav>

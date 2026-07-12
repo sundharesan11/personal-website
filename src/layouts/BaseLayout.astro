@@ -8,9 +8,9 @@ import CubeMenu from "../components/CubeMenu.astro";
 interface Props {
   title: string;
   description?: string;
-  heroOverlay?: boolean;
+  showFooter?: boolean;
 }
-const { title, description = "Sundharesan Kumaresan · AI engineer, writer, and founder-in-waiting", heroOverlay = false } = Astro.props;
+const { title, description = "Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. One question from two sides: who a system sees, and who it never has to.", showFooter = true } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://example.com").href;
 const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").href;
 ---
@@ -33,7 +33,7 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Inter via Fontsource is imported in global.css; until then system stack renders -->
+    <!-- Self-hosted fonts are imported in global.css; until then system stacks render. -->
 
     <!-- No-flash: set the theme class BEFORE first paint -->
     <script is:inline>
@@ -54,9 +54,9 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-bg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-accent focus:outline focus:outline-2 focus:outline-accent"
     >Skip to main content</a>
-    <Header heroOverlay={heroOverlay} />
+    <Header />
     <slot />
-    <Footer />
+    {showFooter && <Footer />}
     <CubeMenu />
     <script>
       import { initMotion } from "../scripts/reveal";

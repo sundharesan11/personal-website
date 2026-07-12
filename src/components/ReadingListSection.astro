@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { splitAtLimit } from "../lib/reading";
+
+interface Props {
+  title: string;
+  entries: CollectionEntry<"reading">[];
+  kind: "read" | "on-deck";
+}
+
+const { title, entries, kind } = Astro.props;
+const { visibleItems: visible, remainingItems: remaining } = splitAtLimit(entries, 5);
+const headingId = kind === "read" ? "read-heading" : "to-read-heading";
+const sectionSpacing = kind === "on-deck" ? "mt-24 border-t border-border pt-8" : "";
+---
+
+<section class:list={["reading-list-shell", sectionSpacing]} aria-labelledby={headingId}>
+  <div class="border-b border-border pb-4">
+    <h2 id={headingId} class="font-serif text-entry font-semibold leading-none">{title}</h2>
+  </div>
+
+  {entries.length === 0 && kind === "on-deck" ? (
+    <p class="mt-8 max-w-[52ch] text-text-muted" data-to-read-state="empty">The next pile is suspiciously tidy. Recommendations are welcome below.</p>
+  ) : remaining.length > 0 ? (
+    <>
+      <ul class="reading-compact-preview mt-8">
+        {visible.map((entry) => (
+          <li class="border-b border-border py-5 first:pt-0">
+            <article>
+              <h3 class="font-serif text-list-title font-semibold leading-tight">
+                {entry.data.link ? <a href={entry.data.link} class="u-draw u-draw--display">{entry.data.title}</a> : entry.data.title}
+              </h3>
+              <p class="mt-1 text-sm uppercase tracking-dateline text-text-muted">{entry.data.author}</p>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <details class="reading-disclosure border-b border-border">
+        <summary class="cursor-pointer py-5 font-sans text-xs uppercase tracking-kicker text-accent transition-colors hover:text-accent-hover">
+          <span class="reading-more-label">View more</span>
+          <span class="reading-less-label">Show less</span>
+        </summary>
+        <ul class="reading-full-list">
+          {entries.map((entry) => (
+            <li class="border-t border-border py-6 first:border-t-0 first:pt-0">
+            <article>
+              <h3 class="font-serif text-list-title font-semibold leading-tight">
+                {entry.data.link ? <a href={entry.data.link} class="u-draw u-draw--display">{entry.data.title}</a> : entry.data.title}
+              </h3>
+              <p class="mt-1 text-sm uppercase tracking-dateline text-text-muted">{entry.data.author}</p>
+              <p class="mt-4 max-w-[62ch] leading-relaxed">{entry.data.note}</p>
+              {kind === "read" && entry.data.question && (
+                <p class="mt-4 max-w-[58ch] font-serif text-dek italic leading-relaxed text-accent">{entry.data.question}</p>
+              )}
+            </article>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </>
+  ) : (
+    <ul class="reading-full-list mt-8">
+      {entries.map((entry) => (
+        <li class="border-b border-border py-6 first:pt-0">
+        <article>
+          <h3 class="font-serif text-list-title font-semibold leading-tight">
+            {entry.data.link ? <a href={entry.data.link} class="u-draw u-draw--display">{entry.data.title}</a> : entry.data.title}
+          </h3>
+          <p class="mt-1 text-sm uppercase tracking-dateline text-text-muted">{entry.data.author}</p>
+          <p class="mt-4 max-w-[62ch] leading-relaxed">{entry.data.note}</p>
+          {kind === "read" && entry.data.question && (
+            <p class="mt-4 max-w-[58ch] font-serif text-dek italic leading-relaxed text-accent">{entry.data.question}</p>
+          )}
+        </article>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>

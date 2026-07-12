@@ -15,10 +15,18 @@ describe("responsive editorial text guards", () => {
 
   it("applies fitting guards to Contact's first viewport copy", () => {
     const contact = read("../src/pages/contact.astro");
+    const pageHeader = read("../src/components/PageHeader.astro");
 
-    expect(contact).toContain('class="label-fit font-sans text-xs uppercase tracking-[0.18em] text-text-muted"');
-    expect(contact).toContain('class="display-fit font-serif font-semibold leading-[0.92]"');
+    expect(pageHeader).toContain("label-fit font-sans text-xs uppercase tracking-kicker text-text-muted");
+    expect(contact).toContain("display-fit font-serif text-display-hero font-semibold leading-[0.92]");
     expect(contact).toContain('class="text-fit mt-8 max-w-[42ch] text-lg leading-relaxed text-text-muted"');
+  });
+
+  it("keeps shared page headers free of top hairlines", () => {
+    const pageHeader = read("../src/components/PageHeader.astro");
+
+    expect(pageHeader).toContain('<header data-reveal class="pt-5">');
+    expect(pageHeader).not.toContain("border-t border-border");
   });
 
   it("applies fitting guards to iyal and the To desk surfaces", () => {
@@ -30,5 +38,12 @@ describe("responsive editorial text guards", () => {
     expect(iyal).toContain("display-fit mt-8");
     expect(futureDesk).toContain("display-fit");
     expect(waste).toContain("display-fit");
+  });
+
+  it("keeps the Home desk statement sticky with Builder first on one line", () => {
+    const home = read("../src/pages/index.astro");
+
+    expect(home).toContain("md:sticky md:top-28 md:self-start");
+    expect(home).toContain('<span class="block whitespace-nowrap">Builder first.</span>');
   });
 });

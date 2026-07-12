@@ -18,8 +18,11 @@ const {
 const resolvedBackgroundSize = backgroundSize ?? (fit === "contain" ? "contain" : "cover");
 ---
 <section class="relative isolate bg-bg md:grid md:min-h-[96vh] md:grid-cols-[38vw_62vw]">
-  <div class="order-2 flex flex-col justify-center bg-bg px-6 py-12 sm:px-10 md:order-1 md:min-h-[96vh] md:py-0 md:pl-[max(1.5rem,8vw)] md:pr-12">
-    <slot />
+  <div class="relative order-2 flex flex-col justify-center bg-bg px-6 py-12 sm:px-10 md:order-1 md:min-h-[96vh] md:py-0 md:pl-[max(1.5rem,8vw)] md:pr-12">
+    <slot name="top-left" />
+    <div class="hero-recede">
+      <slot />
+    </div>
   </div>
   <div
     class="order-1 h-[70vh] overflow-hidden bg-bg bg-no-repeat md:order-2 md:h-auto md:bg-fixed"

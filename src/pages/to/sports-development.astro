@@ -1,20 +1,25 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import NextPageLink from "../../components/NextPageLink.astro";
 ---
-<BaseLayout title="Sports development in India · Sundharesan Kumaresan" description="A billion people, a handful of medals. Finding the talent the system never sees, and building the ladder it never had.">
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
-    <p class="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-accent">A lifetime's work</p>
-    <h1 class="mt-3 font-serif font-semibold leading-[0.98]" style="font-size: clamp(2.2rem, 6.5vw, 4rem);">Sports development in India</h1>
-    <p class="mt-8 max-w-[26ch] font-serif font-semibold leading-[1.08]" style="font-size: clamp(1.45rem, 3.8vw, 2.25rem);">A billion people. A handful of medals. The talent was never the problem.</p>
+<BaseLayout title="The Long Game · Sundharesan Kumaresan" description="A billion people, a handful of medals. Finding the talent the system never sees, and building the ladder it never had.">
+  <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
+    <a href="/to" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
+    <p class="mt-6 font-sans text-xs uppercase tracking-kicker text-accent">A lifetime's work</p>
+    <h1 data-reveal class="reveal-tracking mt-3 font-serif text-display-page font-semibold leading-[0.98]">The Long Game</h1>
+    <p data-reveal class="reveal-scale mt-8 max-w-[26ch] font-serif text-statement font-semibold leading-[1.08]">A billion people. A handful of medals. The talent was never the problem.</p>
 
-    <div class="mt-10 max-w-[60ch] space-y-6 text-lg leading-relaxed text-text-muted">
+    <div class="mt-10 max-w-[60ch] space-y-6 text-lg leading-relaxed text-text">
       <p>Somewhere right now there's a kid in a small town who'd medal for India, and the system will never find her. That's the part that gets me: the same blind spot as the farms. Talent no scout, no academy, no data ever reaches. And even when someone is found, the ladder barely exists, the training still runs on instinct instead of evidence, and the money rarely reaches the athlete who earned it.</p>
       <p>So I care about the whole pipeline: finding the unseen, building the grassroots ladder, bringing real data to how athletes are developed, and making sure they get paid and protected. This isn't a thing to fix in a quarter. It's the kind of problem worth giving a lifetime to, and I plan to.</p>
     </div>
 
-    <div class="mt-16" style="max-width: var(--measure)">
-      <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
-    </div>
+    <section class="mt-16 border-t-2 border-stellar pt-10">
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">Open notes</p>
+      <h2 class="mt-4 max-w-[22ch] font-serif text-entry font-semibold leading-[1.05]">If you have lived this system, I want the uncomfortable parts too.</h2>
+      <a href="/contact" class="group mt-8 inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
+    </section>
+
+    <NextPageLink href="/to/waste-management">The Civic Loop</NextPageLink>
   </main>
 </BaseLayout>

@@ -1,49 +1,43 @@
 ---
 import Monogram from "./Monogram.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-interface Props { heroOverlay?: boolean; }
-const { heroOverlay = false } = Astro.props;
+// One running order everywhere: Home contents, this nav, and the cube menu agree.
 const links = [
   { href: "/work", label: "Now / Work" },
-  { href: "/to", label: "To" },
-  { href: "/reading", label: "Reading" },
   { href: "/writing", label: "Writing" },
+  { href: "/reading", label: "Reading" },
+  { href: "/to", label: "To" },
   { href: "/modelling", label: "Modelling" },
   { href: "/about", label: "About" },
 ];
 const path = Astro.url.pathname;
 const isActive = (href: string) => path.startsWith(href);
 const deferUntilHomeImageHidden = path === "/";
-const tone = heroOverlay ? "light" : "ink";
-const wrap = deferUntilHomeImageHidden || heroOverlay ? "fixed inset-x-0 top-0 z-50 bg-transparent" : "sticky top-0 z-50 bg-transparent";
-const linkBase = heroOverlay ? "text-white/75 hover:text-white" : "text-text-muted hover:text-text";
-const linkActive = heroOverlay ? "text-white" : "text-text";
-const ctrl = heroOverlay ? "text-white/80 hover:text-white" : "text-text-muted hover:text-text";
+const wrap = deferUntilHomeImageHidden ? "fixed inset-x-0 top-0 z-50 bg-transparent" : "sticky top-0 z-50 bg-transparent";
 ---
 <header class:list={[wrap, "site-header w-full"]} data-deferred-header={deferUntilHomeImageHidden ? "home-photo" : undefined}>
-  <div class="mx-auto w-[calc(100%-2rem)] max-w-[1600px] pt-2 pb-0 sm:w-[calc(100%-3rem)] sm:pt-3 sm:pb-0">
-    <div class:list={["glass-topbar flex min-w-0 items-center justify-between gap-3 px-4 py-2 sm:justify-normal sm:gap-7 sm:px-5", heroOverlay && "glass-topbar--overlay"]}>
+  <div class="mx-auto w-[calc(100%-2rem)] max-w-topbar pt-2 pb-0 sm:w-[calc(100%-3rem)] sm:pt-3 sm:pb-0">
+    <div class="glass-topbar flex min-w-0 items-center justify-between gap-3 px-4 py-2 sm:justify-normal sm:gap-7 sm:px-5">
       <div class="flex min-w-0 items-center gap-4 sm:mr-auto sm:gap-5">
-        <Monogram tone={tone} size="1.45rem" />
+        <Monogram size="1.45rem" />
         <a
           href="/iyal"
           aria-label="iyal, Sundharesan's farmer capital network research"
           title="iyal, farmer capital network research"
           aria-current={isActive("/iyal") ? "page" : undefined}
-          class="font-script font-normal leading-none text-accent transition-colors hover:text-accent-hover"
-          style="font-size: clamp(1.55rem, 3.9vw, 2.35rem); text-shadow: 0.032em 0 currentColor;"
+          class="mm-iyal font-script text-statement font-bold leading-none text-accent transition-colors hover:text-accent-hover"
         >iyal</a>
       </div>
       <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
         {links.map((l) => (
           <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
-             class:list={["text-xs font-semibold uppercase tracking-[0.18em] transition-colors u-draw", isActive(l.href) ? linkActive : linkBase]}>{l.label}</a>
+             class:list={["text-xs font-semibold uppercase tracking-kicker transition-colors u-draw", isActive(l.href) ? "text-accent hover:text-accent-hover" : "text-text-muted hover:text-text"]}>{l.label}</a>
         ))}
       </nav>
       <div class="flex shrink-0 items-center gap-2 sm:gap-3">
         <ThemeToggle />
-        <button id="cube-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="cube-menu" aria-label="Open menu" class:list={["rounded-md border border-border p-2 transition-colors", ctrl]}>
-          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <button id="cube-trigger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="cube-menu" aria-label="Open menu" class="rounded-md border border-border p-2 text-text-muted transition-colors hover:text-text">
+          <span class="hb" aria-hidden="true"><span class="hb-l hb-1"></span><span class="hb-l hb-2"></span><span class="hb-l hb-3"></span></span>
         </button>
       </div>
     </div>

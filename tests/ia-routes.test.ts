@@ -4,23 +4,23 @@ import { describe, expect, it } from "vitest";
 const read = (path: string) => readFileSync(new URL(path, import.meta.url), "utf8");
 
 describe("publication IA routes", () => {
-  it("keeps Ambitions as an alias for the To desk", () => {
+  it("redirects Ambitions to the To desk instead of duplicating it", () => {
     const ambitionsExists = existsSync(new URL("../src/pages/ambitions.astro", import.meta.url));
-    const ambitions = read("../src/pages/ambitions.astro");
+    const config = read("../astro.config.mjs");
     const to = read("../src/pages/to/index.astro");
 
-    expect(ambitionsExists).toBe(true);
-    expect(ambitions).toContain("FutureDesk");
+    expect(ambitionsExists).toBe(false);
+    expect(config).toContain("'/ambitions': '/to'");
     expect(to).toContain("FutureDesk");
-    expect(ambitions).toContain("Ambitions / To");
   });
 
   it("keeps Writing lenses aligned with visible content", () => {
     const writing = read("../src/lib/writing.ts");
     const config = read("../src/content.config.ts");
 
+    expect(writing).toContain('export const lenses = [\n  { key: "technical", label: "Technical / AI" },\n  { key: "economics", label: "Economics / Politics" },\n  { key: "theatrical", label: "Theatrical" },\n]');
     expect(writing).toContain('{ key: "theatrical", label: "Theatrical" }');
-    expect(writing).toContain('{ key: "economics", label: "Economics" }');
+    expect(writing).toContain('{ key: "economics", label: "Economics / Politics" }');
     expect(writing).toContain('{ key: "technical", label: "Technical / AI" }');
     expect(writing).not.toContain('{ key: "philosophy"');
     expect(config).not.toContain('"philosophy"');
@@ -34,5 +34,67 @@ describe("publication IA routes", () => {
     expect(architecture).toContain("/to/waste-management");
     expect(architecture).toContain("not a content collection");
     expect(config).not.toContain("modelling");
+  });
+
+  it("keeps perspective prompts inside To detail pages, not the To index", () => {
+    const futureDesk = read("../src/components/FutureDesk.astro");
+    const agri = read("../src/pages/to/agri-fintech.astro");
+    const sports = read("../src/pages/to/sports-development.astro");
+    const waste = read("../src/pages/to/waste-management.astro");
+
+    expect(futureDesk).not.toContain('href="/contact"');
+    expect(futureDesk).not.toContain("Share your perspective");
+    expect(futureDesk).toContain('<article class="group border-t border-border py-10">');
+    expect(futureDesk).not.toContain('<a href={a.href} class="group block border-t border-border py-10">');
+    for (const page of [agri, sports, waste]) {
+      expect(page).toContain('href="/contact"');
+      expect(page).toContain("Share your perspective");
+      expect(page).not.toContain("mailto:sundharesansk11@gmail.com?subject=Farmer%20Capital%20Network");
+    }
+  });
+
+  it("uses the selected To desk names and gives Season Trust one clear bridge to iyal", () => {
+    const futureDesk = read("../src/components/FutureDesk.astro");
+    const agri = read("../src/pages/to/agri-fintech.astro");
+    const sports = read("../src/pages/to/sports-development.astro");
+    const waste = read("../src/pages/to/waste-management.astro");
+
+    expect(futureDesk).toContain('title: "Season Trust"');
+    expect(futureDesk).toContain('title: "The Long Game"');
+    expect(futureDesk).toContain('title: "The Civic Loop"');
+    expect(agri).toContain("Season Trust · Sundharesan Kumaresan");
+    expect(sports).toContain("The Long Game · Sundharesan Kumaresan");
+    expect(waste).toContain("The Civic Loop · Sundharesan Kumaresan");
+    expect(agri).not.toContain("Farmer Capital Network</h1>");
+    expect(futureDesk).toContain("The first product track growing out of iyal");
+    expect(futureDesk).toContain("a trust layer for the farming pipeline");
+    expect(agri).toContain("A practical trust layer for moving one season well.");
+    expect(agri).toContain('href="/iyal"');
+    expect(agri).toContain("The work begins with");
+    expect(agri).not.toContain("Relationship with iyal");
+    expect(agri).not.toContain("is the research and operating seed");
+    expect(agri).not.toContain("Season Trust is the first product track it is testing");
+    expect(agri).toContain("farmers, investors, rural workers");
+    expect(agri).toContain("A practical trust layer for moving one season well.");
+  });
+
+  it("uses the compact right-aligned next-page pattern", () => {
+    const next = read("../src/components/NextPageLink.astro");
+    const agri = read("../src/pages/to/agri-fintech.astro");
+    const sports = read("../src/pages/to/sports-development.astro");
+    const waste = read("../src/pages/to/waste-management.astro");
+    const writingLens = read("../src/pages/writing/[lens].astro");
+    const writingPost = read("../src/pages/writing/[lens]/[slug].astro");
+    const reading = read("../src/pages/reading/index.astro");
+
+    expect(next).toContain("ml-auto");
+    expect(next).toContain("text-right");
+    expect(next).toContain("text-list-title");
+    expect(next).not.toContain("text-statement");
+    for (const page of [agri, sports, waste, writingLens, writingPost, reading]) {
+      expect(page).toContain("NextPageLink");
+      expect(page).not.toContain("Next on the desk</p>");
+      expect(page).not.toContain("Next lens</p>");
+    }
   });
 });

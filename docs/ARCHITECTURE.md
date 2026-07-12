@@ -11,7 +11,7 @@ How the site is structured. Update when structure changes.
 ├── astro.config.mjs
 ├── tsconfig.json
 ├── public/                # static assets served as-is (favicon, og image, fonts)
-│   └── img/               # placeholder photographs (hero, atlas, ledger, grove, about) — swap for real shots
+│   └── img/               # photographs actually in use (hero-crop, work, about)
 └── src/
     ├── content.config.ts  # collection schemas (zod) — Astro v5 location
     ├── content/           # Astro Content Collections
@@ -23,9 +23,11 @@ How the site is structured. Update when structure changes.
     │   ├── Footer.astro
     │   ├── Monogram.astro     # SK. brand mark; trailing dot is stellar-blue
     │   ├── FixedPhotoHero.astro # frame-clipped fixed portrait for Home
-    │   ├── ParallaxHero.astro # legacy split photo hero (kept until unused cleanup)
     │   ├── Figure.astro       # full-bleed photograph wrapper (no borders/rounded corners)
     │   ├── Kicker.astro       # editorial eyebrow label (uppercase, letter-spaced)
+    │   ├── PageHeader.astro   # canonical page masthead (hairline + labels + display h1)
+    │   ├── IndexNo.astro      # the stellar nº index-number motif
+    │   ├── Endmark.astro      # stellar-dot endmark closing long pieces
     │   ├── ThemeToggle.astro
     │   ├── Prose.astro        # styled long-form wrapper
     │   ├── CubeMenu.astro     # rotating-cube ≡ overlay menu plus text fallback
@@ -33,7 +35,7 @@ How the site is structured. Update when structure changes.
     │   ├── FutureDesk.astro   # shared To/Ambitions future-desk index
     │   ├── Sunflower.astro    # lightweight canvas/DOM enhancement for sunflower page
     │   └── TeaserIndex.astro  # "Inside this edition" teaser index (Home)
-    │   # REMOVED: Hero.astro, FlowField.astro, ProjectCard.astro, WorkEntry.astro
+    │   # REMOVED: Hero.astro, FlowField.astro, ProjectCard.astro, WorkEntry.astro, ParallaxHero.astro
     ├── layouts/
     │   └── BaseLayout.astro   # <head>, fonts, meta, slots
     ├── pages/             # file-based routing
@@ -45,17 +47,22 @@ How the site is structured. Update when structure changes.
     │   │   ├── [lens].astro   # Lens index
     │   │   └── [lens]/[slug].astro # Post detail (from content)
     │   ├── reading/
-    │   │   └── index.astro    # Reading — scatter gallery grouped by "what each opened"
+    │   │   └── index.astro    # Reading — compact Read list, To Read, private recommendations
     │   ├── iyal.astro         # Standalone active farmer-capital-network research/product page
     │   ├── contact.astro      # General Web3Forms contact page with mail fallback
-    │   ├── ambitions.astro    # Alias to the To/future-desk experience
+    │   # /ambitions is a redirect to /to (astro.config.mjs), no page file
     │   ├── to/                # Future-desk idea pages
     │   │   ├── index.astro
     │   │   ├── agri-fintech.astro
     │   │   ├── sports-development.astro
     │   │   └── waste-management.astro
     │   └── about.astro
+    ├── lib/
+    │   ├── reading.ts     # generic compact-list partition helper
+    │   ├── writing.ts     # lenses, intros, datelines, linking, next-lens
+    │   └── scatter.ts     # shared scattered-gallery offsets
     ├── scripts/
+    │   ├── (repo root) scripts/new-post.mjs + scripts/publish.mjs — writing workflow (npm run new / npm run publish)
     │   ├── theme.ts       # dark-mode toggle logic
     │   ├── cube.ts        # cube menu: auto-spin, Escape/backdrop close, focus management
     │   ├── reveal.ts      # progressive reveal and scroll-progress enhancement
@@ -67,12 +74,14 @@ How the site is structured. Update when structure changes.
 
 ## Routing
 
-File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature), `/writing` (Writing index), `/writing/[lens]` and `/writing/[lens]/[slug]` (writing collection routes), `/reading` (scatter gallery), `/iyal` (masthead-level active farmer-capital-network research/product page), `/contact` (general Web3Forms contact page with mail fallback), `/to` (future-desk index), `/ambitions` (alias to `/to`), `/to/agri-fintech`, `/to/sports-development`, `/to/waste-management`, `/modelling`, `/about`. The `/work/[slug]` project detail route was REMOVED along with the `projects` collection.
+File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature), `/writing` (Writing index), `/writing/[lens]` and `/writing/[lens]/[slug]` (writing collection routes), `/reading` (compact reading list), `/iyal` (masthead-level active farmer-capital-network research/product page), `/contact` (general Web3Forms contact page with mail fallback), `/to` (future-desk index), `/ambitions` (alias to `/to` via a config redirect, no page file), `/to/agri-fintech`, `/to/sports-development`, `/to/waste-management`, `/modelling`, `/about`. The `/work/[slug]` project detail route was REMOVED along with the `projects` collection.
 
 ## Content model
 
-`writing` frontmatter: `title`, `description`, `date`, `draft?`, `lens` (Economics | Technical | Theatrical), `status` (published | being-written), `featured?`, `cover?`.
-`reading` frontmatter: `title`, `author`, `date`, `what_it_opened`, `cover?`, `notes?`.
+`writing` frontmatter (see `src/content.config.ts`, the source of truth): `title`, `description`, `date`, `draft?` (true = hidden everywhere), `lens` (`economics | technical | theatrical`, lowercase), `status` (`published | writing`; `writing` = the being-written desk), `featured?` (surfaces on Home as "From this issue"), `cover?`, `link?` (external Medium piece: frontmatter-only file, no detail route).
+`reading` frontmatter: `title`, `author`, `note`, `question?`, `status` (`read | on-deck`), `opened`, `cover?`, `link?`, `order`. Entries use descending manual `order` before splitting: `read` entries appear under Read and `on-deck` entries appear under To Read. More than five entries begin as an independent five-item title-and-author preview; the native disclosure replaces that preview with the full detailed list on the same canvas. Five or fewer entries show full detail directly. Read detail includes `note` and optional `question`; To Read detail includes `note` only. The index shows no counts or dates. Recommendations submit privately through Web3Forms, fall back to email when unconfigured, and become content only after manual curation.
+
+Authoring workflow: `npm run new` scaffolds a schema-correct entry; `npm run publish` builds (zod gates every entry), commits, and pushes. See `docs/WRITING_WORKFLOW.md`.
 
 Schemas enforced in `src/content.config.ts` with zod so content stays consistent. The `projects` collection and its schema were REMOVED.
 
@@ -82,11 +91,11 @@ Modelling is an intentionally hardcoded empty page at launch, not a content coll
 
 Tailwind v4 (CSS-first): tokens are defined once in `src/styles/global.css` under an `@theme` block. Tailwind reads `@theme` and auto-generates utilities from those variables — there is no `tailwind.config.mjs`. Components use Tailwind utility classes (`text-accent`, `bg-surface`, etc.) that map directly to the `@theme` tokens. No raw hex/px in components.
 
-Special brand exception: `/iyal` uses `--font-script` (Sacramento via Fontsource) for the lowercase blue `iyal` wordmark only.
+Typography is tokenized in `src/styles/global.css`: `--font-serif` is Libre Bodoni for display, `--font-prose` is Source Serif 4 Variable for article prose, and `--font-sans` is Inter Variable for UI and scanning text. Special brand exception: `/iyal` uses `--font-script` (Sacramento via Fontsource) for the lowercase blue `iyal` wordmark only.
 
 ## Motion
 
-CSS-first photo motion. Home uses `FixedPhotoHero.astro`: a frame-clipped fixed background on the portrait side of the hero, so the image stays visually fixed while scrolling but only paints inside the frame. The Home image side is wider than the text side and anchors the image right so the full portrait fits. About keeps its earlier two-column editorial portrait frame with the real image ratio. Both use `/img/hero-crop.jpeg` with full-image containment rather than the old zoomed PNG crop. Other photo bands may use CSS parallax (`background-attachment: fixed` via Tailwind `bg-fixed`). Client JS stays narrow: `theme.ts` for themes, `cube.ts` for the rotating menu, `reveal.ts` for progressive reveal plus scroll progress, and `sunflower.ts` for the sunflower interaction. Reveal is opt-in via `js-reveal` so content remains visible if JavaScript fails.
+CSS-first photo motion. Home uses `FixedPhotoHero.astro`: a frame-clipped fixed background on the portrait side of the hero, so the image stays visually fixed while scrolling but only paints inside the frame. The Home image side is wider than the text side and anchors the image right so the full portrait fits. Home uses `/img/hero-crop.jpeg`; About uses a dedicated `/img/about.jpg` portrait inside an inline 2:3 editorial frame. The About portrait frame and name/brief column stay sticky on desktop until the opening section gives way to the long-read, which preserves the scroll-hold effect without forcing the image through a viewport-fixed background crop. Other photo bands may use CSS parallax (`background-attachment: fixed` via Tailwind `bg-fixed`). Client JS stays narrow: `theme.ts` for themes, `cube.ts` for the rotating menu, `reveal.ts` for progressive reveal plus scroll progress, and `sunflower.ts` for the sunflower interaction. Reveal is opt-in via `js-reveal` so content remains visible if JavaScript fails.
 
 ## Data flow
 

@@ -1,45 +1,49 @@
 ---
+import PageHeader from "./PageHeader.astro";
 const ambitions = [
   {
     href: "/to/agri-fintech",
     tag: "A venture",
-    title: "Farmer Capital Network",
-    dek: "A trusted way to coordinate capital, people, and execution around a farming season.",
+    title: "Season Trust",
+    dek: "The first product track growing out of iyal: a trust layer for the farming pipeline, from capital to harvest.",
   },
   {
     href: "/to/sports-development",
     tag: "A lifetime's work",
-    title: "Sports development in India",
+    title: "The Long Game",
     dek: "A billion people, a handful of medals. Finding the talent the system never sees, and building the ladder it never had.",
   },
   {
     href: "/to/waste-management",
     tag: "A civic layer",
-    title: "Waste Management",
+    title: "The Civic Loop",
     dek: "The invisible infrastructure of clean cities: boring when it works, impossible to ignore when it doesn't.",
   },
 ];
 ---
-<main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-  <header>
-    <p class="label-fit font-sans text-xs uppercase tracking-[0.18em] text-text-muted">The future desk</p>
+<main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
+  <PageHeader left="The future desk" right="Forming">
     <div class="mt-5 flex min-w-0 items-end gap-5">
-      <h1 class="display-fit font-serif font-semibold leading-[0.78]" style="font-size: clamp(2.8rem, 10vw, 6rem);">To</h1>
+      <h1 data-reveal class="reveal-tracking display-fit font-serif text-display-hero font-semibold leading-[0.78]">To</h1>
       <span class="mb-[0.7rem] h-px min-w-[2rem] flex-1 bg-stellar"></span>
-      <span class="label-fit mb-[0.9rem] font-sans text-xs uppercase tracking-[0.18em] text-accent">Forming</span>
     </div>
-    <p data-reveal class="display-fit mt-8 max-w-[22ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.45rem, 3.8vw, 2.25rem);">Things I intend to build. All of them.</p>
-  </header>
+    <p data-reveal class="display-fit mt-8 max-w-[22ch] font-serif text-statement font-semibold leading-[1.05]">Things I intend to build. All of them.</p>
+  </PageHeader>
 
   <section class="mt-14">
     {ambitions.map((a) => (
-      <a href={a.href} class="group block border-t border-border py-10">
+      <article class="group border-t border-border py-10">
         <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <h2 class="display-fit font-serif font-semibold leading-[1.0] transition-colors group-hover:text-accent" style="font-size: clamp(1.7rem, 5vw, 2.9rem);">{a.title}</h2>
-          <span class="label-fit font-sans text-xs uppercase tracking-[0.18em] text-accent">{a.tag} &rarr;</span>
+          <a href={a.href} class="transition-colors hover:text-accent">
+            <h2 class="swap-italic display-fit font-serif text-entry font-semibold leading-[1.0]">
+              <span class="si-roman">{a.title}</span>
+              <span class="si-italic" aria-hidden="true">{a.title}</span>
+            </h2>
+          </a>
+          <span class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">{a.tag}</span>
         </div>
         <p class="text-fit mt-3 max-w-[62ch] text-text-muted">{a.dek}</p>
-      </a>
+      </article>
     ))}
   </section>
 </main>

@@ -4,7 +4,7 @@ description: "A self-made titan, the son he kept secret, and a woman the world s
 date: 2024-09-22
 lens: theatrical
 status: published
-featured: false
+featured: true
 ---
 
 > A story written by the writer, of his future age

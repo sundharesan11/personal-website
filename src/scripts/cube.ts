@@ -10,13 +10,28 @@ export function initCube(): void {
   let rx = -18, ry = -28;
   let autoSpin = !reduce.matches, dragging = false, moved = false, raf = 0;
   let px = 0, py = 0, downX = 0, downY = 0;
+  let hideTimer = 0;
 
   const render = () => { cube.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; };
   const loop = () => { if (autoSpin && !dragging) ry += 0.22; render(); raf = requestAnimationFrame(loop); };
-  const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+
+  // The dialog promises aria-modal: keep Tab inside it while open.
+  const focusables = (): HTMLElement[] =>
+    Array.from(menu!.querySelectorAll<HTMLElement>("a[href]:not([tabindex='-1']), button")).filter((el) => el.offsetParent !== null);
+  const onKey = (e: KeyboardEvent) => {
+    if (e.key === "Escape") { close(); return; }
+    if (e.key !== "Tab") return;
+    const els = focusables();
+    if (!els.length) return;
+    const first = els[0], last = els[els.length - 1];
+    const active = document.activeElement as HTMLElement;
+    if (e.shiftKey && (active === first || !menu!.contains(active))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (active === last || !menu!.contains(active))) { e.preventDefault(); first.focus(); }
+  };
 
   function open() {
     lastFocus = document.activeElement as HTMLElement;
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = 0; }
     menu!.classList.remove("hidden");
     menu!.classList.add("block");
     requestAnimationFrame(() => menu!.classList.add("is-open"));
@@ -28,12 +43,14 @@ export function initCube(): void {
   }
   function close() {
     menu!.classList.remove("is-open");
-    menu!.classList.add("hidden");
-    menu!.classList.remove("block");
     trigger!.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
     document.removeEventListener("keydown", onKey);
     if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    // Let the panel slide out before hiding it (instant under reduced motion)
+    const finish = () => { menu!.classList.add("hidden"); menu!.classList.remove("block"); hideTimer = 0; };
+    if (reduce.matches) finish();
+    else hideTimer = window.setTimeout(finish, 440);
     (lastFocus ?? trigger!).focus();
   }
 

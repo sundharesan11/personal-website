@@ -8,6 +8,11 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://example.com', // TODO: set real domain once decided (see docs/DECISIONS.md Open/Deferred)
 
+  // /ambitions was an orphaned duplicate of /to; one canonical route now.
+  redirects: {
+    '/ambitions': '/to'
+  },
+
   vite: {
     plugins: [tailwindcss()]
   },
