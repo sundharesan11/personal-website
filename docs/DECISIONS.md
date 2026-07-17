@@ -11,6 +11,10 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### Reading keeps only the last three reads — 2026-07-17
+
+The public Reading page is a current shelf, not an archive: it contains only *Poor Economics*, *The Picture of Dorian Gray*, and *Thinking, Fast and Slow*, newest first. The section is titled “Last three reads” and carries the line “The last three reads. The rest have been returned to the void.” **Why:** a small active selection feels more editorial and prevents the page becoming a dumping ground for every finished book. **Rejected:** preserving an on-page archive, a separate archive route, and retaining older read entries in the collection for later.
+
 ### Reading lists expand from quiet previews — 2026-07-11
 
 Read and To Read each own an independent five-item title-and-author preview when their list is long. Opening the native disclosure replaces that preview on the same canvas with every detailed entry; Read includes notes and optional questions, while To Read includes notes only. Manual order descends, and the page shows no counts or dates. CSS controls the preview swap and label state, with no client JavaScript. **Why:** both shelves stay calm and scannable while their richer context remains one action away. **Rejected:** pagination, separate archive pages, and a JavaScript toggle.
