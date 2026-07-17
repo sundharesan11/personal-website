@@ -102,7 +102,7 @@ Rules:
 **Motion budget** (a magazine is calm):
 - One hover transformation per element. Where the roman→italic swap (`.swap-italic`) applies, the title may also shift to stellar blue; avoid parent block lift.
 - One special reveal style per viewport: `reveal-tracking` is reserved for the page h1, `reveal-scale` for one quote/statement per page. The base fade-rise is the default.
-- Nothing loops. Motion is triggered once (reveal) or user-caused (hover) and comes to rest.
+- Nothing loops, except the small idle sunflower clusters while the visitor remains inactive. Their rotation is bounded to two or three flowers, stops immediately on interaction, and is absent for reduced-motion users.
 - Scroll-linked motion: at most one element per page (the Home hero recede), always behind `@supports (animation-timeline: view())` and `prefers-reduced-motion: no-preference`.
 - Accent never animates into a fill larger than a drop cap.
 

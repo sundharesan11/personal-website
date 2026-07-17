@@ -70,12 +70,18 @@ describe("idle sunflower overlay", () => {
   it("mounts a decorative reduced-motion-safe global overlay", () => {
     const overlay = read("../src/components/IdleSunflowers.astro");
     const layout = read("../src/layouts/BaseLayout.astro");
+    const renderer = read("../src/scripts/sunflower.ts");
     const styles = read("../src/styles/global.css");
 
     expect(layout).toContain('import IdleSunflowers from "../components/IdleSunflowers.astro"');
     expect(layout).toContain("<IdleSunflowers />");
     expect(overlay).toContain('aria-hidden="true"');
     expect(overlay).toContain("prefers-reduced-motion: reduce");
+    expect(overlay).toContain("Math.random");
+    expect(overlay).toContain("initialRotation: Math.random()");
+    expect(overlay).toContain("rotationSpeed });");
+    expect(renderer).toContain("rotationSpeed?: number");
+    expect(renderer).toContain("rot += opts.rotationSpeed");
     for (const event of ["pointermove", "pointerdown", "scroll", "keydown", "touchstart"]) {
       expect(overlay).toContain(`["${event}"`);
     }

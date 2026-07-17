@@ -15,12 +15,12 @@ function hexToRgb(hex: string): RGB {
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
-export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number; static?: boolean } = {}): () => void {
+export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number; static?: boolean; initialRotation?: number; rotationSpeed?: number } = {}): () => void {
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const N = opts.count ?? 260;
-  let w = 0, h = 0, cx = 0, cy = 0, scale = 0, rot = 0, t = 0, raf = 0, running = false;
+  let w = 0, h = 0, cx = 0, cy = 0, scale = 0, rot = opts.initialRotation ?? 0, t = 0, raf = 0, running = false;
   const cssVar = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n);
   let accent = hexToRgb(cssVar("--color-accent") || "#0057B8");
   let muted = hexToRgb(cssVar("--color-text-muted") || "#9A9AA2");
@@ -71,7 +71,7 @@ export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number;
       ctx!.fill();
     }
   }
-  function frame() { rot += 0.0016; t += 0.012; draw(); raf = requestAnimationFrame(frame); }
+  function frame() { rot += opts.rotationSpeed ?? 0.0016; t += 0.012; draw(); raf = requestAnimationFrame(frame); }
   function start() { if (running || reduce.matches) return; running = true; if (!raf) raf = requestAnimationFrame(frame); }
   function stop() { running = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } }
   const onResize = () => { resize(); draw(); };

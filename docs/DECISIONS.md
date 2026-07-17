@@ -13,7 +13,7 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ### Idle sunflower clusters inhabit empty margins — 2026-07-17
 
-After three seconds without scroll, pointer, keyboard, touch, or pointer interaction, every page may show a low-contrast cluster of two or three small decorative sunflowers in unoccupied viewport space. The cluster clears at the next interaction and may return only after a fresh idle period. It never appears for reduced-motion users, never overlaps interactive or reading content, and reuses the existing sunflower visual language. **Why:** the site gains a small moment of life during a pause without turning its editorial pacing into a screen saver. **Rejected:** one flower per idle moment, persistent flowers that remain through interaction, page-specific treatment, and continuous animation.
+After three seconds without scroll, pointer, keyboard, touch, or pointer interaction, every page may show a low-contrast cluster of two or three small decorative sunflowers in collision-checked random viewport margins. Each has a random initial angle and a slow, varied clockwise or counter-clockwise rotation. The cluster clears at the next interaction and may return only after a fresh idle period. It never appears for reduced-motion users and never overlaps interactive or reading content. **Why:** random placement and gentle rotation make the flowers feel discovered rather than arranged, while the bounded idle-only loop keeps the site from becoming a screen saver. **Rejected:** one flower per idle moment, persistent flowers that remain through interaction, page-specific treatment, fixed corner placement, and a continuous all-page animation.
 
 ### Reading keeps only the last three reads — 2026-07-17
 

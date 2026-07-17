@@ -9,19 +9,13 @@
 
   if (overlay instanceof HTMLDivElement && !overlay.dataset.idleSunflowersInit && !reducedMotion) {
     overlay.dataset.idleSunflowersInit = "1";
-    const flowers: HTMLCanvasElement[] = [];
-    const positions = [
-      "top-30 left-6",
-      "top-30 right-6",
-      "bottom-6 left-6",
-      "bottom-6 right-6",
-      "top-1/2 right-6",
-    ];
+    const flowers: Array<{ canvas: HTMLCanvasElement; dispose: () => void }> = [];
 
     const overlapsContent = (canvas: HTMLCanvasElement) => {
       const rect = canvas.getBoundingClientRect();
-      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, .glass-topbar"))
+      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, .glass-topbar, .idle-sunflower"))
         .some((element) => {
+          if (element === canvas) return false;
           const target = element.getBoundingClientRect();
           return rect.left < target.right && rect.right > target.left && rect.top < target.bottom && rect.bottom > target.top;
         });
@@ -29,34 +23,36 @@
 
     const clear = () => {
       for (const flower of flowers.splice(0)) {
-        flower.classList.add("is-clearing");
-        window.setTimeout(() => flower.remove(), 250);
+        flower.dispose();
+        flower.canvas.classList.add("is-clearing");
+        window.setTimeout(() => flower.canvas.remove(), 250);
       }
     };
 
     const show = (count: 2 | 3) => {
       clear();
-      const candidates = positions.flatMap((position) => {
+      const randomPosition = () => {
         const canvas = document.createElement("canvas");
-        canvas.className = `idle-sunflower size-18 max-sm:size-12 ${position}`;
+        canvas.className = "idle-sunflower size-18 max-sm:size-12";
+        canvas.style.left = `${8 + Math.random() * 78}%`;
+        canvas.style.top = `${8 + Math.random() * 78}%`;
         overlay.append(canvas);
         if (overlapsContent(canvas)) {
           canvas.remove();
-          return [];
+          return undefined;
         }
-        return [canvas];
-      });
+        return canvas;
+      };
 
-      if (candidates.length < count) {
-        candidates.forEach((canvas) => canvas.remove());
-        return;
+      for (let attempt = 0; attempt < 24 && flowers.length < count; attempt++) {
+        const canvas = randomPosition();
+        if (!canvas) continue;
+        const rotationSpeed = (Math.random() < 0.5 ? -1 : 1) * (0.00015 + Math.random() * 0.00025);
+        const dispose = initSunflower(canvas, { count: 72, initialRotation: Math.random() * Math.PI * 2, rotationSpeed });
+        flowers.push({ canvas, dispose });
       }
 
-      candidates.slice(0, count).forEach((canvas) => {
-        flowers.push(canvas);
-        initSunflower(canvas, { count: 72, static: true });
-      });
-      candidates.slice(count).forEach((canvas) => canvas.remove());
+      if (flowers.length < count) clear();
     };
 
     const controller = createIdleSunflowerController({ onShow: show, onClear: clear });
