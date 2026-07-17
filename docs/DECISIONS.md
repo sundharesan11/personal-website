@@ -11,6 +11,10 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### Idle sunflower clusters inhabit empty margins — 2026-07-17
+
+After three seconds without scroll, pointer, keyboard, touch, or pointer interaction, every page may show a low-contrast cluster of two or three small decorative sunflowers in unoccupied viewport space. The cluster clears at the next interaction and may return only after a fresh idle period. It never appears for reduced-motion users, never overlaps interactive or reading content, and reuses the existing sunflower visual language. **Why:** the site gains a small moment of life during a pause without turning its editorial pacing into a screen saver. **Rejected:** one flower per idle moment, persistent flowers that remain through interaction, page-specific treatment, and continuous animation.
+
 ### Reading keeps only the last three reads — 2026-07-17
 
 The public Reading page is a current shelf, not an archive: it contains only *Poor Economics*, *The Picture of Dorian Gray*, and *Thinking, Fast and Slow*, newest first. The section is titled “Last three reads” and carries the line “The last three reads. The rest have been returned to the void.” **Why:** a small active selection feels more editorial and prevents the page becoming a dumping ground for every finished book. **Rejected:** preserving an on-page archive, a separate archive route, and retaining older read entries in the collection for later.
