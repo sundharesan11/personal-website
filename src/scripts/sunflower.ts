@@ -15,7 +15,7 @@ function hexToRgb(hex: string): RGB {
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
-export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number } = {}): () => void {
+export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number; static?: boolean } = {}): () => void {
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -80,6 +80,13 @@ export function initSunflower(canvas: HTMLCanvasElement, opts: { count?: number 
   mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
   const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) start(); else stop(); }, { threshold: 0 });
   resize(); readColors();
+  if (opts.static) {
+    draw();
+    window.removeEventListener("resize", onResize);
+    mo.disconnect();
+    io.disconnect();
+    return () => {};
+  }
   if (reduce.matches) draw(); else io.observe(canvas);
   return () => { stop(); io.disconnect(); mo.disconnect(); window.removeEventListener("resize", onResize); };
 }

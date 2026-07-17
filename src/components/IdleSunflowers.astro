@@ -1,0 +1,78 @@
+<div class="idle-sunflowers" aria-hidden="true"></div>
+
+<script>
+  import { createIdleSunflowerController } from "../scripts/idleSunflowers";
+  import { initSunflower } from "../scripts/sunflower";
+
+  const overlay = document.querySelector(".idle-sunflowers");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (overlay instanceof HTMLDivElement && !overlay.dataset.idleSunflowersInit && !reducedMotion) {
+    overlay.dataset.idleSunflowersInit = "1";
+    const flowers: HTMLCanvasElement[] = [];
+    const positions = [
+      "top-30 left-6",
+      "top-30 right-6",
+      "bottom-6 left-6",
+      "bottom-6 right-6",
+      "top-1/2 right-6",
+    ];
+
+    const overlapsContent = (canvas: HTMLCanvasElement) => {
+      const rect = canvas.getBoundingClientRect();
+      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, .glass-topbar"))
+        .some((element) => {
+          const target = element.getBoundingClientRect();
+          return rect.left < target.right && rect.right > target.left && rect.top < target.bottom && rect.bottom > target.top;
+        });
+    };
+
+    const clear = () => {
+      for (const flower of flowers.splice(0)) {
+        flower.classList.add("is-clearing");
+        window.setTimeout(() => flower.remove(), 250);
+      }
+    };
+
+    const show = (count: 2 | 3) => {
+      clear();
+      const candidates = positions.flatMap((position) => {
+        const canvas = document.createElement("canvas");
+        canvas.className = `idle-sunflower size-18 max-sm:size-12 ${position}`;
+        overlay.append(canvas);
+        if (overlapsContent(canvas)) {
+          canvas.remove();
+          return [];
+        }
+        return [canvas];
+      });
+
+      if (candidates.length < count) {
+        candidates.forEach((canvas) => canvas.remove());
+        return;
+      }
+
+      candidates.slice(0, count).forEach((canvas) => {
+        flowers.push(canvas);
+        initSunflower(canvas, { count: 72, static: true });
+      });
+      candidates.slice(count).forEach((canvas) => canvas.remove());
+    };
+
+    const controller = createIdleSunflowerController({ onShow: show, onClear: clear });
+    const events: Array<[keyof WindowEventMap, AddEventListenerOptions | boolean]> = [
+      ["pointermove", { passive: true }],
+      ["pointerdown", { passive: true }],
+      ["scroll", { passive: true }],
+      ["keydown", false],
+      ["touchstart", { passive: true }],
+    ];
+    const activity = () => controller.activity();
+    events.forEach(([event, options]) => window.addEventListener(event, activity, options));
+    window.addEventListener("pagehide", () => {
+      controller.destroy();
+      clear();
+      events.forEach(([event, options]) => window.removeEventListener(event, activity, options));
+    }, { once: true });
+  }
+</script>

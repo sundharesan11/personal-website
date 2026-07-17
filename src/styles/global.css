@@ -143,6 +143,32 @@ body {
   overflow-x: clip;
 }
 
+.idle-sunflowers {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+}
+
+.idle-sunflower {
+  position: absolute;
+  opacity: 0;
+  animation: idle-sunflower-arrive var(--motion-base) var(--ease-editorial) forwards;
+  transition: opacity var(--motion-base) var(--ease-editorial);
+}
+
+.idle-sunflower.is-clearing {
+  opacity: 0;
+}
+
+@keyframes idle-sunflower-arrive {
+  to { opacity: 0.46; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idle-sunflowers { display: none; }
+}
+
 .glass-topbar {
   border: 1px solid color-mix(in srgb, var(--color-border) 62%, transparent);
   border-radius: 999px;

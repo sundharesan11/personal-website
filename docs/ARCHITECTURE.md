@@ -34,6 +34,7 @@ How the site is structured. Update when structure changes.
     │   ├── FactsRail.astro    # sidebar facts/pull-quotes rail
     │   ├── FutureDesk.astro   # shared To/Ambitions future-desk index
     │   ├── Sunflower.astro    # lightweight canvas/DOM enhancement for sunflower page
+    │   ├── IdleSunflowers.astro # global decorative idle-state sunflower overlay
     │   └── TeaserIndex.astro  # "Inside this edition" teaser index (Home)
     │   # REMOVED: Hero.astro, FlowField.astro, ProjectCard.astro, WorkEntry.astro, ParallaxHero.astro
     ├── layouts/
@@ -66,7 +67,8 @@ How the site is structured. Update when structure changes.
     │   ├── theme.ts       # dark-mode toggle logic
     │   ├── cube.ts        # cube menu: auto-spin, Escape/backdrop close, focus management
     │   ├── reveal.ts      # progressive reveal and scroll-progress enhancement
-    │   └── sunflower.ts   # sunflower page interaction enhancement
+    │   ├── sunflower.ts   # sunflower page interaction enhancement
+    │   └── idleSunflowers.ts # three-second idle controller for global sunflower clusters
     │   # REMOVED: flowField.ts
     └── styles/
         └── global.css     # @theme tokens (Tailwind v4), base resets, font import
@@ -95,7 +97,7 @@ Typography is tokenized in `src/styles/global.css`: `--font-serif` is Libre Bodo
 
 ## Motion
 
-CSS-first photo motion. Home uses `FixedPhotoHero.astro`: a frame-clipped fixed background on the portrait side of the hero, so the image stays visually fixed while scrolling but only paints inside the frame. The Home image side is wider than the text side and anchors the image right so the full portrait fits. Home uses `/img/hero-crop.jpeg`; About uses a dedicated `/img/about.jpg` portrait inside an inline 2:3 editorial frame. The About portrait frame and name/brief column stay sticky on desktop until the opening section gives way to the long-read, which preserves the scroll-hold effect without forcing the image through a viewport-fixed background crop. Other photo bands may use CSS parallax (`background-attachment: fixed` via Tailwind `bg-fixed`). Client JS stays narrow: `theme.ts` for themes, `cube.ts` for the rotating menu, `reveal.ts` for progressive reveal plus scroll progress, and `sunflower.ts` for the sunflower interaction. Reveal is opt-in via `js-reveal` so content remains visible if JavaScript fails.
+CSS-first photo motion. Home uses `FixedPhotoHero.astro`: a frame-clipped fixed background on the portrait side of the hero, so the image stays visually fixed while scrolling but only paints inside the frame. The Home image side is wider than the text side and anchors the image right so the full portrait fits. Home uses `/img/hero-crop.jpeg`; About uses a dedicated `/img/about.jpg` portrait inside an inline 2:3 editorial frame. The About portrait frame and name/brief column stay sticky on desktop until the opening section gives way to the long-read, which preserves the scroll-hold effect without forcing the image through a viewport-fixed background crop. Other photo bands may use CSS parallax (`background-attachment: fixed` via Tailwind `bg-fixed`). Client JS stays narrow: `theme.ts` for themes, `cube.ts` for the rotating menu, `reveal.ts` for progressive reveal plus scroll progress, `sunflower.ts` for the page sunflower renderer, and `idleSunflowers.ts` for the three-second, reduced-motion-safe global decorative cluster. Reveal is opt-in via `js-reveal` so content remains visible if JavaScript fails.
 
 ## Data flow
 
