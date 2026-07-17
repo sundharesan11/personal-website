@@ -23,7 +23,8 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
     </PageHeader>
     <div class="mt-12 md:grid md:grid-cols-[minmax(0,1fr)_320px] md:gap-12">
       <div>
-        <ReadingListSection title="Read" entries={readBooks} kind="read" />
+        <p class="mt-6 max-w-[52ch] text-text-muted">The last three reads. The rest have been returned to the void.</p>
+        <ReadingListSection title="Last three reads" entries={readBooks} kind="read" />
         <ReadingListSection title="To Read" entries={toReadBooks} kind="on-deck" />
 
         <section class="mt-24 border-t border-border pt-8" aria-labelledby="recommend-heading">

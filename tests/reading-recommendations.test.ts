@@ -28,13 +28,31 @@ describe("Reading curation", () => {
     });
   });
 
-  it("separates read and on-deck entries into named sections", () => {
+  it("separates the last three reads and on-deck entries into named sections", () => {
     const page = read("../src/pages/reading/index.astro");
 
     expect(page).toContain('const readBooks = books.filter((book) => book.data.status === "read")');
     expect(page).toContain('const toReadBooks = books.filter((book) => book.data.status === "on-deck")');
-    expect(page).toContain('title="Read" entries={readBooks} kind="read"');
+    expect(page).toContain('title="Last three reads" entries={readBooks} kind="read"');
+    expect(page).toContain("The last three reads. The rest have been returned to the void.");
     expect(page).toContain('title="To Read" entries={toReadBooks} kind="on-deck"');
+  });
+
+  it("keeps exactly the three current reads in the requested order", () => {
+    const currentReads = [
+      ["poor-economics.md", 3],
+      ["the-picture-of-dorian-gray.md", 2],
+      ["thinking-fast-and-slow.md", 1],
+    ] as const;
+
+    for (const [filename, order] of currentReads) {
+      const entry = read(`../src/content/reading/${filename}`);
+      expect(entry).toContain("status: read");
+      expect(entry).toContain(`order: ${order}`);
+    }
+
+    const page = read("../src/pages/reading/index.astro");
+    expect(page).not.toContain('title="Read" entries={readBooks} kind="read"');
   });
 
   it("uses descending manual order and removes counts and state totals", () => {
@@ -144,18 +162,18 @@ describe("Reading curation", () => {
     const architecture = read("../docs/ARCHITECTURE.md");
     const decisions = read("../docs/DECISIONS.md");
 
-    expect(architecture).toContain("`read` entries appear under Read");
+    expect(architecture).toContain("shown under “Last three reads”");
     expect(architecture).toContain("`on-deck` entries appear under To Read");
     expect(architecture).toContain("Recommendations submit privately through Web3Forms");
     expect(decisions).toContain("Reading recommendations stay private and curated");
   });
 
-  it("documents the compact Read list instead of the retired scatter grouping", () => {
+  it("documents the current three-read shelf instead of the retired scatter grouping", () => {
     const architecture = read("../docs/ARCHITECTURE.md");
     const decisions = read("../docs/DECISIONS.md");
 
     expect(architecture).toContain("descending manual `order`");
-    expect(architecture).toContain("five-item title-and-author preview");
+    expect(architecture).toContain("three current entries");
     expect(architecture).toContain("no counts or dates");
     expect(architecture).not.toContain("Reading — scatter gallery grouped");
     expect(architecture).not.toContain("`/reading` (scatter gallery)");

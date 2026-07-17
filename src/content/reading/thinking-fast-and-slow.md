@@ -5,5 +5,5 @@ note: "Two systems running the show, and most of life happens before the slow on
 question: "Which of your opinions are actually yours, and which is System 1 still talking?"
 status: read
 opened: "What makes a person tick"
-order: 8
+order: 1
 ---
