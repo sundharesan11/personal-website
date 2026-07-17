@@ -13,7 +13,7 @@
 
     const overlapsContent = (canvas: HTMLCanvasElement) => {
       const rect = canvas.getBoundingClientRect();
-      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, .glass-topbar, .idle-sunflower"))
+      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, img, [role=img], [data-home-photo-frame], [style*=background-image], .glass-topbar, .idle-sunflower"))
         .some((element) => {
           if (element === canvas) return false;
           const target = element.getBoundingClientRect();

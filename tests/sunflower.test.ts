@@ -80,6 +80,7 @@ describe("idle sunflower overlay", () => {
     expect(overlay).toContain("Math.random");
     expect(overlay).toContain("initialRotation: Math.random()");
     expect(overlay).toContain("rotationSpeed });");
+    expect(overlay).toContain("img, [role=img], [data-home-photo-frame], [style*=background-image]");
     expect(renderer).toContain("rotationSpeed?: number");
     expect(renderer).toContain("rot += opts.rotationSpeed");
     for (const event of ["pointermove", "pointerdown", "scroll", "keydown", "touchstart"]) {
