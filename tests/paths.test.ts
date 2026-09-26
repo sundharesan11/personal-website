@@ -1,5 +1,8 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { withBase, withoutBase } from "../src/lib/paths";
+import { legacyProjectTarget, withBase, withoutBase } from "../src/lib/paths";
+
+const read = (path: string) => readFileSync(new URL(path, import.meta.url), "utf8");
 
 describe("deployment paths", () => {
   it("adds a normalized repository base to internal routes and assets", () => {
@@ -19,5 +22,21 @@ describe("deployment paths", () => {
     expect(withoutBase("/personal-website/work", "/personal-website/")).toBe("/work");
     expect(withoutBase("/personal-website", "/personal-website/")).toBe("/");
     expect(withoutBase("/work", "/personal-website/")).toBe("/work");
+  });
+
+  it("deploys the user site at root and migrates the old project path", () => {
+    const workflow = read("../.github/workflows/deploy.yml");
+    const notFound = read("../src/pages/404.astro");
+
+    expect(workflow).not.toContain("SITE_BASE:");
+    expect(notFound).toContain('import { legacyProjectTarget } from "../lib/paths"');
+    expect(notFound).toContain("location.replace");
+  });
+
+  it("keeps legacy project redirects on the same origin", () => {
+    expect(legacyProjectTarget("/personal-website")).toBe("/");
+    expect(legacyProjectTarget("/personal-website/work")).toBe("/work");
+    expect(legacyProjectTarget("/personal-website//evil.example/path")).toBe("/evil.example/path");
+    expect(legacyProjectTarget("/work")).toBeNull();
   });
 });
