@@ -1,26 +1,32 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import FactsRail from "../../components/FactsRail.astro";
+import { withBase } from "../../lib/paths";
 ---
-<BaseLayout title="Now / Work · Sundharesan Kumaresan">
-  <section class="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden md:bg-fixed bg-cover bg-center" style="min-height:56vh; background-image: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.22) 60%, rgba(0,0,0,.42)), url('/img/work.jpg')">
-    <div class="mx-auto flex max-w-[1100px] flex-col justify-end px-6 pb-12" style="min-height:56vh; padding-top:2rem;">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-stellar">The present</p>
-      <h1 class="mt-3 font-serif font-semibold leading-[0.95] text-white" style="font-size: clamp(2.2rem, 6.5vw, 4rem);">Now</h1>
+<BaseLayout
+  title="Now / Work · Sundharesan Kumaresan"
+  description="Forward-deployed engineer at Oogway Labs, building AI products close to customers, users, and the messy middle where software becomes real."
+>
+  <section class="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden md:bg-fixed bg-cover bg-center" style={`min-height:46vh; background-image: linear-gradient(to top, rgba(0,0,0,.72), rgba(0,0,0,.22) 60%, rgba(0,0,0,.42)), url('${withBase("/img/work.jpg")}')`}>
+    <div class="mx-auto flex max-w-page flex-col justify-end px-6 pb-10" style="min-height:46vh; padding-top:2rem;">
+      <p class="font-sans text-xs uppercase tracking-kicker text-stellar-ondark">The present</p>
+      <h1 class="mt-3 font-serif text-display-page font-semibold leading-[0.95] text-white">Now</h1>
     </div>
   </section>
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 py-16">
-    <p data-reveal class="max-w-[24ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.5rem, 4vw, 2.4rem);">Hand me a problem and a blank slate, and I get weirdly happy about it.</p>
-    <div data-reveal class="mt-14 grid gap-12 md:grid-cols-[1.3fr_0.7fr]">
-      <div class="max-w-[60ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p>&ldquo;Forward-deployed engineer&rdquo; is the title on paper. In practice: a client turns up with a problem and no plan, and somehow that becomes my week. I sit with them, real people and real conversations, sketch the fix on a whiteboard, draw the architecture, gently prove it isn&rsquo;t held together by hope, then go build the thing for real. Mostly AI. Then actual users get hold of it, and they turn out to be remarkably talented at breaking whatever I was proudest of.</p>
-        <p>I&rsquo;m an early adopter to a fault. I&rsquo;ll try the shiny new model the week it drops, then spend the next one trying to break it myself, because benchmarks lie and trust is earned. New-age tools, old-school paranoia. Honestly, I treat every build like a story: a problem, some tension, a third act where it finally clicks. My whole job is getting us to that third act: fast, and ideally without the scene where everything&rsquo;s on fire.</p>
+  <main id="main-content" class="mx-auto max-w-page px-6 py-12 md:py-14">
+    <p data-reveal class="reveal-scale max-w-[24ch] font-serif text-entry font-semibold leading-[1.05]">Close enough to hear the problem. Technical enough to build the answer.</p>
+    <div data-reveal class="mt-10 grid gap-10 md:grid-cols-[1.3fr_0.7fr]">
+      <div class="max-w-[60ch] space-y-5 text-lg leading-relaxed text-text">
+        <p>I&rsquo;m a forward-deployed engineer at Oogway Labs, which is a grand way of saying I stay close to the problem. Small team, real customers, fewer places for vague ideas to hide.</p>
+        <p>I get to sit in the messy middle: hear what users are trying to do, shape the product around what would actually help, then go back and build. Some days that means architecture and product judgment. Some days it means making the thing less clever and more useful, which is rude of reality, but usually correct.</p>
+        <p>I put AI to work where it has to behave: inside products people rely on, with legacy software, strange edge cases, and human patience all involved. The work is part LLM craft, part old-school engineering, part listening carefully enough that the next build has a reason to exist.</p>
+        <p>Right now I&rsquo;m exploring that edge: how to drive AI properly, how to keep systems legible, and how to build with other builders and users without turning everything into a demo with nicer lighting.</p>
       </div>
       <div class="md:border-l md:border-border md:pl-10 md:sticky md:top-28 md:self-start">
         <FactsRail items={[
-          { label: "Role", value: "Forward-deployed engineer (professional problem-haver) · Oogway Labs" },
-          { label: "What I build", value: "AI, end to end: from “what if” to “wait, it actually scales”" },
-          { label: "How I work", value: "Move fast, break my own ideas first, keep what survives" },
+          { label: "Role", value: "Forward-deployed engineer", detail: "Oogway Labs" },
+          { label: "Where I work", value: "Small team, close customers, real product pressure" },
+          { label: "What I build", value: "AI products shaped by users, not just demos with better lighting" },
         ]} />
       </div>
     </div>

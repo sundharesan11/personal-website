@@ -1,5 +1,7 @@
 ---
-interface Props { tone?: "light" | "ink"; size?: string; }
-const { tone = "ink", size = "1.4rem" } = Astro.props;
+import { withBase } from "../lib/paths";
+
+interface Props { size?: string; }
+const { size = "1.4rem" } = Astro.props;
 ---
-<a href="/" class:list={["font-serif font-bold leading-none", tone === "light" ? "text-white" : "text-text"]} style={`font-size:${size}`} aria-label="Sundharesan Kumaresan, home">SK<span class="text-stellar">.</span></a>
+<a href={withBase("/")} class="font-serif font-bold leading-none text-text" style={`font-size:${size}`} aria-label="Sundharesan Kumaresan, home"><span class="mm-sk">SK<span class="mm-dot text-stellar">.</span></span></a>

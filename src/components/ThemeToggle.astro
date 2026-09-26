@@ -16,9 +16,15 @@
   if (btn) initToggle(btn);
 </script>
 <style is:global>
-  #theme-toggle .ti-dark, #theme-toggle .ti-cream { display: none; }
-  :root.dark #theme-toggle .ti-light { display: none; }
-  :root.dark #theme-toggle .ti-dark { display: block; }
-  :root.theme-cream #theme-toggle .ti-light { display: none; }
-  :root.theme-cream #theme-toggle .ti-cream { display: block; }
+  /* Icons stack in one grid cell and rotate through, no hard cuts */
+  #theme-toggle { display: grid; }
+  #theme-toggle > svg {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: rotate(-90deg);
+    transition: transform var(--motion-base) var(--ease-editorial), opacity var(--motion-base) var(--ease-editorial);
+  }
+  :root:not(.dark):not(.theme-cream) #theme-toggle .ti-light { opacity: 1; transform: none; }
+  :root.dark #theme-toggle .ti-dark { opacity: 1; transform: none; }
+  :root.theme-cream #theme-toggle .ti-cream { opacity: 1; transform: none; }
 </style>

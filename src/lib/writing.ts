@@ -1,7 +1,9 @@
+import { withBase } from "./paths";
+
 export const lenses = [
-  { key: "theatrical", label: "Theatrical" },
-  { key: "economics", label: "Economics" },
   { key: "technical", label: "Technical / AI" },
+  { key: "economics", label: "Economics / Politics" },
+  { key: "theatrical", label: "Theatrical" },
 ];
 
 export const lensIntro: Record<string, string> = {
@@ -10,22 +12,24 @@ export const lensIntro: Record<string, string> = {
   technical: "The day job, thinking out loud. Mostly AI and data systems, written the way I wish someone had written them for me: less hand-waving, more here's-how-it-actually-works-and-where-it-breaks.",
 };
 
-export const scatter = [
-  { ml: "", w: "md:max-w-[52ch]" },
-  { ml: "md:ml-[22%]", w: "md:max-w-[42ch]" },
-  { ml: "md:ml-[8%]", w: "md:max-w-[50ch]" },
-  { ml: "md:ml-[28%]", w: "md:max-w-[40ch]" },
-  { ml: "md:ml-[13%]", w: "md:max-w-[48ch]" },
-  { ml: "md:ml-[4%]", w: "md:max-w-[52ch]" },
-  { ml: "md:ml-[18%]", w: "md:max-w-[44ch]" },
-];
+export { scatter } from "./scatter";
 
+const fmtDate = (d: Date) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+
+// Dateline first, always: a publication keeps its chronology even when the
+// piece lives on Medium.
 export function metaOf(entry: any): string {
   const d = entry.data;
-  return d.link ? "Read on Medium ↗" : d.status === "writing" ? "Being written" : d.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  if (d.status === "writing") return "Being written";
+  return d.link ? `${fmtDate(d.date)} · On Medium ↗` : fmtDate(d.date);
 }
 
 export function linkOf(entry: any): string | null {
   const d = entry.data;
-  return d.link ?? (d.status === "published" ? `/writing/${d.lens}/${entry.id}` : null);
+  return d.link ?? (d.status === "published" ? withBase(`/writing/${d.lens}/${entry.id}`) : null);
+}
+
+export function nextLens(key: string) {
+  const i = lenses.findIndex((l) => l.key === key);
+  return lenses[(i + 1) % lenses.length];
 }

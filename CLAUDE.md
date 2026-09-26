@@ -4,7 +4,7 @@ Root context for this project. Keep this file **lean** — it loads every turn. 
 
 ## What this is
 
-A personal portfolio site for Sundharesan Kumaresan. Aesthetic: **Vogue/magazine editorial** — black-and-white Didone display type at extreme scale, full-bleed full-colour photography, no boxes or cards, asymmetric flush-left composition, and a single **stellar-blue** spot colour threaded throughout (monogram dot, index numbers, links, rules, drop caps). Light + dark. Content-first. Structured as a publication: Home (threshold) · Now/Work (role feature) · Writing (four lenses + a being-written desk, with a Modern↔Evening edition toggle) · Reading (scatter gallery) · Ambitions (a 'forming' op-ed) · About (long-read), with Contact in the footer and a rotating-cube ≡ menu. Owner: Sundharesan Kumaresan, AI engineer at Oogway Labs (employer, not the masthead).
+A personal portfolio site for Sundharesan Kumaresan. Aesthetic: **Vogue/magazine editorial** — black-and-white Didone display type at extreme scale, full-bleed full-colour photography, no boxes or cards, asymmetric flush-left composition, and a single **stellar-blue** spot colour threaded throughout (monogram dot, index numbers, links, rules, drop caps). Three themes: light, cream, dark. Content-first. Structured as a publication with one running order: Home (threshold + featured piece) · Now/Work (role feature) · Writing (three lenses + a being-written desk; a fourth lens is parked in DECISIONS) · Reading (scatter gallery) · To (the future desk, incl. iyal, the active research thread) · Modelling · About (long-read), with Contact in the footer and a rotating-cube ≡ menu. Owner: Sundharesan Kumaresan, AI engineer at Oogway Labs (employer, not the masthead).
 
 ## Stack
 
@@ -19,11 +19,13 @@ npm install        # install deps
 npm run dev        # local dev server
 npm run build      # production build -> ./dist
 npm run preview    # preview the build
+npm run new        # scaffold a writing/reading entry (schema-correct frontmatter)
+npm run publish    # build gate -> commit -> push (see docs/WRITING_WORKFLOW.md)
 ```
 
 ## Conventions
 
-- **Design tokens are law.** Never hardcode colors, spacing, or font sizes — use the tokens in `docs/DESIGN_SYSTEM.md` (mirrored in `tailwind.config`). If a value isn't a token, add it to the system first.
+- **Design tokens are law.** Never hardcode colors, spacing, font sizes, tracking, or motion values — use the tokens in `docs/DESIGN_SYSTEM.md` (defined in the `@theme` block of `src/styles/global.css`, Tailwind v4 CSS-first). If a value isn't a token, add it to the system first. No inline `style="font-size: …"` in pages.
 - Components are small, composable `.astro` files. Reach for client JS only when interaction demands it (`client:*` directives, sparingly).
 - Content (copy, projects, posts) lives in Markdown/MDX via Astro Content Collections, not hardcoded in templates.
 - Accessibility is a requirement, not a pass: semantic HTML, visible focus states, AA contrast.
@@ -42,4 +44,5 @@ npm run preview    # preview the build
 - `docs/DESIGN_SYSTEM.md` — tokens, type, spacing, components, do/don't
 - `docs/DECISIONS.md` — decision log (Decided + Open/Deferred)
 - `docs/ARCHITECTURE.md` — structure, routing, content model
+- `docs/WRITING_WORKFLOW.md` — how to write & publish (npm run new / publish, draft states)
 - `docs/ROADMAP.md` — phases and status

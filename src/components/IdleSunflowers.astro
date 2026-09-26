@@ -1,0 +1,74 @@
+<div class="idle-sunflowers" aria-hidden="true"></div>
+
+<script>
+  import { createIdleSunflowerController } from "../scripts/idleSunflowers";
+  import { initSunflower } from "../scripts/sunflower";
+
+  const overlay = document.querySelector(".idle-sunflowers");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (overlay instanceof HTMLDivElement && !overlay.dataset.idleSunflowersInit && !reducedMotion) {
+    overlay.dataset.idleSunflowersInit = "1";
+    const flowers: Array<{ canvas: HTMLCanvasElement; dispose: () => void }> = [];
+
+    const overlapsContent = (canvas: HTMLCanvasElement) => {
+      const rect = canvas.getBoundingClientRect();
+      return Array.from(document.querySelectorAll("a, button, input, textarea, select, summary, h1, h2, h3, h4, h5, h6, p, blockquote, img, [role=img], [data-home-photo-frame], [style*=background-image], .glass-topbar, .idle-sunflower"))
+        .some((element) => {
+          if (element === canvas) return false;
+          const target = element.getBoundingClientRect();
+          return rect.left < target.right && rect.right > target.left && rect.top < target.bottom && rect.bottom > target.top;
+        });
+    };
+
+    const clear = () => {
+      for (const flower of flowers.splice(0)) {
+        flower.dispose();
+        flower.canvas.classList.add("is-clearing");
+        window.setTimeout(() => flower.canvas.remove(), 250);
+      }
+    };
+
+    const show = (count: 2 | 3) => {
+      clear();
+      const randomPosition = () => {
+        const canvas = document.createElement("canvas");
+        canvas.className = "idle-sunflower size-18 max-sm:size-12";
+        canvas.style.left = `${8 + Math.random() * 78}%`;
+        canvas.style.top = `${8 + Math.random() * 78}%`;
+        overlay.append(canvas);
+        if (overlapsContent(canvas)) {
+          canvas.remove();
+          return undefined;
+        }
+        return canvas;
+      };
+
+      for (let attempt = 0; attempt < 24 && flowers.length < count; attempt++) {
+        const canvas = randomPosition();
+        if (!canvas) continue;
+        const rotationSpeed = (Math.random() < 0.5 ? -1 : 1) * (0.00015 + Math.random() * 0.00025);
+        const dispose = initSunflower(canvas, { count: 72, initialRotation: Math.random() * Math.PI * 2, rotationSpeed });
+        flowers.push({ canvas, dispose });
+      }
+
+      if (flowers.length < count) clear();
+    };
+
+    const controller = createIdleSunflowerController({ onShow: show, onClear: clear });
+    const events: Array<[keyof WindowEventMap, AddEventListenerOptions | boolean]> = [
+      ["pointermove", { passive: true }],
+      ["pointerdown", { passive: true }],
+      ["scroll", { passive: true }],
+      ["keydown", false],
+      ["touchstart", { passive: true }],
+    ];
+    const activity = () => controller.activity();
+    events.forEach(([event, options]) => window.addEventListener(event, activity, options));
+    window.addEventListener("pagehide", () => {
+      controller.destroy();
+      clear();
+      events.forEach(([event, options]) => window.removeEventListener(event, activity, options));
+    }, { once: true });
+  }
+</script>

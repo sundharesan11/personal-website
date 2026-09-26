@@ -1,0 +1,19 @@
+---
+// src/components/PageHeader.astro
+// The canonical page masthead: muted label left, accent label right, optional
+// display title. Every section page opens with this.
+interface Props {
+  left: string;
+  right?: string;
+  title?: string;
+}
+const { left, right, title } = Astro.props;
+---
+<header data-reveal class="pt-5">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+    <span class="label-fit font-sans text-xs uppercase tracking-kicker text-text-muted">{left}</span>
+    {right && <span class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">{right}</span>}
+  </div>
+  {title && <h1 data-reveal class="reveal-tracking mt-5 font-serif font-semibold leading-[0.9] text-display-hero">{title}</h1>}
+  <slot />
+</header>

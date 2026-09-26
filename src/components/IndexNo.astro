@@ -1,0 +1,10 @@
+---
+// src/components/IndexNo.astro
+// The house `nº 01` index-number motif. One spec, used everywhere.
+interface Props {
+  n: number;
+  class?: string;
+}
+const { n, class: className } = Astro.props;
+---
+<span class:list={["font-sans text-xs uppercase tracking-kicker text-accent", className]}>n&ordm; {String(n).padStart(2, "0")}</span>

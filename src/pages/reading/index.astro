@@ -1,58 +1,68 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import NextPageLink from "../../components/NextPageLink.astro";
 import Sunflower from "../../components/Sunflower.astro";
+import EditorialField from "../../components/EditorialField.astro";
+import ReadingListSection from "../../components/ReadingListSection.astro";
 import { getCollection } from "astro:content";
 
-const books = (await getCollection("reading")).sort((a, b) => a.data.order - b.data.order);
-const groups = [...new Set(books.map((b) => b.data.opened))];
-
-// scattered placement: varied indent + width per book (deeper indent pairs with a narrower measure so nothing overflows)
-const layout = [
-  { ml: "", w: "md:max-w-[52ch]" },
-  { ml: "md:ml-[24%]", w: "md:max-w-[42ch]" },
-  { ml: "md:ml-[9%]", w: "md:max-w-[50ch]" },
-  { ml: "md:ml-[32%]", w: "md:max-w-[40ch]" },
-  { ml: "md:ml-[14%]", w: "md:max-w-[48ch]" },
-  { ml: "md:ml-[4%]", w: "md:max-w-[52ch]" },
-  { ml: "md:ml-[19%]", w: "md:max-w-[44ch]" },
-];
+const books = (await getCollection("reading")).sort((a, b) => b.data.order - a.data.order);
+const readBooks = books.filter((book) => book.data.status === "read");
+const toReadBooks = books.filter((book) => book.data.status === "on-deck");
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 ---
-<BaseLayout title="Reading · Sundharesan Kumaresan">
-  <main id="main-content" class="relative mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <header class="border-t border-border pt-5">
-      <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <span class="font-sans text-xs uppercase tracking-[0.18em] text-text-muted">The reading room</span>
-        <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">{books.length} books</span>
-      </div>
-      <h1 class="mt-5 font-serif font-semibold leading-[0.9]" style="font-size: clamp(2.5rem, 8vw, 5.5rem);">Reading</h1>
-    </header>
+<BaseLayout
+  title="Reading · Sundharesan Kumaresan"
+  description="The books that did the most damage to how Sundharesan thinks, plus the next pile on the desk."
+>
+  <main id="main-content" class="relative mx-auto max-w-page px-6 pt-16 pb-16">
+    <PageHeader left="The reading room" right="A working shelf" title="Reading">
+      <p class="mt-7 max-w-[58ch] text-lg leading-relaxed text-text-muted">Not a shelf, a map of dents. The books that stayed, followed by the next pile ready to do some damage.</p>
+    </PageHeader>
     <div class="mt-12 md:grid md:grid-cols-[minmax(0,1fr)_320px] md:gap-12">
       <div>
-        {groups.map((g) => (
-          <section class="mt-16">
-            <h2 class="font-sans text-sm uppercase tracking-[0.18em] text-text-muted">{g}</h2>
-            <div class="mt-8 flex flex-col gap-12">
-              {books.filter((b) => b.data.opened === g).map((b) => {
-                const L = layout[books.findIndex((x) => x.id === b.id) % layout.length];
-                return (
-                <article class:list={["max-w-[58ch] transition-transform duration-300 hover:-translate-y-1", L.ml, L.w]}>
-                  <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <h3 class="font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.4rem, 3.4vw, 2.1rem);">
-                      {b.data.link ? <a href={b.data.link} class="transition-colors hover:text-accent">{b.data.title}</a> : b.data.title}
-                    </h3>
-                    <span class:list={["font-sans text-xs uppercase tracking-[0.16em]", b.data.status === "on-deck" ? "text-accent" : "text-text-muted"]}>{b.data.status === "on-deck" ? "on deck" : "read"}</span>
-                  </div>
-                  <p class="mt-1 text-sm uppercase tracking-[0.12em] text-text-muted">{b.data.author}</p>
-                  <p class="mt-3 text-text-muted">{b.data.note}</p>
-                  {b.data.question && (
-                    <p class="mt-3 font-serif italic leading-snug text-text" style="font-size: clamp(1.05rem, 2.2vw, 1.4rem);">{b.data.question}</p>
-                  )}
-                </article>
-                );
-              })}
+        <p class="mt-6 max-w-[52ch] text-text-muted">The last three reads. The rest have been returned to the void.</p>
+        <ReadingListSection title="Last three reads" entries={readBooks} kind="read" />
+        <ReadingListSection title="To Read" entries={toReadBooks} kind="on-deck" />
+
+        <section class="mt-24 border-t border-border pt-8" aria-labelledby="recommend-heading">
+          <p class="font-sans text-xs uppercase tracking-kicker text-accent">Reader's margin</p>
+          <h2 id="recommend-heading" class="mt-4 font-serif text-entry font-semibold leading-none">Recommend a book</h2>
+          <p class="mt-5 max-w-[56ch] text-text-muted">Give me the title and the reason it earned the interruption. Recommendations arrive privately and nothing appears here automatically.</p>
+
+          {hasWeb3FormsKey ? (
+            <form action="https://api.web3forms.com/submit" method="POST" class="mt-10 max-w-[58ch]" data-reveal data-recommendation-state="configured">
+              <input type="hidden" name="access_key" value={web3formsAccessKey} />
+              <input type="hidden" name="subject" value="Private book recommendation" />
+              <input type="hidden" name="from_name" value="Sundharesan website reading room" />
+              <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+              <EditorialField required label="Book title" name="book_title" placeholder="The book I should lose a weekend to" />
+              <div class="mt-8">
+                <EditorialField required type="textarea" label="Why this one?" name="reason" rows={6} placeholder="What stayed with you, changed your mind, or refused to leave?" />
+              </div>
+
+              <details class="mt-8 border-t border-border pt-5">
+                <summary class="cursor-pointer font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-accent">Want a reply?</summary>
+                <div class="mt-6 grid gap-8 sm:grid-cols-2">
+                  <EditorialField label="Name (optional)" name="name" autocomplete="name" placeholder="Who sent me down this path?" />
+                  <EditorialField type="email" label="Email (optional)" name="email" autocomplete="email" placeholder="Only if you want a reply" />
+                </div>
+              </details>
+
+              <button type="submit" class="group mt-8 font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Send recommendation <span class="adv-arrow text-accent">&rarr;</span></button>
+            </form>
+          ) : (
+            <div class="mt-10 max-w-[58ch] border-t border-border pt-6" data-reveal data-recommendation-state="fallback">
+              <p class="font-sans text-xs uppercase tracking-kicker text-accent">Recommendation form offline</p>
+              <p class="mt-5 text-text-muted">Send the title and why it deserves the next empty margin. Your name is optional.</p>
+              <a href="mailto:sundharesansk11@gmail.com?subject=Book%20recommendation" class="group mt-7 inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Recommend by email <span class="adv-arrow text-accent">&rarr;</span></a>
             </div>
-          </section>
-        ))}
+          )}
+        </section>
+        <NextPageLink href="/writing" eyebrow="Where the damage goes">The writing these books fed</NextPageLink>
       </div>
       <div class="hidden md:block" aria-hidden="true">
         <div class="pointer-events-none sticky top-28">

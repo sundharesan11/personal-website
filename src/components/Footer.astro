@@ -1,15 +1,26 @@
 ---
+import { withBase } from "../lib/paths";
+
 const year = new Date().getFullYear();
+// Same set as About: the publication has one masthead of profiles.
+const socials = [
+  { href: "mailto:sundharesansk11@gmail.com", label: "Email" },
+  { href: "https://x.com/sundharesansk11", label: "X" },
+  { href: "https://www.linkedin.com/in/sundharesan-kumaresan-iyal11", label: "LinkedIn" },
+  { href: "https://github.com/sundharesan11", label: "GitHub" },
+  { href: "https://medium.com/@sundharesansk11", label: "Medium" },
+  { href: "https://www.instagram.com/sundharesan_11/", label: "Instagram" },
+];
 ---
 <footer class="relative z-10 bg-bg pt-28">
-  <div class="mx-auto max-w-[1100px] px-6 pb-12">
+  <div class="mx-auto max-w-page px-6 pb-12">
     <div class="border-t-2 border-stellar pt-10">
-      <a href="/contact" class="font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.7rem, 5vw, 2.8rem);">Get in touch <span class="text-accent">&rarr;</span></a>
+      <a href={withBase("/contact")} class="group font-serif text-entry font-semibold leading-none text-text transition-colors hover:text-accent">Get in touch <span class="adv-arrow text-accent">&rarr;</span></a>
       <div class="mt-8 flex flex-col gap-4 text-sm text-text-muted sm:flex-row sm:items-end sm:justify-between">
         <div class="flex flex-wrap gap-x-6 gap-y-2">
-          <a href="mailto:sundharesansk11@gmail.com" class="u-draw transition-colors hover:text-text">Email</a>
-          <a href="https://x.com/sundharesansk11" class="u-draw transition-colors hover:text-text">X</a>
-          <a href="https://www.linkedin.com/in/sundharesan-kumaresan-iyal11" class="u-draw transition-colors hover:text-text">LinkedIn</a>
+          {socials.map((s) => (
+            <a href={s.href} class="u-draw transition-colors hover:text-text">{s.label}</a>
+          ))}
         </div>
         <span>&copy; {year} Sundharesan Kumaresan</span>
       </div>

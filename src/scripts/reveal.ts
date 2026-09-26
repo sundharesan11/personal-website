@@ -1,4 +1,5 @@
 export function initMotion(): void {
+  document.documentElement.classList.add("js-reveal");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal], main section"));
   els.forEach((el) => el.setAttribute("data-reveal", ""));
@@ -12,6 +13,18 @@ export function initMotion(): void {
     }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
     els.forEach((el) => io.observe(el));
   }
+
+  // Scroll-aware topbar: the glass pill tightens once the page is in motion
+  let stateTicking = false;
+  const updateScrolled = () => {
+    document.body.classList.toggle("is-scrolled", window.scrollY > 32);
+    stateTicking = false;
+  };
+  updateScrolled();
+  window.addEventListener("scroll", () => {
+    if (!stateTicking) { stateTicking = true; requestAnimationFrame(updateScrolled); }
+  }, { passive: true });
+
   const bar = document.getElementById("scroll-progress");
   if (bar && !reduce.matches) {
     let ticking = false;

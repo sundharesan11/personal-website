@@ -1,48 +1,49 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EditorialField from "../components/EditorialField.astro";
+import { withBase } from "../lib/paths";
 
 const themes = [
-  "Farmer-investor collaboration",
-  "Capital planning and seasonal financing",
-  "Market access and price discovery",
-  "Farmer-buyer relationships",
-  "Logistics coordination",
-  "Government support and regulatory navigation",
-  "Trust and transparency mechanisms",
-  "Community-driven agricultural knowledge",
-  "Decision support for farming operations",
-  "Long-term behaviour inside agricultural networks",
+  "The week before sowing, when cash has to arrive before advice becomes useful",
+  "The buyer who says yes on the phone and vanishes when the crop is ready",
+  "The truck that is technically available and practically nowhere near the farm",
+  "The local operator everyone trusts, even when no software knows their name",
+  "The government scheme that exists, but only if someone can navigate the paperwork",
+  "The price signal that reaches the farmer late enough to feel like a joke",
+  "The repayment plan that respects a season instead of a calendar fantasy",
+  "The WhatsApp group where the real market intelligence already lives",
+  "The storage decision that turns a good harvest into either breathing room or panic",
+  "The quiet question under every deal: who will still show up if this goes badly?",
 ];
 
 const validation = [
-  "Understand a farmer's seasonal planning before pretending software knows the answer.",
-  "Coordinate access to capital around real cash-flow moments, not neat spreadsheet fantasies.",
-  "Identify buyers, logistics partners, and support systems that can actually show up.",
-  "Track operational challenges through the season, especially where trust is gained or quietly lost.",
-  "Use simple tools and manual coordination before asking code to carry the weight.",
+  "Start with one season, one crop, and the exact week money starts deciding the harvest.",
+  "Map who the farmer already calls: buyer, transporter, input dealer, lender, neighbour, local fixer.",
+  "Find the moment trust breaks: price, pickup, repayment, paperwork, storage, or silence.",
+  "Coordinate the smallest useful workflow by hand before asking software to wear a cape.",
+  "Keep the farmer's judgment in the loop, because the field is not a dashboard and never has been.",
 ];
 
 const principles = [
   {
     title: "Farmers first.",
-    body: "Technology should support farmers, not replace their judgment.",
+    body: "The person taking the weather, debt, soil, buyer, and family risk gets the first vote.",
   },
   {
     title: "Relationships before transactions.",
-    body: "Strong agricultural networks are built on trust, not only contracts.",
+    body: "A season runs on people showing up when the spreadsheet has already left the room.",
   },
   {
     title: "Understand before building.",
-    body: "Real workflows should shape software, not the other way around.",
+    body: "The first product is listening carefully enough to stop having clever wrong ideas.",
   },
   {
     title: "Transparency creates confidence.",
-    body: "Every stakeholder should clearly understand the information relevant to them.",
+    body: "Farmers, buyers, lenders, and operators should know what matters to them without needing a translator.",
   },
   {
     title: "Small experiments over large assumptions.",
-    body: "One real workflow teaches more than ten hypothetical features.",
+    body: "One real crop cycle teaches more than ten hypothetical features.",
   },
   {
     title: "Long-term thinking.",
@@ -51,53 +52,64 @@ const principles = [
 ];
 
 const questions = [
-  "Can trust between farmers and capital providers become measurable?",
-  "What information helps farmers make better decisions?",
-  "How can uncertainty throughout a farming season be reduced?",
-  "What prevents effective coordination today?",
-  "Can software strengthen human relationships instead of replacing them?",
-  "What is the smallest intervention that creates meaningful value for a farmer?",
-  "How should incentives align between farmers, investors, buyers, logistics providers, and governments?",
+  "What does a farmer need to know before borrowing for a season?",
+  "Who is already trusted on the ground, and why?",
+  "Where does money arrive too late to matter?",
+  "Which buyer promises are reliable enough to build around?",
+  "What can be coordinated over a phone call before a platform has any right to exist?",
+  "Where does logistics quietly eat the farmer's margin?",
+  "What is the smallest workflow that makes one season less uncertain?",
 ];
 
 const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 ---
 <BaseLayout
   title="iyal · Sundharesan Kumaresan"
   description="iyal is Sundharesan Kumaresan's active research and product flow exploring agricultural coordination, farmer capital networks, and trust."
 >
-  <main id="main-content" class="mx-auto max-w-[1100px] px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted transition-colors hover:text-text">&larr; To</a>
+  <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
+    <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-12">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-text-muted">Farmer capital network · active research</p>
-      <h1 class="mt-6 font-script font-normal leading-[0.8] text-accent" style="font-size: clamp(5.4rem, 18vw, 13rem);">iyal</h1>
-      <p data-reveal class="mt-8 max-w-[18ch] font-serif font-semibold leading-[1.02]" style="font-size: clamp(1.8rem, 5.5vw, 3.7rem);">Exploring the future of agricultural coordination.</p>
-      <p class="mt-8 max-w-[64ch] text-lg leading-relaxed text-text-muted">Agriculture is one of humanity's oldest systems, yet many of the people who depend on it still operate inside disconnected ecosystems. Farmers, investors, buyers, logistics providers, governments, researchers, and startups each solve a small part of the problem. Very few connect them together.</p>
+      <p class="label-fit font-sans text-xs uppercase tracking-kicker text-text-muted">Farmer capital network · active research</p>
+      <h1 class="mt-6 font-script text-display-giant font-normal leading-[0.8] text-accent">iyal</h1>
+      <p data-reveal class="display-fit mt-8 max-w-[18ch] font-serif text-display-read font-semibold leading-[1.02]">Following the trust, timing, and money of a farming season.</p>
+      <p class="text-fit mt-8 max-w-[64ch] text-lg leading-relaxed text-text">A crop does not wait for a clean product brief. Money is needed before sowing, labour before the weather turns, transport before the buyer changes their mind, and trust before anyone signs anything that matters. <span class="font-script text-3xl leading-none text-accent">iyal</span> is my active research thread into that messy middle: how farmers, capital, buyers, logistics, and local operators already move together, and where a small amount of coordination could make the season less brutal.</p>
     </header>
+
+    <figure class="mt-20 relative left-1/2 w-screen -translate-x-1/2">
+      <img
+        src={withBase("/img/iyal-season-map.png")}
+        alt="A pencilled systems map connecting farmers, workers, buyers, capital, local operators, storage, and transport across one farming season."
+        class="h-auto w-full"
+        width="1664"
+        height="936"
+      />
+    </figure>
 
     <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">What is iyal?</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">What is iyal?</p>
       </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-        <p><span class="font-script text-3xl leading-none text-accent">iyal</span> is an ongoing research and product flow exploring how technology, human relationships, coordinated workflows, and trust can improve the agricultural ecosystem.</p>
-        <p>It does not start with another marketplace. It starts with the ground truth: how decisions are made, where uncertainty appears, what breaks communication, and how different stakeholders move through a farming season.</p>
-        <p class="font-serif text-text" style="font-size: clamp(1.35rem, 3vw, 1.9rem);">Better software starts with better understanding. Annoying, inconvenient, and usually correct.</p>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p><span class="font-script text-3xl leading-none text-accent">iyal</span> is an ongoing research and product flow about one practical question: what would make a farming season easier to coordinate without insulting the people who already understand it?</p>
+        <p>It does not start with another marketplace. It starts with ground truth: who needs money when, which buyer can be trusted, which truck can actually show up, which local person everyone calls, and where silence becomes expensive.</p>
+        <p class="font-serif text-list-title text-text">Better software starts with better understanding. Annoying, inconvenient, and usually correct.</p>
       </div>
     </section>
 
     <section class="mt-20">
-      <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Why this matters</p>
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">Why this matters</p>
       <div class="mt-6 grid gap-12 md:grid-cols-[1fr_0.8fr]">
-        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text-muted">
-          <p>Agriculture is not only about growing crops. It is about managing uncertainty.</p>
-          <p>Every season asks the same brutal questions in new clothes: when to plant, how to arrange capital, which buyer can be trusted, when to sell, which logistics partner is available, which schemes apply, and how risk should be shared fairly.</p>
-          <blockquote class="border-l-2 border-accent pl-6 font-serif italic leading-[1.2] text-text" style="font-size: clamp(1.5rem, 3.8vw, 2.3rem);">Agriculture doesn't only need better technology. It needs better coordination.</blockquote>
+        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+          <p>Agriculture is not only about growing crops. It is about managing uncertainty with real money on the line.</p>
+          <p>Every season asks the same brutal questions in new clothes: when to plant, how to arrange capital, which buyer can be trusted, when to sell, which transport is real and which is wishful thinking, which schemes apply, and how risk should be shared fairly.</p>
+          <blockquote class="border-l-2 border-accent pl-6 font-serif text-statement italic leading-[1.2] text-text">Agriculture doesn't only need better technology. It needs better coordination.</blockquote>
         </div>
         <ul class="border-t border-border">
           {themes.map((theme) => (
-            <li class="border-b border-border py-4 text-text-muted">{theme}</li>
+            <li class="border-b border-border py-4 text-text">{theme}</li>
           ))}
         </ul>
       </div>
@@ -105,15 +117,15 @@ const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 
     <section class="mt-24 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Current validation</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">Current validation</p>
       </div>
       <div>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-text-muted">I am intentionally not building a large platform yet. The current work is about validating small coordination workflows with real people: farmers, investors, buyers, logistics partners, and the people already trusted on the ground.</p>
+        <p class="text-fit max-w-[62ch] text-lg leading-relaxed text-text">I am intentionally not building a large platform yet. The current work is about validating small coordination workflows with real people: farmers, capital providers, buyers, transporters, local operators, and the people already trusted on the ground.</p>
         <ol class="mt-8 space-y-6">
           {validation.map((item, index) => (
             <li class="grid gap-4 border-t border-border pt-6 sm:grid-cols-[4rem_1fr]">
-              <span class="whitespace-nowrap font-sans text-xs uppercase tracking-[0.18em] text-accent">nº {String(index + 1).padStart(2, "0")}</span>
-              <p class="max-w-[58ch] text-text-muted">{item}</p>
+              <span class="whitespace-nowrap font-sans text-xs uppercase tracking-kicker text-accent">nº {String(index + 1).padStart(2, "0")}</span>
+              <p class="max-w-[58ch] text-text">{item}</p>
             </li>
           ))}
         </ol>
@@ -122,14 +134,14 @@ const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 
     <section class="mt-24">
       <div class="flex flex-wrap items-end gap-5">
-        <h2 class="font-serif font-semibold leading-[0.95]" style="font-size: clamp(2.2rem, 7vw, 4.8rem);">Principles</h2>
+        <h2 class="font-serif text-display-page font-semibold leading-[0.95]">Principles</h2>
         <span class="mb-4 h-px flex-1 bg-stellar"></span>
       </div>
       <div class="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
         {principles.map((principle) => (
           <article class="border-t border-border pt-6">
-            <h3 class="font-serif font-semibold leading-[1.1]" style="font-size: clamp(1.25rem, 3vw, 1.75rem);">{principle.title}</h3>
-            <p class="mt-3 max-w-[54ch] text-text-muted">{principle.body}</p>
+            <h3 class="font-serif text-list-title font-semibold leading-[1.1]">{principle.title}</h3>
+            <p class="mt-3 max-w-[54ch] text-text">{principle.body}</p>
           </article>
         ))}
       </div>
@@ -137,84 +149,93 @@ const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 
     <section class="mt-24 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Questions driving the work</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">Questions driving the work</p>
       </div>
       <ul class="max-w-[68ch]">
         {questions.map((question) => (
-          <li class="border-b border-border py-4 font-serif leading-[1.28] text-text" style="font-size: clamp(1.05rem, 2.1vw, 1.35rem);">{question}</li>
+          <li class="border-b border-border py-4 font-serif text-dek leading-[1.28] text-text">{question}</li>
         ))}
       </ul>
     </section>
 
     <section class="mt-24">
-      <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Long-term vision</p>
-      <p class="mt-6 max-w-[26ch] font-serif font-semibold leading-[1.05]" style="font-size: clamp(1.6rem, 5vw, 3.1rem);">Infrastructure for people who already do the hard part.</p>
-      <p class="mt-8 max-w-[68ch] text-lg leading-relaxed text-text-muted">If today's agricultural systems connect individual participants, iyal is trying to learn what it would take to help them work together more effectively: farmers with better visibility, investors with more confidence, markets that are easier to reach, logistics that are less improvised, and decisions supported by real operational understanding.</p>
-      <p class="mt-6 max-w-[68ch] text-lg leading-relaxed text-text-muted">Not overnight. Not by pretending the field is a dashboard. Through learning, experimentation, and collaboration with the people who already know where the system bends.</p>
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">Long-term vision</p>
+      <p class="mt-6 max-w-[26ch] font-serif text-display-read font-semibold leading-[1.05]">Infrastructure for people who already do the hard part.</p>
+      <p class="text-fit mt-8 max-w-[68ch] text-lg leading-relaxed text-text">If today's agricultural systems connect individual participants, iyal is trying to learn what it would take to help them work together through the season: farmers with clearer options, capital providers with better context, buyers who can be trusted, transport that is less improvised, and decisions grounded in real operations.</p>
+      <p class="text-fit mt-6 max-w-[68ch] text-lg leading-relaxed text-text">Not overnight. Not by pretending the field is a dashboard. Through field notes, small experiments, and collaboration with the people who already know where the system bends.</p>
     </section>
 
     <section class="mt-28 border-t-2 border-stellar pt-10">
       <div class="grid gap-12 md:grid-cols-[0.85fr_1.15fr]">
         <div>
-          <p class="font-sans text-xs uppercase tracking-[0.18em] text-accent">Contribute</p>
-          <h2 class="mt-4 max-w-[13ch] font-serif font-semibold leading-[1.02]" style="font-size: clamp(2rem, 5.5vw, 4rem);">Stay close to the work.</h2>
-          <p class="mt-8 max-w-[44ch] text-lg leading-relaxed text-text-muted"><span class="font-script text-3xl leading-none text-accent">iyal</span> is still in validation. If agriculture, capital, logistics, policy, or field operations are part of your world, this is the quiet door in.</p>
+          <p class="font-sans text-xs uppercase tracking-kicker text-accent">Contribute</p>
+          <h2 class="mt-4 max-w-[13ch] font-serif text-display-read font-semibold leading-[1.02]">Stay close to the work.</h2>
+          <p class="mt-8 max-w-[44ch] text-lg leading-relaxed text-text"><span class="font-script text-3xl leading-none text-accent">iyal</span> is still in validation. If agriculture, capital, logistics, policy, or field operations are part of your world, this is the quiet door in.</p>
         </div>
-        <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6">
-          <input type="hidden" name="access_key" value={web3formsAccessKey} />
-          <input type="hidden" name="subject" value="iyal field note" />
-          <input type="hidden" name="from_name" value="iyal website" />
-          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+        {hasWeb3FormsKey ? (
+          <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6">
+            <input type="hidden" name="access_key" value={web3formsAccessKey} />
+            <input type="hidden" name="subject" value="iyal field note" />
+            <input type="hidden" name="from_name" value="iyal website" />
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
 
-          <div class="grid gap-8 sm:grid-cols-2">
-            <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Your full name" />
-            <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where can I reply?" />
-          </div>
+            <div class="grid gap-8 sm:grid-cols-2">
+              <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Your full name" />
+              <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where can I reply?" />
+            </div>
 
-          <div class="mt-8">
-            <EditorialField
-              label="Your role in the ecosystem"
-              name="ecosystem_role"
-              placeholder="Farmer, investor, buyer, logistics, policy, researcher, operator..."
-            />
-          </div>
+            <div class="mt-8">
+              <EditorialField
+                label="Your role in the season"
+                name="season_role"
+                placeholder="Farmer, lender, buyer, transporter, policy, researcher, operator..."
+              />
+            </div>
 
-          <div class="mt-8">
-            <EditorialField
-              label="Where are you working from?"
-              name="location_context"
-              placeholder="Village, district, state, country, or the market you know best"
-            />
-          </div>
+            <div class="mt-8">
+              <EditorialField
+                label="Where are you working from?"
+                name="location_context"
+                placeholder="Village, district, state, country, or the market you know best"
+              />
+            </div>
 
-          <div class="mt-8">
-            <EditorialField
-              required
-              type="textarea"
-              label="What are you seeing on the ground?"
-              name="message"
-              rows={7}
-              placeholder="Tell me what breaks, what works, who is trusted, or what I am probably missing."
-            />
-          </div>
+            <div class="mt-8">
+              <EditorialField
+                required
+                type="textarea"
+                label="What are you seeing on the ground?"
+                name="message"
+                rows={7}
+                placeholder="Tell me what breaks, what works, who is trusted, or what I am probably missing."
+              />
+            </div>
 
-          <div class="mt-8">
-            <EditorialField
-              required
-              type="select"
-              label="Can I follow up?"
-              name="follow_up_preference"
-              placeholder="Choose how open this door should be"
-              options={[
-                { value: "yes_happy_to_talk", label: "Yes, happy to talk" },
-                { value: "email_only", label: "Reply by email only" },
-                { value: "not_yet", label: "Not yet, just sharing a note" },
-              ]}
-            />
-          </div>
+            <div class="mt-8">
+              <EditorialField
+                required
+                type="select"
+                label="Can I follow up?"
+                name="follow_up_preference"
+                placeholder="Choose how open this door should be"
+                options={[
+                  { value: "yes_happy_to_talk", label: "Yes, happy to talk" },
+                  { value: "email_only", label: "Reply by email only" },
+                  { value: "not_yet", label: "Not yet, just sharing a note" },
+                ]}
+              />
+            </div>
 
-          <button type="submit" class="mt-10 font-serif font-semibold leading-none text-text transition-colors hover:text-accent" style="font-size: clamp(1.45rem, 3.4vw, 2.25rem);">Send field note <span class="text-accent">&rarr;</span></button>
-        </form>
+            <p class="text-fit mt-8 max-w-[52ch] text-sm leading-relaxed text-text-muted">I read these as field notes, not leads in a funnel. If the form misbehaves, send the same note to <a href="mailto:sundharesansk11@gmail.com" class="u-underline text-text hover:text-accent">sundharesansk11@gmail.com</a>.</p>
+            <button type="submit" class="group mt-8 font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Send field note <span class="adv-arrow text-accent">&rarr;</span></button>
+          </form>
+        ) : (
+          <section class="border-t border-border pt-6">
+            <p class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">Field-note door</p>
+            <p class="text-fit mt-5 max-w-[54ch] text-lg leading-relaxed text-text-muted">The form needs a Web3Forms key before it can send properly. Until then, email the note: where you are, what breaks in the season, who is trusted, and what I am probably missing.</p>
+            <a href="mailto:sundharesansk11@gmail.com?subject=iyal%20field%20note" class="group mt-8 inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Email field note <span class="adv-arrow text-accent">&rarr;</span></a>
+          </section>
+        )}
       </div>
     </section>
   </main>

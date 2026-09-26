@@ -1,6 +1,6 @@
 # Design System
 
-The spine of the site. Every UI choice traces back here. Aesthetic: **Vogue/magazine editorial** — image-led, black-and-white Didone display type at extreme scale, no boxes or cards, asymmetric flush-left composition, and a single stellar-blue spot colour.
+The spine of the site. Every UI choice traces back here. Aesthetic: **Vogue/magazine editorial** — image-led, black-and-white Bodoni display type at extreme scale, article-serif long reads, no boxes or cards, asymmetric flush-left composition, and a single stellar-blue spot colour.
 
 > Tokens are declared once in `src/styles/global.css` under the `@theme` block (Tailwind v4, CSS-first). Tailwind generates utilities from them automatically — there is no `tailwind.config.mjs`. When you add a token, add it to `@theme` in `global.css`; the utility is immediately available.
 
@@ -31,14 +31,27 @@ Ink (black/white, theme-dependent) + full-colour photography + a single stellar-
 
 > `--color-stellar: #0057B8` is the spot colour name in light and cream themes. Dark mode uses `#6BB6FF`, an AA-safe tint of the same blue family, because `#0057B8` is too dark on the dark background. Rules: body text on `bg` only. `text-muted` never for primary reading content. Accent (stellar) never as a large fill — it is a highlight, not a background.
 
+Cream theme keeps the same roles with warmer neutrals; `text-muted` is `#685E50` so small editorial labels clear AA contrast on `#F3EBDD`.
+
 ## Typography
 
-- **Display (Didone):** Playfair Display via `--font-serif` — the display voice for the name, section titles, work/post titles, and drop caps. Used at **extreme `clamp()` sizes**:
-  - Name / hero: `clamp(2.8rem, 10vw, 7rem)`
-  - Section title (Work / Writing / About): `clamp(3rem, 9vw, 6rem)`
-  - Work / post title: `clamp(2rem, 4.5vw, 3.4rem)`
-- **UI + body:** Inter (or `ui-sans-serif, system-ui` fallback) — body copy, nav, kickers (uppercase, letter-spaced), and datelines.
-- Keep to one weight contrast per context; no more than 2 families total.
+- **Display (Bodoni):** Libre Bodoni via `--font-serif` — the display voice for the name, section titles, work/post titles, pull quotes, and drop caps. Used at **extreme `clamp()` sizes**, which live as tokens (never inline styles):
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `text-display-giant` | `clamp(5rem, 18vw, 13rem)` | the iyal script masthead only |
+| `text-display-hero` | `clamp(2.5rem, 8vw, 5.5rem)` | section mastheads (Writing, Reading, Modelling, To, 404) + display statements (Contact h1) |
+| `text-display-page` | `clamp(2.3rem, 7vw, 4.8rem)` | detail-page h1s (lens pages, To details, Now) and large section h2s |
+| `text-display-read` | `clamp(2.1rem, 5.5vw, 3.6rem)` | long-read h1s (About, posts), the big pull quote |
+| `text-display-name` | `clamp(2rem, 5vw, 4rem)` | the Home hero name (fits its 38vw column) |
+| `text-entry` | `clamp(1.7rem, 5vw, 2.9rem)` | contents-list entry titles, footer CTA, status h2s |
+| `text-statement` | `clamp(1.5rem, 3.8vw, 2.3rem)` | serif statements/deks, inline pull quotes, CTA buttons |
+| `text-list-title` | `clamp(1.4rem, 3.4vw, 2.05rem)` | post/book titles in lists, minor h2/h3 |
+| `text-dek` | `clamp(1.05rem, 2.4vw, 1.45rem)` | italic deks, reading questions |
+| `text-kicker-compact` | `0.625rem` | constrained single-line identity kickers |
+- **Article prose:** Source Serif 4 Variable via `--font-prose` — reusable long-form prose in `Prose.astro`, especially Writing pages.
+- **UI + scanning body:** Inter (or `ui-sans-serif, system-ui` fallback) — nav, forms, kickers (uppercase, letter-spaced), datelines, and non-article body copy.
+- Keep to one weight contrast per context; the system has three type roles only. Sacramento is the one-off `iyal` wordmark exception.
 
 Type scale (rem, ~1.25 ratio):
 
@@ -52,7 +65,7 @@ Type scale (rem, ~1.25 ratio):
 | `2xl`   | 2.1     | 1.2         | page title |
 | `3xl`   | 2.8     | 1.1         | hero (base; extended via clamp) |
 
-Weights: 400 body, 500 emphasis, 600 headings. Avoid 700+ for body; display headings may use 700 for impact. Body measure: max ~68ch.
+Weights: 400 body, 500 emphasis, 600 headings. Avoid 700+ for body; display headings may use 700 for impact. Body measure: max ~68ch. Article prose uses Source Serif 4 around 1.18rem with generous leading.
 
 ## Spacing
 
@@ -63,29 +76,58 @@ Section vertical rhythm: 96–128px between major sections on desktop, 48–64px
 
 - **No rounded corners anywhere** in the editorial system (no `rounded-*` on photos, sections, or any UI chrome).
 - **No shadows.** The system is flat; separation comes from whitespace and hairline rules.
-- Exception: interactive UI micro-elements (the theme toggle button) may use a minimal radius if the component demands it.
+- Exception: interactive UI micro-elements and the approved macOS-style glass topbar may use radius. The topbar is the only sanctioned floating pill.
 
 ## Motion
 
-- CSS parallax (`background-attachment: fixed`) on full-bleed photo bands (hero, work entries, work-detail cover, about portrait). Static on mobile/iOS (acceptable).
-- Subtle micro-interactions: 150–250ms, ease-out. Fade/translate a few px on entrance.
-- Respect `prefers-reduced-motion` — disable non-essential motion.
-- **No canvas / JS animation** (flow field removed; only client JS remaining is the theme toggle).
+Durations and easings are tokens — never hardcode a cubic-bezier or ms value:
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--motion-fast` | 180ms | colour, icon, hairline micro-motion |
+| `--motion-base` | 250ms | standard micro-interaction |
+| `--motion-slow` | 420ms | panels, page-level moves |
+| `--motion-reveal` | 700ms | entrance reveals |
+| `--ease-editorial` | `cubic-bezier(.2,.6,.2,1)` | the house ease (reveals, hovers) |
+| `--ease-panel` | `cubic-bezier(.2,.7,.2,1)` | the cube panel slide |
+| `--ease-settle` | `cubic-bezier(.34,1.4,.64,1)` | **the monogram dot only** — the one overshoot |
+| `--stagger` | 45ms | per-item delay in choreographed lists |
+
+Rules:
+- CSS parallax (`background-attachment: fixed`) on full-bleed photo bands where used. Static on mobile/iOS is acceptable.
+- Subtle micro-interactions: fade/translate a few px on entrance; animate only `transform`/`opacity` (plus border-color) so the glass pill's backdrop-filter stays cheap.
+- Respect `prefers-reduced-motion` — the global kill switch zeroes all durations; every effect's end state must be its visible resting state.
+- Client JS is allowed only for narrow enhancements already in use: theme toggle, rotating cube menu, progressive reveal/scroll progress, and the sunflower interaction. Content must remain visible if JavaScript fails.
+
+**Motion budget** (a magazine is calm):
+- One hover transformation per element. Where the roman→italic swap (`.swap-italic`) applies, the title may also shift to stellar blue; avoid parent block lift.
+- One special reveal style per viewport: `reveal-tracking` is reserved for the page h1, `reveal-scale` for one quote/statement per page. The base fade-rise is the default.
+- Nothing loops, except the small idle sunflower clusters while the visitor remains inactive. Their rotation is bounded to two or three flowers, stops immediately on interaction, and is absent for reduced-motion users.
+- Scroll-linked motion: at most one element per page (the Home hero recede), always behind `@supports (animation-timeline: view())` and `prefers-reduced-motion: no-preference`.
+- Accent never animates into a fill larger than a drop cap.
+
+**Sanctioned motion patterns:** masthead settle (`.mm-sk`/`.mm-dot`/`.mm-iyal`), scroll-aware pill (`body.is-scrolled`), cube-menu choreography, hamburger morph (`.hb`), theme-toggle rotation, underline draw (`.u-draw`, in-left/out-right), arrow advance (`.adv-arrow`/`.adv-label`), italic swap (`.swap-italic`), drop-cap ink-fill (`.dropcap-draw`), h1 tracking-settle (`.reveal-tracking`), quote scale-settle (`.reveal-scale`), hero recede (`.hero-recede`).
 
 ## Vogue editorial patterns
 
 - **Full-bleed photo bands:** `-mx-[50vw] w-screen` with `bg-fixed` (CSS parallax). No borders, no rounded corners, no shadows. Full-colour photograph fills the band.
-- **Monogram (SK.):** Playfair Display, flush-left; the trailing dot is stellar-blue (`text-accent`). Used in the site header/brand.
-- **Parallax hero:** Full-bleed, full-viewport photo band with the name at extreme `clamp()` size in Playfair over a dark scrim, plus kicker eyebrow and dateline.
+- **Monogram (SK.):** Libre Bodoni, flush-left; the trailing dot is stellar-blue (`text-accent`). Used in the site header/brand.
+- **Glass topbar:** The site header is a floating macOS-style glass pill over a transparent sticky/overlay header. It uses blur, translucency, and a hairline border, with no heavy shadow.
+- **Parallax hero:** Full-bleed, full-viewport photo band with the name at extreme `clamp()` size in Libre Bodoni over a dark scrim, plus kicker eyebrow and dateline.
 - **Work entry:** Alternating full-bleed parallax photo + serif title at `clamp(2rem, 4.5vw, 3.4rem)` + stellar-blue `nº` index number + dateline + short description. No cards or borders.
-- **Writing contents list:** Flush-left list entries; stellar-blue `nº` index number; Playfair serif title; hairline `border` rule between items. No cards.
-- **Drop cap:** First letter of first body paragraph, Playfair Display, stellar-blue (`text-accent`), class `.dropcap`.
-- **Pull quote:** Playfair Display italic, stellar-blue left hairline rule (`border-l-2 border-accent`), generous indent.
-- **Kicker:** Small uppercase, `tracking-[0.14em]`, Inter — editorial eyebrow label. The one sanctioned uppercase element.
-- **Dateline:** Dates rendered small, uppercase, `tracking-[0.12em]`, `text-muted`, Inter.
+- **Writing contents list:** Flush-left list entries; stellar-blue `nº` index number; Libre Bodoni title; hairline `border` rule between items. No cards.
+- **Page masthead:** `PageHeader.astro` — muted label left + accent label right + optional display h1, with no top hairline. Every section page opens with it; Home and Now/Work are the deliberate opt-outs (threshold and photo band).
+- **Index number:** `IndexNo.astro` — the stellar `nº 01` motif, one spec (`text-xs`, `tracking-kicker`, accent).
+- **Endmark:** `Endmark.astro` — the monogram's stellar dot closing a long piece.
+- **Drop cap:** First letter of first body paragraph, Libre Bodoni, stellar-blue (`text-accent`), class `.dropcap` (+ `.dropcap-draw` for the reveal ink-fill).
+- **Pull quote:** Libre Bodoni italic, stellar-blue left hairline rule (`border-l-2 border-accent`), generous indent.
+- **Kicker:** Small uppercase, `tracking-kicker` (0.18em), Inter — editorial eyebrow label (`Kicker.astro`). The one sanctioned uppercase element.
+- **Dateline:** Dates rendered small, uppercase, `tracking-dateline` (0.12em), `text-muted`, Inter.
+- **Theme-frozen dark surfaces:** the cube-menu panel (`bg-ink`) and photo-band scrims stay dark in every theme; their accent is always `stellar-ondark` so contrast holds in light/cream.
 - **Hairline rules:** `border` token as a 1px divider; used sparingly under section headings and between writing entries.
 - **Links:** Underline only (no box); stellar-blue accent (`text-accent underline`). Visible focus ring always.
-- **Editorial footer:** Bold serif "Get in touch →" mailto link; no contact form (needs backend — deferred).
+- **Next-page link:** `NextPageLink.astro` — compact, right-aligned page progression. Small uppercase eyebrow, `text-list-title` serif link, hairline rule, `ml-auto`, no full-width CTA treatment.
+- **Editorial footer:** Bold serif "Get in touch →" route to `/contact`. Contact and iyal use Web3Forms when configured and show a mail fallback when no `PUBLIC_WEB3FORMS_ACCESS_KEY` is present.
 
 ## Removed patterns
 
@@ -98,7 +140,7 @@ Section vertical rhythm: 96–128px between major sections on desktop, 48–64px
 |----|-------|
 | Use full-bleed photographs | Add boxes, cards, borders, shadows, or rounded corners |
 | Let stellar-blue be the single accent | Introduce a second accent or use stellar as a fill |
-| Playfair Display at extreme clamp sizes | Use display type at modest/predictable sizes |
+| Libre Bodoni at extreme clamp sizes | Use display type at modest/predictable sizes |
 | Vast negative space between sections | Fill whitespace with decoration or extra elements |
 | Left-align everything (flush-left composition) | Center headings or long text |
 | Reuse the Vogue patterns above | Create one-off styled variants |

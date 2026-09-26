@@ -1,8 +1,8 @@
 ---
 // src/components/Kicker.astro
-// Small letter-spaced eyebrow label used above page titles and in the hero.
-interface Props { text: string; tone?: "default" | "onPhoto"; }
+// Small letter-spaced eyebrow label used above page titles and in section heads.
+interface Props { text: string; tone?: "default" | "accent"; }
 const { text, tone = "default" } = Astro.props;
-const color = tone === "onPhoto" ? "text-white/80" : "text-text-muted";
+const color = tone === "accent" ? "text-accent" : "text-text-muted";
 ---
-<span class={`block text-xs uppercase tracking-[0.14em] ${color}`}>{text}</span>
+<span class={`block text-xs uppercase tracking-kicker ${color}`}>{text}</span>

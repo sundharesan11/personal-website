@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FixedPhotoHero from "../components/FixedPhotoHero.astro";
+import IndexNo from "../components/IndexNo.astro";
+import { withBase } from "../lib/paths";
 
 const contents = [
   { href: "/work", title: "Now / Work", teaser: "The day job, minus the gloss: AI products, built end to end." },
@@ -10,45 +12,71 @@ const contents = [
   { href: "/modelling", title: "Modelling", teaser: "Not a model yet. A standing desire to give it an honest shot someday." },
   { href: "/about", title: "About", teaser: "The long version, where it all turns out to be one story, not three." },
 ];
+
 ---
-<BaseLayout title="Sundharesan Kumaresan">
+<BaseLayout
+  title="Sundharesan Kumaresan"
+  description="Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. A personal publication about systems, stories, and who gets seen."
+>
   <FixedPhotoHero
     image="/img/hero-crop.jpeg"
     alt="Sundharesan Kumaresan"
     fit="contain"
-    objectPosition="right center"
+    backgroundSize="auto calc(100% - 28px)"
+    objectPosition="right 18px"
   >
-    <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">AI engineer &middot; writer &middot; Oogway Labs</p>
-    <h1 class="mt-5 font-serif font-semibold leading-[0.92] text-text" style="font-size: clamp(2rem, 5vw, 4rem);">Sundharesan<br />Kumaresan</h1>
+    <a
+      slot="top-left"
+      href={withBase("/iyal")}
+      aria-label="iyal, Sundharesan's farmer capital network research"
+      title="iyal, farmer capital network research"
+      class="absolute top-12 left-6 font-script text-statement font-bold leading-none text-accent transition-colors hover:text-accent-hover sm:left-10 md:left-[max(1.5rem,8vw)]"
+    >iyal</a>
+    <div class="hero-title-block inline-block w-fit max-w-full">
+      <div class="hero-role mt-16 flex items-baseline justify-between gap-3 whitespace-nowrap font-sans text-kicker-compact uppercase tracking-dateline text-accent md:mt-0">
+        <span>Forward Deployed Engineer</span>
+        <span>Oogway Labs</span>
+      </div>
+      <h1 class="display-fit mt-5 font-serif text-display-name font-semibold leading-[0.92] text-text">Sundharesan<br />Kumaresan</h1>
+    </div>
   </FixedPhotoHero>
   <main id="main-content" class="relative z-10 bg-bg">
-    <div class="mx-auto max-w-[1100px] px-6">
+    <div class="mx-auto max-w-page px-6">
 
     <section class="py-20 md:py-28">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-accent">From the desk</p>
-      <div class="mt-6 grid gap-10 md:grid-cols-[1.5fr_0.5fr] md:gap-16">
-        <div class="dropcap max-w-[60ch] text-lg leading-[1.8] text-text-muted">
-          <p>I'm an AI engineer. I take something half-defined and slightly impossible and turn it into a real thing people use, the architecture, the build, the whole thing, usually faster than is strictly advisable. I love it, which probably says more about me than the work. I write fiction too, not as often as I'd like, usually when there's something I'm trying to work out on the page. Lately I've also been knee-deep in economics, logistics, and the psychology underneath both, partly because the products that actually land are built on how people think, mostly because people are the most interesting puzzle going. And under all of it, the same fixation: who a system treats as real, and who it quietly writes off.</p>
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">From the desk</p>
+      <div class="mt-6 grid gap-10 md:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] md:gap-16">
+        <div class="dropcap dropcap-draw max-w-[60ch] space-y-5 text-lg leading-[1.8] text-text">
+          <p>I'm a forward-deployed engineer, though "builder" is closer to the truth. Hand me something half-defined and slightly impossible, and I'll architect it, build it, and deliver it: a real thing, in real hands. I love the whole arc, which probably says more about me than the work.</p>
+          <p>Writing is how I think out loud. No schedule, no grand plan: I write to figure out what I actually believe, and to get better at saying it so it lands. Lately that means economics, logistics, and the psychology underneath both, because people are the most interesting puzzle going.</p>
+          <p>This site is where those thoughts get to live and compound. <span class="font-script text-3xl leading-none text-accent">iyal</span>, the research thread I keep pulling on, is here too. The things I want to build only get bigger from here, and I'd rather the right people find me thinking out loud than polished and silent.</p>
+          <p>And under all of it, the same fixation: who a system treats as real, and who it quietly writes off.</p>
         </div>
-        <aside class="md:border-l md:border-border md:pl-10">
-          <p class="font-serif leading-[1.1]" style="font-size: clamp(1.4rem, 3vw, 2rem);">Engineer first. Hopelessly curious after that.</p>
+        <aside class="md:sticky md:top-28 md:self-start md:border-l md:border-border md:pl-10">
+          <p class="font-serif text-statement leading-[1.1]">
+            <span class="block whitespace-nowrap">Builder first.</span>
+            <span class="block">Hopelessly curious after that.</span>
+          </p>
         </aside>
       </div>
     </section>
 
-    <section class="border-t border-border py-16">
-      <div class="flex items-baseline justify-between border-b border-border pb-3">
-        <h2 class="font-serif font-semibold" style="font-size: clamp(1.4rem, 3.4vw, 1.95rem);">Inside</h2>
-        <span class="font-sans text-xs uppercase tracking-[0.16em] text-text-muted">The contents</span>
+
+    <section class="py-10">
+      <div class="border-b border-border pb-3">
+        <h2 class="font-serif text-list-title font-normal text-text-muted">Inside</h2>
       </div>
       <div>
         {contents.map((c, i) => (
-          <a href={c.href} class="group block border-b border-border py-8">
+          <a href={withBase(c.href)} class="group block border-b border-border py-4">
             <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-              <h3 class="font-serif font-semibold leading-[1.0] transition-colors group-hover:text-accent" style="font-size: clamp(1.5rem, 4vw, 2.4rem);">{c.title}</h3>
-              <span class="font-sans text-xs uppercase tracking-[0.16em] text-accent">n&ordm; {String(i + 1).padStart(2, "0")} &rarr;</span>
+              <h3 class="swap-italic font-serif text-list-title font-semibold leading-[1.0]">
+                <span class="si-roman">{c.title}</span>
+                <span class="si-italic" aria-hidden="true">{c.title}</span>
+              </h3>
+              <span class="adv-label font-sans text-xs uppercase tracking-kicker text-accent"><IndexNo n={i + 1} /> <span class="adv-arrow">&rarr;</span></span>
             </div>
-            <p class="mt-2 max-w-[62ch] text-text-muted">{c.teaser}</p>
+            <p class="mt-1 max-w-[62ch] text-sm text-text-muted">{c.teaser}</p>
           </a>
         ))}
       </div>

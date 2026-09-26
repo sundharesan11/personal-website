@@ -5,5 +5,5 @@ note: "I came in thinking poverty was a number. I left understanding it as a tho
 question: "If poverty is a thousand rational decisions, whose fault is it?"
 status: read
 opened: "Who a system leaves out"
-order: 1
+order: 3
 ---

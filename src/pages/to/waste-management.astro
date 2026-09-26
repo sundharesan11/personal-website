@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NextPageLink from "../../components/NextPageLink.astro";
+import { withBase } from "../../lib/paths";
+
+const signals = [
+  "Collection that respects how people already live",
+  "Segregation that survives the real street, not just the poster",
+  "Workers paid, protected, and seen as system operators",
+  "Town-level operations that can be repeated without becoming theatre",
+  "Cleanliness that feels normal enough to disappear",
+];
+---
+<BaseLayout
+  title="The Civic Loop · Sundharesan Kumaresan"
+  description="The invisible infrastructure of clean cities: boring when it works, impossible to ignore when it doesn't."
+>
+  <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
+    <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
+
+    <header class="mt-8">
+      <p class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">A civic layer</p>
+      <h1 data-reveal class="reveal-tracking display-fit mt-3 max-w-[12ch] font-serif text-display-page font-semibold leading-[0.98]">The Civic Loop</h1>
+      <p data-reveal class="reveal-scale display-fit mt-8 max-w-[25ch] font-serif text-statement font-semibold leading-[1.08]">The kind of work that should become invisible when it works.</p>
+      <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>Waste keeps pulling at me because it is one of those problems that sits under everything else. Build roads, housing, schools, markets, offices, and restaurants. If the waste system is an afterthought, the place tells on itself in a week.</p>
+        <p>India has enormous infrastructure capability. We can move fast when the priority is clear. I think waste handling has to become one of those prior action items, not the thing we remember after the ribbon has already been cut.</p>
+      </div>
+    </header>
+
+    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
+      <div>
+        <p class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">The pull</p>
+      </div>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>I keep thinking about tier 1 and tier 2 cities, and the towns just outside the spotlight. Not as places that need cosmetic cleanliness, but as places that deserve a baseline civic dignity: streets that don't punish you for walking, collection that happens before decay becomes the smell of the neighbourhood, and systems that make daily life lighter without asking for applause.</p>
+        <p>The meaningful version of this work is not glamorous. Good. Glamour tends to leave early.</p>
+        <blockquote class="border-l-2 border-accent pl-6 font-serif text-statement italic leading-[1.2] text-text">The best waste system is the one nobody has to keep noticing.</blockquote>
+      </div>
+    </section>
+
+    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
+      <div>
+        <p class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">The work</p>
+      </div>
+      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>I don't yet know the right form. It may be operations, technology, policy, financing, behaviour design, or some unromantic mix of all five. The first job is to understand the actual chain: households, shops, bulk generators, collectors, sorters, transport, processing, landfills, recyclers, municipalities, contractors, and the people who keep the whole thing moving with very little comfort.</p>
+        <p>What I do know is the standard I care about. Cleaner cities, cleaner towns, better working conditions, less invisible harm, and a system that improves lifestyle without turning basic sanitation into a luxury product.</p>
+      </div>
+    </section>
+
+    <section class="mt-20">
+      <div class="flex flex-wrap items-end gap-5">
+        <h2 class="font-serif text-display-page font-semibold leading-[0.95]">What I would look for</h2>
+        <span class="mb-4 h-px flex-1 bg-stellar"></span>
+      </div>
+      <p class="mt-8 max-w-[60ch] text-lg leading-relaxed text-text">If I ever touch this seriously, I want the work to prove itself through the dull, useful details:</p>
+      <ul class="mt-6 border-t border-border" style="max-width: var(--measure)">
+        {signals.map((item) => (
+          <li class="border-b border-border py-4 text-text">{item}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-20 border-t-2 border-stellar pt-10">
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">Current status</p>
+      <h2 class="display-fit mt-4 max-w-[24ch] font-serif text-entry font-semibold leading-[1.05]">A problem I keep returning to, not a venture I am pretending already exists.</h2>
+      <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
+        <p>For now this sits on the To desk: a serious interest, a civic itch, and something I want to learn properly before I put a name on it.</p>
+        <p>The ambition is simple enough to say and hard enough to deserve a life: make the cleaner thing the default thing, especially in the places where development is arriving fast and waste cannot remain someone else's problem.</p>
+        <a href={withBase("/contact")} class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
+      </div>
+    </section>
+
+    <NextPageLink href="/iyal"><span class="font-script text-accent">iyal</span>, the active thread</NextPageLink>
+  </main>
+</BaseLayout>

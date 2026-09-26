@@ -7,9 +7,9 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 All six publication sections are scaffolded with placeholder copy and real component structure:
 - **Home** — threshold page with "Inside this edition" teaser index (`TeaserIndex.astro`)
 - **Now/Work** — single role feature page (confidentiality-safe; no client/project names)
-- **Writing** — four lenses (Economics · Philosophy · Technical · Theatrical) + being-written desk + Modern↔Evening edition toggle (`EditionToggle.astro` + `src/scripts/edition.ts`)
+- **Writing** — three live lenses (Economics · Technical · Theatrical) + being-written desk + Modern↔Evening edition toggle (`EditionToggle.astro` + `src/scripts/edition.ts`)
 - **Reading** — scatter gallery grouped by "what each opened" (`reading` content collection)
-- **Ambitions** — "forming" op-ed (agri-fintech thesis, other ideas, Social Writing manifesto)
+- **To / Ambitions** — future-desk index, with `/ambitions` as an alias to `/to`
 - **About** — long-read format
 - **Cube menu** — rotating 3D ≡ overlay linking all six destinations (`CubeMenu.astro` + `src/scripts/cube.ts`)
 
@@ -21,7 +21,7 @@ Owner content/asset work (real copy, photos, writing pieces, reading list) track
 - [x] `npm create astro@latest` + add Tailwind (v4, CSS-first — see DECISIONS)
 - [x] Wire tokens into `src/styles/global.css` `@theme` (light + dark)
 - [x] Theme toggle: no-flash inline script + persisted preference
-- [x] BaseLayout + Header (nav + toggle) + Footer (mailto contact)
+- [x] BaseLayout + Header (nav + toggle) + Footer contact route
 
 ## Phase 1 — Core pages (placeholder content, shell-first)
 - [x] Home (hero, intro, featured work) + reactive flow-field hero motion
@@ -36,11 +36,11 @@ Owner content/asset work (real copy, photos, writing pieces, reading list) track
 - [ ] Design critique pass — use `design-critique` skill
 - [x] Meta/OG tags, favicon, social card
 - [~] Performance check (Lighthouse) — static + near-zero JS; run Lighthouse in-browser before deploy
-- [ ] Swap placeholder content → Soumyo's real bio/projects/copy
+- [ ] Swap remaining placeholder content → Sundharesan's final bio/projects/copy
 
 ## Phase 3 — Optional / later
 - [ ] Analytics
-- [ ] Contact form (upgrade from mailto)
+- [x] Contact form with mail fallback
 - [ ] Deploy + custom domain (set real `site` in astro.config.mjs — currently example.com placeholder)
 
 > Decisions about scope live in `docs/DECISIONS.md` (Open / Deferred). Don't expand scope without logging it there.
