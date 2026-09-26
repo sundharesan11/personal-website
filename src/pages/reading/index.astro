@@ -5,6 +5,7 @@ import NextPageLink from "../../components/NextPageLink.astro";
 import Sunflower from "../../components/Sunflower.astro";
 import EditorialField from "../../components/EditorialField.astro";
 import ReadingListSection from "../../components/ReadingListSection.astro";
+import Web3FormFields from "../../components/Web3FormFields.astro";
 import { getCollection } from "astro:content";
 
 const books = (await getCollection("reading")).sort((a, b) => b.data.order - a.data.order);
@@ -34,11 +35,6 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 
           {hasWeb3FormsKey ? (
             <form action="https://api.web3forms.com/submit" method="POST" class="mt-10 max-w-[58ch]" data-reveal data-recommendation-state="configured">
-              <input type="hidden" name="access_key" value={web3formsAccessKey} />
-              <input type="hidden" name="subject" value="Private book recommendation" />
-              <input type="hidden" name="from_name" value="Sundharesan website reading room" />
-              <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
-
               <EditorialField required label="Book title" name="book_title" placeholder="The book I should lose a weekend to" />
               <div class="mt-8">
                 <EditorialField required type="textarea" label="Why this one?" name="reason" rows={6} placeholder="What stayed with you, changed your mind, or refused to leave?" />
@@ -52,6 +48,12 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
                 </div>
               </details>
 
+              <Web3FormFields
+                accessKey={web3formsAccessKey}
+                subject="Private book recommendation"
+                fromName="Sundharesan website reading room"
+              />
+              <p class="text-fit mt-8 max-w-[52ch] text-sm leading-relaxed text-text-muted">If the form misbehaves, email the title and your reason to <a href="mailto:sundharesansk11@gmail.com?subject=Book%20recommendation" class="u-underline text-text hover:text-accent">sundharesansk11@gmail.com</a>.</p>
               <button type="submit" class="group mt-8 font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Send recommendation <span class="adv-arrow text-accent">&rarr;</span></button>
             </form>
           ) : (

@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:forms": "node scripts/check-web3forms-build.mjs",
     "check:pages": "node scripts/check-pages-build.mjs",
     "preview": "astro preview",
     "astro": "astro",

@@ -30,6 +30,7 @@ GitHub Actions deploys the static `dist/` output from `main` to the user-site re
     │   ├── Figure.astro       # full-bleed photograph wrapper (no borders/rounded corners)
     │   ├── Kicker.astro       # editorial eyebrow label (uppercase, letter-spaced)
     │   ├── PageHeader.astro   # canonical page masthead (hairline + labels + display h1)
+    │   ├── Web3FormFields.astro # shared Web3Forms metadata, redirect, honeypot, and hCaptcha
     │   ├── IndexNo.astro      # the stellar nº index-number motif
     │   ├── Endmark.astro      # stellar-dot endmark closing long pieces
     │   ├── ThemeToggle.astro
@@ -55,6 +56,7 @@ GitHub Actions deploys the static `dist/` output from `main` to the user-site re
     │   │   └── index.astro    # Reading — compact Read list, To Read, private recommendations
     │   ├── iyal.astro         # Standalone active farmer-capital-network research/product page
     │   ├── contact.astro      # General Web3Forms contact page with mail fallback
+    │   ├── thanks.astro       # Same-site success destination for Web3Forms submissions
     │   # /ambitions is a redirect to /to (astro.config.mjs), no page file
     │   ├── to/                # Future-desk idea pages
     │   │   ├── index.astro
@@ -80,7 +82,7 @@ GitHub Actions deploys the static `dist/` output from `main` to the user-site re
 
 ## Routing
 
-File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature), `/writing` (Writing index), `/writing/[lens]` and `/writing/[lens]/[slug]` (writing collection routes), `/reading` (compact reading list), `/iyal` (masthead-level active farmer-capital-network research/product page), `/contact` (general Web3Forms contact page with mail fallback), `/to` (future-desk index), `/ambitions` (alias to `/to` via a config redirect, no page file), `/to/agri-fintech`, `/to/sports-development`, `/to/waste-management`, `/modelling`, `/about`. The `/work/[slug]` project detail route was REMOVED along with the `projects` collection.
+File-based via `src/pages`. Routes: `/` (Home), `/work` (Now/Work role feature), `/writing` (Writing index), `/writing/[lens]` and `/writing/[lens]/[slug]` (writing collection routes), `/reading` (compact reading list), `/iyal` (masthead-level active farmer-capital-network research/product page), `/contact` (general Web3Forms contact page with mail fallback), `/thanks` (same-site form success page), `/to` (future-desk index), `/ambitions` (alias to `/to` via a config redirect, no page file), `/to/agri-fintech`, `/to/sports-development`, `/to/waste-management`, `/modelling`, `/about`. The `/work/[slug]` project detail route was REMOVED along with the `projects` collection.
 
 ## Content model
 

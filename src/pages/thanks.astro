@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { withBase } from "../lib/paths";
+---
+
+<BaseLayout
+  title="Message sent · Sundharesan Kumaresan"
+  description="Your note reached Sundharesan."
+  noindex
+>
+  <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-24">
+    <PageHeader left="Delivery note" right="The internet behaved" />
+    <section class="mt-16 max-w-[68ch] border-t-2 border-stellar pt-10" data-reveal>
+      <h1 class="reveal-tracking display-fit font-serif text-display-hero font-semibold leading-[0.92]">Message sent.</h1>
+      <p class="text-fit mt-8 max-w-[48ch] text-lg leading-relaxed text-text-muted">It made it through. I will reply if there is a real thread to pull, which is a less robotic promise than “we value your enquiry”.</p>
+      <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+        <a href={withBase("/")} class="u-underline font-serif text-statement font-semibold text-text hover:text-accent">Return home</a>
+        <a href={withBase("/contact")} class="u-underline font-serif text-statement font-semibold text-text hover:text-accent">Send another note</a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

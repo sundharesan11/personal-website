@@ -113,15 +113,15 @@ describe("Reading curation", () => {
     expect(page).toContain('import EditorialField from "../../components/EditorialField.astro"');
     expect(page).toContain('action="https://api.web3forms.com/submit"');
     expect(page).toContain('method="POST"');
-    expect(page).toContain('name="subject" value="Private book recommendation"');
+    expect(page).toContain('subject="Private book recommendation"');
     expect(page).toContain('name="book_title"');
     expect(page).toContain('required label="Book title" name="book_title"');
     expect(page).toContain('name="reason"');
     expect(page).toContain('required type="textarea" label="Why this one?" name="reason"');
     expect(page).toContain('type="email" label="Email (optional)" name="email"');
-    expect(page).toContain('name="access_key" value={web3formsAccessKey}');
-    expect(page).toContain('name="from_name" value="Sundharesan website reading room"');
-    expect(page).toContain('name="botcheck"');
+    expect(page).toContain('fromName="Sundharesan website reading room"');
+    expect(page).toContain("<Web3FormFields");
+    expect(page).toContain("If the form misbehaves");
   });
 
   it("keeps optional identity fields inside a reply disclosure", () => {
