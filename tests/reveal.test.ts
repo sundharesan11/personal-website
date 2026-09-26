@@ -11,6 +11,26 @@ describe("progressive reveal motion", () => {
     expect(css).toContain(".js-reveal [data-reveal] { opacity: 0;");
     expect(css).not.toContain("\n[data-reveal] { opacity: 0;");
     expect(reveal).toContain('document.documentElement.classList.add("js-reveal")');
+    expect(css).toContain("transform: none !important");
+  });
+
+  it("uses the scale reveal on the selected editorial page titles", () => {
+    const pageHeader = read("../src/components/PageHeader.astro");
+    const reading = read("../src/pages/reading/index.astro");
+    const writing = read("../src/pages/writing/index.astro");
+    const futureDesk = read("../src/components/FutureDesk.astro");
+    const about = read("../src/pages/about.astro");
+    const modelling = read("../src/pages/modelling.astro");
+    const notFound = read("../src/pages/404.astro");
+
+    expect(pageHeader).toContain('titleMotion?: "tracking" | "scale"');
+    expect(pageHeader).toContain('titleMotion === "scale" ? "reveal-scale" : "reveal-tracking"');
+    expect(reading).toContain('titleMotion="scale"');
+    expect(writing).toContain('titleMotion="scale"');
+    expect(futureDesk).toContain('class="reveal-scale display-fit');
+    expect(about).toContain('class="reveal-scale font-serif text-display-read');
+    expect(modelling).not.toContain('titleMotion="scale"');
+    expect(notFound).not.toContain('titleMotion="scale"');
   });
 
   it("keeps the cube drawer flat and metadata accurate", () => {
