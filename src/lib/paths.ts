@@ -16,3 +16,12 @@ export function withoutBase(pathname: string, base = import.meta.env.BASE_URL): 
     ? pathname.slice(normalizedBase.length)
     : pathname;
 }
+
+export function legacyProjectTarget(
+  pathname: string,
+  legacyBase = "/personal-website",
+): string | null {
+  if (pathname !== legacyBase && !pathname.startsWith(`${legacyBase}/`)) return null;
+  const remainder = pathname.slice(legacyBase.length).replace(/^\/+/, "");
+  return `/${remainder}`;
+}

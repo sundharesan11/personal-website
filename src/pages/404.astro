@@ -19,4 +19,10 @@ import { withBase } from "../lib/paths";
       <a href={withBase("/contact")} class="u-draw text-text-muted transition-colors hover:text-text">Contact</a>
     </nav>
   </main>
+  <script>
+    import { legacyProjectTarget } from "../lib/paths";
+
+    const nextPath = legacyProjectTarget(location.pathname);
+    if (nextPath) location.replace(`${nextPath}${location.search}${location.hash}`);
+  </script>
 </BaseLayout>
