@@ -36,7 +36,7 @@ describe("FixedPhotoHero", () => {
 
     expect(home).toContain('description="Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. A personal publication about systems, stories, and who gets seen."');
     expect(home).toContain('aria-label="iyal, Sundharesan\'s farmer capital network research"');
-    expect(home).toContain('href="/iyal"');
+    expect(home).toContain('href={withBase("/iyal")}');
     expect(home).toContain('slot="top-left"');
     expect(home).toContain('class="absolute top-12 left-6 font-script text-statement font-bold leading-none text-accent transition-colors hover:text-accent-hover sm:left-10 md:left-[max(1.5rem,8vw)]"');
     expect(home).toContain('>iyal</a>');
@@ -60,7 +60,7 @@ describe("FixedPhotoHero", () => {
     expect(about).toContain("md:min-h-[calc(100vh-8rem)]");
     expect(about).toContain("aspect-[2/3]");
     expect(about).toContain("md:max-w-[520px]");
-    expect(about).toContain('src="/img/about.jpg"');
+    expect(about).toContain('src={withBase("/img/about.jpg")}');
     expect(about).toContain('width="2656"');
     expect(about).toContain('height="3984"');
     expect(about).toContain("object-cover object-center");

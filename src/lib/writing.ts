@@ -1,3 +1,5 @@
+import { withBase } from "./paths";
+
 export const lenses = [
   { key: "technical", label: "Technical / AI" },
   { key: "economics", label: "Economics / Politics" },
@@ -24,7 +26,7 @@ export function metaOf(entry: any): string {
 
 export function linkOf(entry: any): string | null {
   const d = entry.data;
-  return d.link ?? (d.status === "published" ? `/writing/${d.lens}/${entry.id}` : null);
+  return d.link ?? (d.status === "published" ? withBase(`/writing/${d.lens}/${entry.id}`) : null);
 }
 
 export function nextLens(key: string) {

@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Prose from "../components/Prose.astro";
 import Endmark from "../components/Endmark.astro";
+import { withBase } from "../lib/paths";
 
 const socials = [
   { href: "mailto:sundharesansk11@gmail.com", label: "Email" },
@@ -27,7 +28,7 @@ const socials = [
       </div>
       <figure class="aspect-[2/3] min-h-[420px] w-full max-w-[460px] overflow-hidden bg-bg md:sticky md:top-32 md:order-first md:min-h-[min(72vh,720px)] md:max-w-[520px]">
         <img
-          src="/img/about.jpg"
+          src={withBase("/img/about.jpg")}
           width="2656"
           height="3984"
           alt="Portrait of Sundharesan Kumaresan"
@@ -44,7 +45,7 @@ const socials = [
       <p>I do not write fiction as often as I would like. Most of the time I am carrying around an overthought observation that is not yet interesting enough to deserve daylight. Give it a character, a room, a bad decision, and sometimes it becomes worth looking at.</p>
       <p>Fiction is where I get to think sideways. Economics and technical writing ask me to be clear and useful. Stories let me be more expressive, follow the strange parts for a while, and see whether the thing I have been quietly overthinking can turn into something another person might recognise. When it works, it reveals more than I meant to say. Which is inconvenient, but probably the point.</p>
       <p>Underneath all of it sits one question I cannot put down: who a system is built to count, and who it quietly does not. It is not abstract. The people who grow our food, the kid in a small town who could medal for the country, the worker who knows where everything actually breaks, they are often invisible to the systems that could change their lives. That invisibility is a choice someone made, usually by accident, always with consequences.</p>
-      <p>That question is also where I am headed. I have not built every answer yet, and I am not going to pretend otherwise. Right now I am doing the unglamorous part: learning the economics and logistics, building close to real users, and testing the ideas that need to survive contact with the world. The ambitions live under To. The active research lives in <a href="/iyal" class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>. Both are still earning the right to become more.</p>
+      <p>That question is also where I am headed. I have not built every answer yet, and I am not going to pretend otherwise. Right now I am doing the unglamorous part: learning the economics and logistics, building close to real users, and testing the ideas that need to survive contact with the world. The ambitions live under To. The active research lives in <a href={withBase("/iyal")} class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>. Both are still earning the right to become more.</p>
       <p>There is also modelling. No shoots, no catalogue, no agent sending a PDF called “Sundharesan Selects”. There are a few decent shots somewhere, but I have kept them off the internet. The urge has been hanging around for years, annoyingly persistent, so it earned its own page. Maybe it becomes something. Maybe I discover I am not nearly as photogenic before coffee as I had hoped. Either way, I am giving it a proper chance to take shape.<Endmark /></p>
     </Prose></div>
     <blockquote data-reveal class="reveal-scale mt-24 max-w-[20ch] border-l-2 border-stellar pl-8 font-serif text-display-read font-semibold leading-[1.02]">

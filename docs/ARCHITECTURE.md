@@ -2,6 +2,10 @@
 
 How the site is structured. Update when structure changes.
 
+## Hosting
+
+GitHub Actions deploys the static `dist/` output from `main` to GitHub Pages at `/personal-website`. The workflow sets `SITE_BASE`; `src/lib/paths.ts` prefixes internal routes and public assets while local development stays rooted at `/`.
+
 ## Planned tree
 
 ```

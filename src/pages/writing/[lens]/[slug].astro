@@ -6,6 +6,7 @@ import Endmark from "../../../components/Endmark.astro";
 import NextPageLink from "../../../components/NextPageLink.astro";
 import { getCollection, render } from "astro:content";
 import { lenses } from "../../../lib/writing";
+import { withBase } from "../../../lib/paths";
 
 export async function getStaticPaths() {
   const posts = await getCollection("writing", ({ data }) => !data.draft && !data.link && data.status === "published");
@@ -35,7 +36,7 @@ const older = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
     <div data-reveal class="mt-12"><Prose dropcap><Content /></Prose></div>
     <div class="mx-auto" style="max-width: var(--measure)"><Endmark /></div>
     <div class="mx-auto mt-16" style="max-width: var(--measure)">
-      <a href={`/writing/${post.data.lens}`} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; {lensLabel}</a>
+      <a href={withBase(`/writing/${post.data.lens}`)} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; {lensLabel}</a>
       <div class="mt-6 flex flex-col items-end gap-4">
         {older && (
           <NextPageLink href={`/writing/${older.data.lens}/${older.id}`} eyebrow="Earlier" class="mt-0">{older.data.title}</NextPageLink>

@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CubeMenu from "../components/CubeMenu.astro";
 import IdleSunflowers from "../components/IdleSunflowers.astro";
+import { withBase } from "../lib/paths";
 
 interface Props {
   title: string;
@@ -12,8 +13,8 @@ interface Props {
   showFooter?: boolean;
 }
 const { title, description = "Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. One question from two sides: who a system sees, and who it never has to.", showFooter = true } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://example.com").href;
-const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").href;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://sundharesan11.github.io").href;
+const ogImage = new URL(withBase("/og-default.png"), Astro.site ?? "https://sundharesan11.github.io").href;
 ---
 <!doctype html>
 <html lang="en">
@@ -32,7 +33,7 @@ const ogImage = new URL("/og-default.png", Astro.site ?? "https://example.com").
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
 
     <!-- Self-hosted fonts are imported in global.css; until then system stacks render. -->
 

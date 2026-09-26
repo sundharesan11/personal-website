@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NextPageLink from "../../components/NextPageLink.astro";
+import { withBase } from "../../lib/paths";
 
 const experiments = [
   "One geography",
@@ -26,7 +27,7 @@ const success = [
   description="A practical trust layer for farmers, buyers, investors, workers, local operators, and logistics moving one season well."
 >
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
+    <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-8">
       <p class="font-sans text-xs uppercase tracking-kicker text-accent">A venture</p>
@@ -35,7 +36,7 @@ const success = [
       <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
         <p>Agriculture isn't short of hardworking people. It is short of coordination.</p>
         <p>A farmer needs capital before sowing, rural workers need steady work and clear instructions, local operators need to know who is doing what, a truck has to actually show up at harvest, and the buyer still has to answer the phone. Investors, meanwhile, need enough trust to participate without pretending a dashboard understands the village.</p>
-        <p>The work begins with <a href="/iyal" class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>, where I am learning how a season actually runs: who is trusted, where handoffs break, and which relationships already carry the work. Season Trust is a practical way to test whether farmers, buyers, investors, rural workers, local operators, and logistics can move one season with enough shared context to keep showing up for one another.</p>
+        <p>The work begins with <a href={withBase("/iyal")} class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>, where I am learning how a season actually runs: who is trusted, where handoffs break, and which relationships already carry the work. Season Trust is a practical way to test whether farmers, buyers, investors, rural workers, local operators, and logistics can move one season with enough shared context to keep showing up for one another.</p>
       </div>
     </header>
 
@@ -99,7 +100,7 @@ const success = [
       <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
         <p>I'm learning from farmers, investors, rural workers, agronomists, researchers, and anyone who works close to the ground. If this problem resonates with you, or if you're fairly sure I'm approaching it the wrong way, I'd genuinely like to hear it.</p>
         <p>Ideas get better in conversation long before they get built.</p>
-        <a href="/contact" class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
+        <a href={withBase("/contact")} class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
       </div>
     </section>
 

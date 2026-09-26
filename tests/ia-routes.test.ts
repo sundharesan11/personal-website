@@ -10,7 +10,7 @@ describe("publication IA routes", () => {
     const to = read("../src/pages/to/index.astro");
 
     expect(ambitionsExists).toBe(false);
-    expect(config).toContain("'/ambitions': '/to'");
+    expect(config).toContain("'/ambitions': routeWithBase('/to')");
     expect(to).toContain("FutureDesk");
   });
 
@@ -47,7 +47,7 @@ describe("publication IA routes", () => {
     expect(futureDesk).toContain('<article class="group border-t border-border py-10">');
     expect(futureDesk).not.toContain('<a href={a.href} class="group block border-t border-border py-10">');
     for (const page of [agri, sports, waste]) {
-      expect(page).toContain('href="/contact"');
+      expect(page).toContain('href={withBase("/contact")}');
       expect(page).toContain("Share your perspective");
       expect(page).not.toContain("mailto:sundharesansk11@gmail.com?subject=Farmer%20Capital%20Network");
     }
@@ -69,7 +69,7 @@ describe("publication IA routes", () => {
     expect(futureDesk).toContain("The first product track growing out of iyal");
     expect(futureDesk).toContain("a trust layer for the farming pipeline");
     expect(agri).toContain("A practical trust layer for moving one season well.");
-    expect(agri).toContain('href="/iyal"');
+    expect(agri).toContain('href={withBase("/iyal")}');
     expect(agri).toContain("The work begins with");
     expect(agri).not.toContain("Relationship with iyal");
     expect(agri).not.toContain("is the research and operating seed");

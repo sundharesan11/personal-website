@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FixedPhotoHero from "../components/FixedPhotoHero.astro";
 import IndexNo from "../components/IndexNo.astro";
+import { withBase } from "../lib/paths";
 
 const contents = [
   { href: "/work", title: "Now / Work", teaser: "The day job, minus the gloss: AI products, built end to end." },
@@ -26,7 +27,7 @@ const contents = [
   >
     <a
       slot="top-left"
-      href="/iyal"
+      href={withBase("/iyal")}
       aria-label="iyal, Sundharesan's farmer capital network research"
       title="iyal, farmer capital network research"
       class="absolute top-12 left-6 font-script text-statement font-bold leading-none text-accent transition-colors hover:text-accent-hover sm:left-10 md:left-[max(1.5rem,8vw)]"
@@ -46,7 +47,7 @@ const contents = [
       <p class="font-sans text-xs uppercase tracking-kicker text-accent">From the desk</p>
       <div class="mt-6 grid gap-10 md:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] md:gap-16">
         <div class="dropcap dropcap-draw max-w-[60ch] space-y-5 text-lg leading-[1.8] text-text">
-          <p>I'm an AI engineer, though "builder" is closer to the truth. Hand me something half-defined and slightly impossible, and I'll architect it, build it, and deliver it: a real thing, in real hands. I love the whole arc, which probably says more about me than the work.</p>
+          <p>I'm a forward-deployed engineer, though "builder" is closer to the truth. Hand me something half-defined and slightly impossible, and I'll architect it, build it, and deliver it: a real thing, in real hands. I love the whole arc, which probably says more about me than the work.</p>
           <p>Writing is how I think out loud. No schedule, no grand plan: I write to figure out what I actually believe, and to get better at saying it so it lands. Lately that means economics, logistics, and the psychology underneath both, because people are the most interesting puzzle going.</p>
           <p>This site is where those thoughts get to live and compound. <span class="font-script text-3xl leading-none text-accent">iyal</span>, the research thread I keep pulling on, is here too. The things I want to build only get bigger from here, and I'd rather the right people find me thinking out loud than polished and silent.</p>
           <p>And under all of it, the same fixation: who a system treats as real, and who it quietly writes off.</p>
@@ -67,7 +68,7 @@ const contents = [
       </div>
       <div>
         {contents.map((c, i) => (
-          <a href={c.href} class="group block border-b border-border py-4">
+          <a href={withBase(c.href)} class="group block border-b border-border py-4">
             <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
               <h3 class="swap-italic font-serif text-list-title font-semibold leading-[1.0]">
                 <span class="si-roman">{c.title}</span>

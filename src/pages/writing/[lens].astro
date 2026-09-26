@@ -5,6 +5,7 @@ import IndexNo from "../../components/IndexNo.astro";
 import NextPageLink from "../../components/NextPageLink.astro";
 import { getCollection } from "astro:content";
 import { lenses, lensIntro, scatter, linkOf, metaOf, nextLens } from "../../lib/writing";
+import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
   const all = await getCollection("writing", ({ data }) => !data.draft);
@@ -30,7 +31,7 @@ const next = nextLens(lens.key);
     <div class="md:grid md:grid-cols-[minmax(0,1fr)_300px] md:gap-12">
       <div>
         <div>
-          <a href="/writing" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; Writing</a>
+          <a href={withBase("/writing")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; Writing</a>
           <h1 data-reveal class="reveal-tracking mt-3 font-serif text-display-page font-semibold leading-[0.95]">{lens.label}</h1>
         </div>
         <p class="mt-6 max-w-[60ch] text-lg leading-relaxed text-text-muted">{lensIntro[lens.key]}</p>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NextPageLink from "../../components/NextPageLink.astro";
+import { withBase } from "../../lib/paths";
 
 const signals = [
   "Collection that respects how people already live",
@@ -15,7 +16,7 @@ const signals = [
   description="The invisible infrastructure of clean cities: boring when it works, impossible to ignore when it doesn't."
 >
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
+    <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-8">
       <p class="label-fit font-sans text-xs uppercase tracking-kicker text-accent">A civic layer</p>
@@ -67,7 +68,7 @@ const signals = [
       <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
         <p>For now this sits on the To desk: a serious interest, a civic itch, and something I want to learn properly before I put a name on it.</p>
         <p>The ambition is simple enough to say and hard enough to deserve a life: make the cleaner thing the default thing, especially in the places where development is arriving fast and waste cannot remain someone else's problem.</p>
-        <a href="/contact" class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
+        <a href={withBase("/contact")} class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
       </div>
     </section>
 

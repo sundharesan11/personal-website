@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NextPageLink from "../../components/NextPageLink.astro";
+import { withBase } from "../../lib/paths";
 ---
 <BaseLayout title="The Long Game · Sundharesan Kumaresan" description="A billion people, a handful of medals. Finding the talent the system never sees, and building the ladder it never had.">
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
-    <a href="/to" class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
+    <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
     <p class="mt-6 font-sans text-xs uppercase tracking-kicker text-accent">A lifetime's work</p>
     <h1 data-reveal class="reveal-tracking mt-3 font-serif text-display-page font-semibold leading-[0.98]">The Long Game</h1>
     <p data-reveal class="reveal-scale mt-8 max-w-[26ch] font-serif text-statement font-semibold leading-[1.08]">A billion people. A handful of medals. The talent was never the problem.</p>
@@ -17,7 +18,7 @@ import NextPageLink from "../../components/NextPageLink.astro";
     <section class="mt-16 border-t-2 border-stellar pt-10">
       <p class="font-sans text-xs uppercase tracking-kicker text-accent">Open notes</p>
       <h2 class="mt-4 max-w-[22ch] font-serif text-entry font-semibold leading-[1.05]">If you have lived this system, I want the uncomfortable parts too.</h2>
-      <a href="/contact" class="group mt-8 inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
+      <a href={withBase("/contact")} class="group mt-8 inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
     </section>
 
     <NextPageLink href="/to/waste-management">The Civic Loop</NextPageLink>

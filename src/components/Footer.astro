@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../lib/paths";
+
 const year = new Date().getFullYear();
 // Same set as About: the publication has one masthead of profiles.
 const socials = [
@@ -13,7 +15,7 @@ const socials = [
 <footer class="relative z-10 bg-bg pt-28">
   <div class="mx-auto max-w-page px-6 pb-12">
     <div class="border-t-2 border-stellar pt-10">
-      <a href="/contact" class="group font-serif text-entry font-semibold leading-none text-text transition-colors hover:text-accent">Get in touch <span class="adv-arrow text-accent">&rarr;</span></a>
+      <a href={withBase("/contact")} class="group font-serif text-entry font-semibold leading-none text-text transition-colors hover:text-accent">Get in touch <span class="adv-arrow text-accent">&rarr;</span></a>
       <div class="mt-8 flex flex-col gap-4 text-sm text-text-muted sm:flex-row sm:items-end sm:justify-between">
         <div class="flex flex-wrap gap-x-6 gap-y-2">
           {socials.map((s) => (

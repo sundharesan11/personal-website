@@ -52,7 +52,7 @@ describe("iyal sister masthead", () => {
   it("uses the full-season systems map to explain iyal's shared operating loop", () => {
     const iyal = read("../src/pages/iyal.astro");
 
-    expect(iyal).toContain('src="/img/iyal-season-map.png"');
+    expect(iyal).toContain('src={withBase("/img/iyal-season-map.png")}');
     expect(iyal).toContain('class="mt-20 relative left-1/2 w-screen -translate-x-1/2"');
     expect(iyal).toContain('class="h-auto w-full"');
     expect(iyal).not.toContain("A working map of the people, handoffs, and timings that move one farming season.");

@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 // Publish the working copy: build (the schema gate), then commit and push.
 // Usage: npm run publish [-- "commit message"]
-// Once a git-connected host (Netlify/Vercel/Cloudflare Pages) is set up,
-// the push is the deploy.
+// GitHub Pages deploys pushes to main through .github/workflows/deploy.yml.
 
 import { execSync } from "node:child_process";
 
@@ -37,7 +36,7 @@ run(`git commit -m ${JSON.stringify(message)}`);
 
 try {
   run("git push");
-  console.log("\nPublished. If a host is connected to this repo, it is deploying now.");
+  console.log("\nPublished. Pushes to main deploy through GitHub Pages.");
 } catch {
   console.error("\nCommitted locally, but the push failed (no remote or no network). Run `git push` when ready.");
   process.exit(1);

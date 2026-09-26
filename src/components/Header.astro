@@ -1,6 +1,7 @@
 ---
 import Monogram from "./Monogram.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import { withBase, withoutBase } from "../lib/paths";
 // One running order everywhere: Home contents, this nav, and the cube menu agree.
 const links = [
   { href: "/work", label: "Now / Work" },
@@ -10,7 +11,7 @@ const links = [
   { href: "/modelling", label: "Modelling" },
   { href: "/about", label: "About" },
 ];
-const path = Astro.url.pathname;
+const path = withoutBase(Astro.url.pathname);
 const isActive = (href: string) => path.startsWith(href);
 const deferUntilHomeImageHidden = path === "/";
 const wrap = deferUntilHomeImageHidden ? "fixed inset-x-0 top-0 z-50 bg-transparent" : "sticky top-0 z-50 bg-transparent";
@@ -21,7 +22,7 @@ const wrap = deferUntilHomeImageHidden ? "fixed inset-x-0 top-0 z-50 bg-transpar
       <div class="flex min-w-0 items-center gap-4 sm:mr-auto sm:gap-5">
         <Monogram size="1.45rem" />
         <a
-          href="/iyal"
+          href={withBase("/iyal")}
           aria-label="iyal, Sundharesan's farmer capital network research"
           title="iyal, farmer capital network research"
           aria-current={isActive("/iyal") ? "page" : undefined}
@@ -30,7 +31,7 @@ const wrap = deferUntilHomeImageHidden ? "fixed inset-x-0 top-0 z-50 bg-transpar
       </div>
       <nav aria-label="Primary" class="hidden items-center gap-7 sm:flex">
         {links.map((l) => (
-          <a href={l.href} aria-current={isActive(l.href) ? "page" : undefined}
+          <a href={withBase(l.href)} aria-current={isActive(l.href) ? "page" : undefined}
              class:list={["text-xs font-semibold uppercase tracking-kicker transition-colors u-draw", isActive(l.href) ? "text-accent hover:text-accent-hover" : "text-text-muted hover:text-text"]}>{l.label}</a>
         ))}
       </nav>

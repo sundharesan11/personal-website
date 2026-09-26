@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check:pages": "node scripts/check-pages-build.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",

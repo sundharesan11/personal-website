@@ -56,7 +56,7 @@ The cube menu keeps the 180px cube unchanged, but the text list beneath it is qu
 The Now / Work photo header uses a shorter 46vh field, and the first content block has tighter vertical padding and grid spacing. **Why:** the page should still feel like a photo-led editorial feature, but the role statement and first content need to land together in the next viewport instead of feeling buried below a tall cover. **Rejected:** removing the photo band, shrinking the display type, or adding a separate jump/CTA.
 
 ### Now / Work copy describes the current role — 2026-07-08
-The Now / Work page frames Sundharesan's present work as a forward-deployed AI engineer at Oogway Labs: small team, direct customer conversations, product shaping, AI systems built against real users, and legacy software realities. **Why:** Now / Work should describe the current operating state, not future ambition or generic early-adopter behavior. **Rejected:** claiming every new model release is tested, over-indexing on benchmarks, or making the page sound like a recruiting profile.
+The Now / Work page frames Sundharesan's present work as a forward-deployed engineer at Oogway Labs: small team, direct customer conversations, product shaping, AI systems built against real users, and legacy software realities. **Why:** Now / Work should describe the current operating state, not future ambition or generic early-adopter behavior. **Rejected:** claiming every new model release is tested, over-indexing on benchmarks, or making the page sound like a recruiting profile.
 
 ### Home desk statement sticks inside the opening note — 2026-07-08
 The Home "Builder first. Hopelessly curious after that." statement is sticky on desktop inside the From the desk section, then releases before the Inside section. "Builder first." is kept as one line with an explicit line break after it. **Why:** the pull statement should behave like a magazine rail note, not scroll away immediately or split the title phrase awkwardly. **Rejected:** making the statement fixed across the whole page, shrinking the display token, or widening it with one-off chrome.
@@ -158,7 +158,7 @@ Expanded from 4 sections to a full publication (per `docs/plan-and-todo.md`). Ho
 Removed the `projects` collection, the `/work/[slug]` route, and `WorkEntry`/`ProjectCard`. Now/Work is a confidentiality-safe role feature instead. **Why:** owner's plan + Oogway confidentiality (no client/project names by default).
 
 ### Identity: Oogway Labs is the employer — 2026-06-15
-Sundharesan is "AI engineer at Oogway Labs · writer · founder-in-waiting." Oogway Labs appears as his **employer** in content (Now/Work, identity line, About), NOT as the masthead. Reconciles the earlier scrub of "Soumyo — Oogway Labs," which was wrong only in the name.
+Sundharesan is "Forward Deployed Engineer at Oogway Labs · writer · founder-in-waiting." Oogway Labs appears as his **employer** in content (Now/Work, identity line, About), NOT as the masthead. Reconciles the earlier scrub of "Soumyo — Oogway Labs," which was wrong only in the name.
 
 ### Rotating cube ≡ menu — 2026-06-15
 A global ≡ overlay with a 3D CSS cube (6 faces = the 6 destinations), slow auto-spin (static under prefers-reduced-motion), Escape/backdrop close + focus management, and a plain text nav list as the accessible fallback (alongside the header's text nav). `CubeMenu.astro` + `src/scripts/cube.ts`.
@@ -194,16 +194,16 @@ Every page now ends with an onward path: next/prev piece on post details (plus a
 The 2026-06-15 entry describes `EditionToggle.astro` + `edition.ts`, but no such code exists in the repo; the three-way light/cream/dark theme cycle is the only reading-mode control. Docs now match the code; the vestigial `.writing-page` wrappers were removed. If an Evening reading mode returns, it re-enters through Open/Deferred.
 
 ### Writing workflow: local-first scripts, no CMS — 2026-07-06
-Owner writes locally (Obsidian or any editor pointed at `src/content/`), scaffolds with `npm run new` (schema-correct frontmatter, enums mirroring `content.config.ts`), and ships with `npm run publish` (build gate → commit → push; push = deploy once a host is connected). Draft states live in frontmatter: `draft: true` = private, `status: writing` = public being-written desk, `status: published` = live. **Why:** solo author, fully static site, zero new infrastructure. **Rejected for now:** Sveltia CMS at `/admin` (the documented upgrade path — two static files + a GitHub OAuth worker, no SSR needed), Keystatic (drags React + an adapter into a static site), TinaCMS/hosted CMS (overkill, lock-in), custom `/write` page (hand-building a worse Sveltia).
+Owner writes locally (Obsidian or any editor pointed at `src/content/`), scaffolds with `npm run new` (schema-correct frontmatter, enums mirroring `content.config.ts`), and ships with `npm run publish` (build gate → commit → push; pushes to `main` deploy through GitHub Pages). Draft states live in frontmatter: `draft: true` = private, `status: writing` = public being-written desk, `status: published` = live. **Why:** solo author, fully static site, zero new infrastructure. **Rejected for now:** Sveltia CMS at `/admin` (the documented upgrade path — two static files + a GitHub OAuth worker, no SSR needed), Keystatic (drags React + an adapter into a static site), TinaCMS/hosted CMS (overkill, lock-in), custom `/write` page (hand-building a worse Sveltia).
+
+### Hosting: GitHub Pages — 2026-09-27
+Deploy the static build from `main` with GitHub Actions to `https://sundharesan11.github.io/personal-website/`. The workflow supplies `SITE_BASE=/personal-website`; shared URL helpers keep routes and public assets base-aware while local development remains at `/`. A generated-output check rejects root-relative URLs that would escape the repository path. A custom domain remains open and can later remove the repository base without changing content. **Rejected for now:** Vercel, Netlify, and Cloudflare Pages. They remain viable if hosting needs change.
 
 ---
 
 ## Open / Deferred
 
 These are intentionally undecided. Don't lock them in without confirming.
-
-### Hosting / deploy target
-Vercel vs Netlify vs Cloudflare Pages — all fine for static Astro. **Open:** pick when we're ready to deploy.
 
 ### Domain
 **Open:** which domain (oogwaylabs subdomain, personal domain, etc.)?

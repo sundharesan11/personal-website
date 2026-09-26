@@ -1,21 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
+import { withBase } from "../lib/paths";
 ---
 <BaseLayout title="Not found · Sundharesan Kumaresan">
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
     <PageHeader left="Off the map" right="404" title="Nothing here." />
     <p class="mt-8 max-w-[40ch] font-serif text-list-title font-semibold leading-[1.05]">This page doesn't exist, or it did and I moved it. Either way, you've wandered off the edge of the publication.</p>
     <nav aria-label="Back into the site" class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm uppercase tracking-dateline">
-      <a href="/" class="u-draw text-text transition-colors hover:text-accent">Home</a>
-      <a href="/work" class="u-draw text-text-muted transition-colors hover:text-text">Now / Work</a>
-      <a href="/writing" class="u-draw text-text-muted transition-colors hover:text-text">Writing</a>
-      <a href="/reading" class="u-draw text-text-muted transition-colors hover:text-text">Reading</a>
-      <a href="/to" class="u-draw text-text-muted transition-colors hover:text-text">To</a>
-      <a href="/modelling" class="u-draw text-text-muted transition-colors hover:text-text">Modelling</a>
-      <a href="/about" class="u-draw text-text-muted transition-colors hover:text-text">About</a>
-      <a href="/iyal" class="u-draw font-script normal-case tracking-normal text-accent transition-colors hover:text-accent-hover">iyal</a>
-      <a href="/contact" class="u-draw text-text-muted transition-colors hover:text-text">Contact</a>
+      <a href={withBase("/")} class="u-draw text-text transition-colors hover:text-accent">Home</a>
+      <a href={withBase("/work")} class="u-draw text-text-muted transition-colors hover:text-text">Now / Work</a>
+      <a href={withBase("/writing")} class="u-draw text-text-muted transition-colors hover:text-text">Writing</a>
+      <a href={withBase("/reading")} class="u-draw text-text-muted transition-colors hover:text-text">Reading</a>
+      <a href={withBase("/to")} class="u-draw text-text-muted transition-colors hover:text-text">To</a>
+      <a href={withBase("/modelling")} class="u-draw text-text-muted transition-colors hover:text-text">Modelling</a>
+      <a href={withBase("/about")} class="u-draw text-text-muted transition-colors hover:text-text">About</a>
+      <a href={withBase("/iyal")} class="u-draw font-script normal-case tracking-normal text-accent transition-colors hover:text-accent-hover">iyal</a>
+      <a href={withBase("/contact")} class="u-draw text-text-muted transition-colors hover:text-text">Contact</a>
     </nav>
   </main>
 </BaseLayout>

@@ -37,7 +37,7 @@ describe("Web3Forms contact surfaces", () => {
   it("routes the footer headline to the contact page", () => {
     const footer = read("../src/components/Footer.astro");
 
-    expect(footer).toContain('href="/contact"');
+    expect(footer).toContain('href={withBase("/contact")}');
     expect(footer).toContain("Get in touch");
   });
 });
