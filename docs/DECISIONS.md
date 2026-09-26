@@ -11,6 +11,9 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### Main editorial page titles use the scale-and-rise reveal — 2026-09-27
+Reading, Writing, To, and About use the existing `reveal-scale` entrance on their primary titles. `PageHeader` exposes this as a typed opt-in and keeps `reveal-tracking` as its default, so Modelling, 404, Contact, lens pages, post pages, and To detail pages retain their current motion. About may use the same scale reveal again on its later pull quote because the two moments occupy different viewports. Reduced-motion visitors still receive static, fully visible type. **Why:** the restrained scale-and-rise has more physical presence on the main publication desks without making every route perform the same trick. **Rejected:** changing the shared default globally, adding a second animation system, or animating whole masthead blocks.
+
 ### Production Web3Forms uses build-time configuration and same-site confirmation — 2026-09-27
 All three public forms share one Web3Forms metadata component: access key, form identity, same-site `/thanks/` redirect, honeypot, and free-tier hCaptcha markup. GitHub Actions injects `PUBLIC_WEB3FORMS_ACCESS_KEY` only into the production build and validates the generated form HTML before upload, while unconfigured local builds keep the visible email fallback. The hCaptcha widget uses its automatic theme and sits in an overflow-safe wrapper for narrow screens. **Why:** a static deployment should fail visibly when form delivery is missing, and successful visitors should return to the site instead of a generic provider page. **Rejected:** committing the access key, silently deploying fallback-only production HTML, adding form-specific redirect pages, or introducing a custom backend before delivery evidence requires one.
 
