@@ -1,0 +1,24 @@
+---
+import { withBase } from "../lib/paths";
+
+interface Props {
+  accessKey: string;
+  subject: string;
+  fromName: string;
+}
+
+const { accessKey, subject, fromName } = Astro.props;
+const redirect = new URL(withBase("/thanks/"), Astro.site ?? Astro.url.origin).href;
+---
+
+<input type="hidden" name="access_key" value={accessKey} />
+<input type="hidden" name="subject" value={subject} />
+<input type="hidden" name="from_name" value={fromName} />
+<input type="hidden" name="redirect" value={redirect} />
+<input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+<div class="mt-8 max-w-full overflow-x-auto pb-1" data-web3forms-captcha>
+  <div class="h-captcha" data-captcha="true" data-theme="auto"></div>
+</div>
+
+<script is:inline src="https://web3forms.com/client/script.js" async defer></script>

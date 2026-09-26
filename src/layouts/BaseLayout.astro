@@ -11,8 +11,9 @@ interface Props {
   title: string;
   description?: string;
   showFooter?: boolean;
+  noindex?: boolean;
 }
-const { title, description = "Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. One question from two sides: who a system sees, and who it never has to.", showFooter = true } = Astro.props;
+const { title, description = "Sundharesan Kumaresan · Forward Deployed Engineer at Oogway Labs. One question from two sides: who a system sees, and who it never has to.", showFooter = true, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://sundharesan11.github.io").href;
 const ogImage = new URL(withBase("/og-default.png"), Astro.site ?? "https://sundharesan11.github.io").href;
 ---
@@ -23,6 +24,7 @@ const ogImage = new URL(withBase("/og-default.png"), Astro.site ?? "https://sund
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

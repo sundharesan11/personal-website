@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import EditorialField from "../components/EditorialField.astro";
+import Web3FormFields from "../components/Web3FormFields.astro";
 
 const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
 const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
@@ -21,11 +22,6 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 
       {hasWeb3FormsKey ? (
         <form action="https://api.web3forms.com/submit" method="POST" class="border-t border-border pt-6" data-reveal>
-          <input type="hidden" name="access_key" value={web3formsAccessKey} />
-          <input type="hidden" name="subject" value="Website contact" />
-          <input type="hidden" name="from_name" value="Sundharesan website" />
-          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
-
           <div class="grid gap-8 sm:grid-cols-2">
             <EditorialField required label="Your name" name="name" autocomplete="name" placeholder="Human name, preferably. Brand name also tolerated." />
             <EditorialField required type="email" label="Email" name="email" autocomplete="email" placeholder="Where should I reply?" />
@@ -60,6 +56,11 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
             />
           </div>
 
+          <Web3FormFields
+            accessKey={web3formsAccessKey}
+            subject="Website contact"
+            fromName="Sundharesan website"
+          />
           <p class="text-fit mt-8 max-w-[52ch] text-sm leading-relaxed text-text-muted">I usually reply by email if there is a real thread to pull. If the form misbehaves, send the same note to <a href="mailto:sundharesansk11@gmail.com" class="u-underline text-text hover:text-accent">sundharesansk11@gmail.com</a>.</p>
           <button type="submit" class="group mt-8 font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Send note <span class="adv-arrow text-accent">&rarr;</span></button>
         </form>

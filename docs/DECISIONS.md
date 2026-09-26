@@ -11,6 +11,9 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### Production Web3Forms uses build-time configuration and same-site confirmation — 2026-09-27
+All three public forms share one Web3Forms metadata component: access key, form identity, same-site `/thanks/` redirect, honeypot, and free-tier hCaptcha markup. GitHub Actions injects `PUBLIC_WEB3FORMS_ACCESS_KEY` only into the production build and validates the generated form HTML before upload, while unconfigured local builds keep the visible email fallback. The hCaptcha widget uses its automatic theme and sits in an overflow-safe wrapper for narrow screens. **Why:** a static deployment should fail visibly when form delivery is missing, and successful visitors should return to the site instead of a generic provider page. **Rejected:** committing the access key, silently deploying fallback-only production HTML, adding form-specific redirect pages, or introducing a custom backend before delivery evidence requires one.
+
 ### Idle sunflower clusters inhabit empty margins — 2026-07-17
 
 After three seconds without scroll, pointer, keyboard, touch, or pointer interaction, every page may show a low-contrast cluster of two or three small decorative sunflowers in collision-checked random viewport margins. Each has a random initial angle and a slow, varied clockwise or counter-clockwise rotation. The cluster clears at the next interaction and may return only after a fresh idle period. It never appears for reduced-motion users and never overlaps interactive, reading, or image content, including background-image frames. **Why:** random placement and gentle rotation make the flowers feel discovered rather than arranged, while the bounded idle-only loop keeps the site from becoming a screen saver. **Rejected:** one flower per idle moment, persistent flowers that remain through interaction, page-specific treatment, fixed corner placement, and a continuous all-page animation.
@@ -212,7 +215,7 @@ These are intentionally undecided. Don't lock them in without confirming.
 **Open:** none, or a privacy-friendly option (Plausible/Umami) later.
 
 ### Contact delivery quality
-**Open:** whether Web3Forms is reliable enough after real submissions, or whether the site needs a first-party serverless handler later. The current decision is Web3Forms plus visible mail fallback.
+**Open:** whether Web3Forms is reliable enough after real submissions, or whether the site needs a first-party serverless handler later. The current decision is Web3Forms plus visible mail fallback. Delivery and hCaptcha enforcement still need one live owner-verified submission after the dashboard protection is enabled.
 
 ### View Transitions / persistent masthead
 **Open:** adding Astro's `<ClientRouter />` so the glass pill and scroll-progress bar persist across navigations (the "bound spine" effect). High payoff but a real migration: scripts (cube/theme/reveal) must re-init on `astro:page-load`. Deferred until the MPA reloads actually bother the owner.

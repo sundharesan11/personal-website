@@ -31,6 +31,10 @@ jobs:
         run: npm test
       - name: Build
         run: npm run build
+        env:
+          PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_ACCESS_KEY }}
+      - name: Check production forms
+        run: npm run check:forms
       - name: Check Pages paths
         run: npm run check:pages
       - name: Upload Pages artifact

@@ -33,6 +33,15 @@ describe("deployment paths", () => {
     expect(notFound).toContain("location.replace");
   });
 
+  it("injects and validates Web3Forms configuration during deployment", () => {
+    const workflow = read("../.github/workflows/deploy.yml");
+    const packageJson = read("../package.json");
+
+    expect(workflow).toContain("PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_ACCESS_KEY }}");
+    expect(workflow).toContain("npm run check:forms");
+    expect(packageJson).toContain('"check:forms": "node scripts/check-web3forms-build.mjs"');
+  });
+
   it("keeps legacy project redirects on the same origin", () => {
     expect(legacyProjectTarget("/personal-website")).toBe("/");
     expect(legacyProjectTarget("/personal-website/work")).toBe("/work");
