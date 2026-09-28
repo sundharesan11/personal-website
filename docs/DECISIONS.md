@@ -11,6 +11,9 @@ Format each entry: `### [short title] — YYYY-MM-DD`
 
 ## Decided
 
+### The sunflower is drawn as a botanical plate — 2026-09-29
+The shared sunflower renderer (margin flowers on Reading and Writing lenses, and the idle clusters) now draws the flower's real anatomy: 21 solid lanceolate ray petals in front, 21 in a deeper grey behind, short grey bract tips between them, a pale pollen ring, and a solid stellar-blue seed head with golden-angle seeds that are larger and darker toward the centre. Three front petals (unevenly spaced) take the spot colour. Colours are mixed from the theme tokens (`--color-accent`, `--color-text-muted`, `--color-bg`, `--color-text`), so light, cream, and dark all follow automatically. **Why:** the previous thin translucent blades around a pale disc read as a starburst or dandelion; a sunflower is recognised by broad pointed petals around a large, dark centre. **Rejected:** an outline-only "engraving" study (too faint at idle sizes) and an irregular two-ink "screenprint" study (more characterful, less recognisably a sunflower).
+
 ### Main editorial page titles use the scale-and-rise reveal — 2026-09-27
 Reading, Writing, To, and About use the existing `reveal-scale` entrance on their primary titles. `PageHeader` exposes this as a typed opt-in and keeps `reveal-tracking` as its default, so Modelling, 404, Contact, lens pages, post pages, and To detail pages retain their current motion. About may use the same scale reveal again on its later pull quote because the two moments occupy different viewports. Reduced-motion visitors still receive static, fully visible type. **Why:** the restrained scale-and-rise has more physical presence on the main publication desks without making every route perform the same trick. **Rejected:** changing the shared default globally, adding a second animation system, or animating whole masthead blocks.
 
