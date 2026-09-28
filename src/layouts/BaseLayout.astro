@@ -49,6 +49,12 @@ const ogImage = new URL(withBase("/og-default.png"), Astro.site ?? "https://sund
           el.classList.toggle("dark", t === "dark");
           el.classList.toggle("theme-cream", t === "cream");
         } catch (_) {}
+        // Enter the pre-reveal state before first paint, so titles animate in
+        // instead of painting at rest and then jumping. If the motion script
+        // never runs, drop the class so content can't stay hidden.
+        const root = document.documentElement;
+        root.classList.add("js-reveal");
+        setTimeout(() => { if (!root.dataset.motion) root.classList.remove("js-reveal"); }, 3000);
       })();
     </script>
   </head>

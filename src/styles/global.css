@@ -380,6 +380,10 @@ html { scroll-behavior: smooth; }
   transform-origin: left top;
   transition-duration: 0.8s;
 }
+.js-reveal [data-reveal].reveal-scale.is-revealed { transform: none; }
+/* A title revealed inside a revealing masthead lands just after its kicker,
+   so its own settle reads instead of dissolving into the parent's fade. */
+.js-reveal [data-reveal] [data-reveal] { transition-delay: calc(var(--stagger) * 3); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
