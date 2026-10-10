@@ -3,103 +3,47 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import NextPageLink from "../../components/NextPageLink.astro";
 import { withBase } from "../../lib/paths";
 
-const experiments = [
-  "One geography",
-  "A trusted local partner",
-  "A small group of farmers",
-  "A handful of investors and backers",
-  "Rural workers and local operators in the loop",
-  "Manual coordination using simple tools",
-];
-
-const success = [
-  "Farmers feel backed, not financially trapped.",
-  "Investors can see where the money went without needing a translator.",
-  "Rural workers and local operators know what is expected, when, and by whom.",
-  "Local relationships get stronger instead of being replaced.",
-  "Capital lands in the week it's needed, not the quarter after.",
-  "Repayment follows the harvest, not a spreadsheet's imagination.",
-  "Trust compounds because people keep showing up.",
+const learned = [
+  "A thin margin with more money poured into it is still a thin margin, now with one more person waiting to be paid.",
+  "The farmer's problem is buying at retail and selling at wholesale, not a shortage of investors.",
+  "Collecting other people's money for farm seasons is a regulated business, not a side project.",
+  "Banks, buyers, and dairies already lend against a season. The useful work is making a small group worth lending to.",
 ];
 ---
 <BaseLayout
   title="Season Trust · Sundharesan Kumaresan"
-  description="A practical trust layer for farmers, buyers, investors, workers, local operators, and logistics moving one season well."
+  description="Season Trust was a first bet on outside money funding farm seasons. It is parked while iyal works on farm margins first."
 >
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
     <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-8">
-      <p class="font-sans text-xs uppercase tracking-kicker text-accent">A venture</p>
+      <p class="font-sans text-xs uppercase tracking-kicker text-accent">A parked bet</p>
       <h1 data-reveal class="reveal-tracking mt-3 max-w-[12ch] font-serif text-display-page font-semibold leading-[0.98]">Season Trust</h1>
-      <p data-reveal class="reveal-scale mt-8 max-w-[25ch] font-serif text-statement font-semibold leading-[1.08]">A practical trust layer for moving one season well.</p>
+      <p data-reveal class="reveal-scale mt-8 max-w-[25ch] font-serif text-statement font-semibold leading-[1.08]">Outside money into farm seasons. Parked, on purpose.</p>
       <div class="mt-10 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
-        <p>Agriculture isn't short of hardworking people. It is short of coordination.</p>
-        <p>A farmer needs capital before sowing, rural workers need steady work and clear instructions, local operators need to know who is doing what, a truck has to actually show up at harvest, and the buyer still has to answer the phone. Investors, meanwhile, need enough trust to participate without pretending a dashboard understands the village.</p>
-        <p>The work begins with <a href={withBase("/iyal")} class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>, where I am learning how a season actually runs: who is trusted, where handoffs break, and which relationships already carry the work. Season Trust is a practical way to test whether farmers, buyers, investors, rural workers, local operators, and logistics can move one season with enough shared context to keep showing up for one another.</p>
+        <p>Season Trust was my first bet: let people from outside the village fund a farming season, and let repayment follow the harvest instead of a calendar.</p>
+        <p>I've parked it. Money poured into a thin margin just adds someone else who wants a share of it. The margin has to work first. When it does, banks and buyers are better places for that money to come from than me.</p>
+        <p>The work continues in <a href={withBase("/iyal")} class="font-script text-3xl leading-none text-accent transition-colors hover:text-accent-hover">iyal</a>, which now asks a plainer question: what does a season cost, what does it earn, and who keeps the difference?</p>
       </div>
     </header>
 
     <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
       <div>
-        <p class="font-sans text-xs uppercase tracking-kicker text-accent">The problem</p>
+        <p class="font-sans text-xs uppercase tracking-kicker text-accent">What changed my mind</p>
       </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
-        <p>Most agricultural finance is obsessed with moving money.</p>
-        <p>I'm more interested in finishing seasons.</p>
-        <p>Capital alone fixes nothing if the truck doesn't come, the buyer ghosts, the price moves, or nobody says anything until it's too late.</p>
-        <p>The real work is coordination: farmers, investors, rural workers, buyers, local operators, and logistics, all making decisions half-blind about each other. Hand each of them the piece of the picture they're missing, and the whole season gets less brutal.</p>
-        <blockquote class="border-l-2 border-accent pl-6 font-serif text-statement italic leading-[1.2] text-text">Trust is the missing infrastructure.</blockquote>
-      </div>
-    </section>
-
-    <section class="mt-20 grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:border-t md:border-border md:pt-12">
-      <div>
-        <p class="font-sans text-xs uppercase tracking-kicker text-accent">The idea</p>
-      </div>
-      <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
-        <p>Season Trust is my sketch of what a trusted coordination layer could look like.</p>
-        <p>Not financing as a one-off transaction. A season as a shared workflow: the farmer gets support when the season needs it, the investor can see what their money is actually doing, rural workers and local operators know what has to happen next, and the person everyone already calls does the verifying no dashboard can.</p>
-        <p>Repayment follows the season's actual cash, milk collections and crop sales, instead of a repayment calendar drawn up in an office by someone who has never waited on rain.</p>
-        <p class="font-serif text-list-title text-text">The long game isn't financing farms. It's a season where everyone involved can see enough to act with confidence.</p>
-      </div>
-    </section>
-
-    <section class="mt-20">
-      <div class="flex flex-wrap items-end gap-5">
-        <h2 class="font-serif text-display-page font-semibold leading-[0.95]">Why start small</h2>
-        <span class="mb-4 h-px flex-1 bg-stellar"></span>
-      </div>
-      <div class="mt-8 grid gap-10 md:grid-cols-[1fr_0.8fr]">
-        <div class="max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
-          <p>Before software, homework. I want to watch these relationships work in the wild first.</p>
-          <p>The first experiments stay deliberately tiny. Every conversation, delay, success, and minor disaster is the curriculum.</p>
-          <p>Software earns its cape later, by doing the boring parts well.</p>
-        </div>
-        <ul class="border-t border-border">
-          {experiments.map((item) => (
-            <li class="border-b border-border py-4 text-text">{item}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <section class="mt-20">
-      <h2 class="font-serif text-list-title font-semibold">What success looks like</h2>
-      <p class="mt-4 max-w-[60ch] text-text-muted">I'll consider the idea worth pursuing if I can show that:</p>
-      <ul class="mt-6 border-t border-border" style="max-width: var(--measure)">
-        {success.map((item) => (
-          <li class="border-b border-border py-4 text-text">{item}</li>
+      <ul class="max-w-[68ch] border-t border-border">
+        {learned.map((item) => (
+          <li class="border-b border-border py-4 text-lg leading-relaxed text-text">{item}</li>
         ))}
       </ul>
     </section>
 
     <section class="mt-20 border-t-2 border-stellar pt-10">
       <p class="font-sans text-xs uppercase tracking-kicker text-accent">Current status</p>
-      <h2 class="mt-4 max-w-[22ch] font-serif text-entry font-semibold leading-[1.05]">Research and validation. Conversation before software.</h2>
+      <h2 class="mt-4 max-w-[22ch] font-serif text-entry font-semibold leading-[1.05]">Parked. Not abandoned, not open for funding.</h2>
       <div class="mt-8 max-w-[68ch] space-y-6 text-lg leading-relaxed text-text">
-        <p>I'm learning from farmers, investors, rural workers, agronomists, researchers, and anyone who works close to the ground. If this problem resonates with you, or if you're fairly sure I'm approaching it the wrong way, I'd genuinely like to hear it.</p>
-        <p>Ideas get better in conversation long before they get built.</p>
+        <p>I'm not taking money for this. If you've seen outside money help a farming season, or watched it go badly, I'd like to hear how it actually worked.</p>
         <a href={withBase("/contact")} class="group inline-block font-serif text-statement font-semibold leading-none text-text transition-colors hover:text-accent">Share your perspective <span class="adv-arrow text-accent">&rarr;</span></a>
       </div>
     </section>

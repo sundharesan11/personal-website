@@ -53,7 +53,7 @@ describe("publication IA routes", () => {
     }
   });
 
-  it("uses the selected To desk names and gives Season Trust one clear bridge to iyal", () => {
+  it("uses the selected To desk names and parks Season Trust with one clear bridge to iyal", () => {
     const futureDesk = read("../src/components/FutureDesk.astro");
     const agri = read("../src/pages/to/agri-fintech.astro");
     const sports = read("../src/pages/to/sports-development.astro");
@@ -66,16 +66,14 @@ describe("publication IA routes", () => {
     expect(sports).toContain("The Long Game · Sundharesan Kumaresan");
     expect(waste).toContain("The Civic Loop · Sundharesan Kumaresan");
     expect(agri).not.toContain("Farmer Capital Network</h1>");
-    expect(futureDesk).toContain("The first product track growing out of iyal");
-    expect(futureDesk).toContain("a trust layer for the farming pipeline");
-    expect(agri).toContain("A practical trust layer for moving one season well.");
+    expect(futureDesk).toContain('tag: "A parked bet"');
+    expect(futureDesk).toContain("Parked while iyal works out whether the margin can carry it.");
+    expect(agri).toContain("Outside money into farm seasons. Parked, on purpose.");
     expect(agri).toContain('href={withBase("/iyal")}');
-    expect(agri).toContain("The work begins with");
-    expect(agri).not.toContain("Relationship with iyal");
-    expect(agri).not.toContain("is the research and operating seed");
-    expect(agri).not.toContain("Season Trust is the first product track it is testing");
-    expect(agri).toContain("farmers, investors, rural workers");
-    expect(agri).toContain("A practical trust layer for moving one season well.");
+    expect(agri).toContain("The work continues in");
+    expect(agri).toContain("I'm not taking money for this.");
+    expect(agri).not.toContain("the investor can see what their money is actually doing");
+    expect(agri).not.toContain("A handful of investors and backers");
   });
 
   it("uses the compact right-aligned next-page pattern", () => {

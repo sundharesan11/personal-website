@@ -9,6 +9,7 @@ const themes = [
   "The buyer who says yes on the phone and vanishes when the crop is ready",
   "The truck that is technically available and practically nowhere near the farm",
   "The local operator everyone trusts, even when no software knows their name",
+  "The feed bag priced for one buyer, paid for by a hundred buyers one at a time",
   "The government scheme that exists, but only if someone can navigate the paperwork",
   "The price signal that reaches the farmer late enough to feel like a joke",
   "The repayment plan that respects a season instead of a calendar fantasy",
@@ -19,8 +20,10 @@ const themes = [
 
 const validation = [
   "Start with one season, one crop, and the exact week money starts deciding the harvest.",
+  "Write down every rupee in and out of one season with three dairy farmers and three groundnut farmers.",
   "Map who the farmer already calls: buyer, transporter, input dealer, lender, neighbour, local fixer.",
   "Find the moment trust breaks: price, pickup, repayment, paperwork, storage, or silence.",
+  "Back one small dairy, five cows, and keep honest books on it.",
   "Coordinate the smallest useful workflow by hand before asking software to wear a cape.",
   "Keep the farmer's judgment in the loop, because the field is not a dashboard and never has been.",
 ];
@@ -43,6 +46,10 @@ const principles = [
     body: "Farmers, buyers, lenders, and operators should know what matters to them without needing a translator.",
   },
   {
+    title: "Replace a step, don't add one.",
+    body: "If iyal sits in the chain, it has to take the place of a markup that's already there, and the farmer has to keep more after it's paid.",
+  },
+  {
     title: "Small experiments over large assumptions.",
     body: "One real crop cycle teaches more than ten hypothetical features.",
   },
@@ -53,7 +60,9 @@ const principles = [
 ];
 
 const questions = [
-  "What does a farmer need to know before borrowing for a season?",
+  "What does one acre of groundnut actually cost, and what does it pay?",
+  "Where does the farmer buy at retail and sell at wholesale?",
+  "What could fifteen neighbours buy or sell together that one farmer can't?",
   "Who is already trusted on the ground, and why?",
   "Where does money arrive too late to matter?",
   "Which buyer promises are reliable enough to build around?",
@@ -67,16 +76,16 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
 ---
 <BaseLayout
   title="iyal · Sundharesan Kumaresan"
-  description="iyal is Sundharesan Kumaresan's active research and product flow exploring agricultural coordination, farmer capital networks, and trust."
+  description="iyal is Sundharesan Kumaresan's active research and product flow into farm margins: what a farming season costs, what it earns, and who keeps the difference."
 >
   <main id="main-content" class="mx-auto max-w-page px-6 pt-16 pb-16">
     <a href={withBase("/to")} class="font-sans text-xs uppercase tracking-kicker text-text-muted transition-colors hover:text-text">&larr; To</a>
 
     <header class="mt-12">
-      <p class="label-fit font-sans text-xs uppercase tracking-kicker text-text-muted">Farmer capital network · active research</p>
+      <p class="label-fit font-sans text-xs uppercase tracking-kicker text-text-muted">Farm margins · research alongside my day job</p>
       <h1 class="mt-6 font-script text-display-giant font-normal leading-[0.8] text-accent">iyal</h1>
-      <p data-reveal class="display-fit mt-8 max-w-[18ch] font-serif text-display-read font-semibold leading-[1.02]">Following the trust, timing, and money of a farming season.</p>
-      <p class="text-fit mt-8 max-w-[64ch] text-lg leading-relaxed text-text">A crop does not wait for a clean product brief. Money is needed before sowing, labour before the weather turns, transport before the buyer changes their mind, and trust before anyone signs anything that matters. <span class="font-script text-3xl leading-none text-accent">iyal</span> is my active research thread into that messy middle: how farmers, capital, buyers, logistics, and local operators already move together, and where a small amount of coordination could make the season less brutal.</p>
+      <p data-reveal class="display-fit mt-8 max-w-[18ch] font-serif text-display-read font-semibold leading-[1.02]">Following the money of a farming season: what it costs, what it earns, and who keeps the difference.</p>
+      <p class="text-fit mt-8 max-w-[64ch] text-lg leading-relaxed text-text">A crop does not wait for a clean product brief. Money is needed before sowing, labour before the weather turns, transport before the buyer changes their mind, and trust before anyone signs anything that matters. <span class="font-script text-3xl leading-none text-accent">iyal</span> is my active research thread into that messy middle: how farmers, capital, buyers, logistics, and local operators already move together, and where a small amount of coordination could make the season less brutal. Starting close to home, in South India.</p>
     </header>
 
     <figure class="mt-20 relative left-1/2 w-screen -translate-x-1/2">
@@ -162,7 +171,8 @@ const hasWeb3FormsKey = web3formsAccessKey.trim().length > 0;
     <section class="mt-24">
       <p class="font-sans text-xs uppercase tracking-kicker text-accent">Long-term vision</p>
       <p class="mt-6 max-w-[26ch] font-serif text-display-read font-semibold leading-[1.05]">Infrastructure for people who already do the hard part.</p>
-      <p class="text-fit mt-8 max-w-[68ch] text-lg leading-relaxed text-text">If today's agricultural systems connect individual participants, iyal is trying to learn what it would take to help them work together through the season: farmers with clearer options, capital providers with better context, buyers who can be trusted, transport that is less improvised, and decisions grounded in real operations.</p>
+      <p class="text-fit mt-8 max-w-[68ch] text-lg leading-relaxed text-text">If today's agricultural systems connect individual participants, iyal is trying to learn what it would take to help them work together through the season: farmers with clearer options, capital providers with better context, buyers who can be trusted, transport that is less improvised, and decisions grounded in real operations. Ideally, the people doing the work keep more of what working together earns.</p>
+      <p class="text-fit mt-6 max-w-[68ch] text-lg leading-relaxed text-text">Starting with crops and dairy. The same questions probably apply to fishers, weavers, and small processors, and I'll find out by asking them.</p>
       <p class="text-fit mt-6 max-w-[68ch] text-lg leading-relaxed text-text">Not overnight. Not by pretending the field is a dashboard. Through field notes, small experiments, and collaboration with the people who already know where the system bends.</p>
     </section>
 
